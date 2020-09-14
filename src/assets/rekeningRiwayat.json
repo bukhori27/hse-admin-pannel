@@ -1,0 +1,26 @@
+[
+  {
+    "title": "Riwayat Tagihan",
+    "bulan": "Mei 2018",
+    "invoice": "Invoice No",
+    "noInvoice": "1234567890",
+    "status": "Status",
+    "isiStatus": "Sudah Bayar",
+    "biaya": "Rp 200.000,-",
+    "icon": "fa fa-download",
+    "bulan1": "April 2018",
+    "invoice1": "Invoice No",
+    "noInvoice1": "1234567890",
+    "status1": "Status",
+    "isiStatus1": "Sudah Bayar",
+    "biaya1": "Rp 200.000,-",
+    "icon1": "fa fa-download",
+    "bulan2": "Maret 2018",
+    "invoice2": "Invoice No",
+    "noInvoice2": "1234567890",
+    "status2": "Status",
+    "isiStatus2": "Sudah Bayar",
+    "biaya2": "Rp 200.000,-",
+    "icon2": "fa fa-download"
+  }
+]

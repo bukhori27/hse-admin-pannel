@@ -1,0 +1,31 @@
+[
+  {
+    "title": "TEXT BASED SETTING",
+    "labelchoose": "Choose Default Avatar",
+    "btnchoose": "Choose File",
+    "labelchatbox": "Chatbox Tittle",
+    "chatbox": "",
+    "labelonline": "Online Widget Tittle",
+    "onlinewidget": "",
+    "labelWelcome": "Welcome Message For New Visitor",
+    "welcome": "",
+    "labelwel": "Welcome Message",
+    "welcome1": "",
+    "labelwaiting": "Waiting Message",
+    "waiting": "",
+    "labeloffline": "Offline Widget Tittle",
+    "offline": "",
+    "labelon": "On Offline Show",
+    "form": "form",
+    "message": "message",
+    "labelofflinemessage": "Offline Form Message",
+    "offmessage": "",
+    "labelofflinerequest": "Offline request success message",
+    "offrequest": "",
+    "labelrequest": "Request for feedback",
+    "request": "",
+    "labelsetfedback": "Set Feedback success message",
+    "fedback": "",
+    "btn": "save"
+  }
+]

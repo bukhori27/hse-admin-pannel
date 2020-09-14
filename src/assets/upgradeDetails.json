@@ -1,0 +1,22 @@
+[
+  {
+    "title": "ADD ON",
+    "subTitle": "Bayar Hanya Sesuai Layanan Yang Kamu Gunakan, Tidak Lebih."
+  },
+  {
+    "id": "1",
+    "title1": "Bussiness Hours",
+    "title2": "Bussiness Hours",
+    "harga": "Rp 15.000,-",
+    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    "btn": "beli"
+  },
+  {
+    "id": "1",
+    "title1": "Call Center",
+    "title2": "Call Center",
+    "harga": "Rp 25.000,-",
+    "content": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    "btn": "beli"
+  }
+]

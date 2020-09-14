@@ -1,0 +1,14 @@
+[
+  {
+    "title": "Account Balance",
+    "hargaPaket": "Rp 200.000,-",
+    "text": "Paket Berlangganan",
+    "btn": "Upgrade",
+    "saldo": "Rp 0,-",
+    "textSaldo": "Saldo Voucher",
+    "btnSaldo": "TopUp",
+    "point": "0",
+    "textPoint": "Point Kamu",
+    "btnPoint": "Lihat Detail"
+  }
+]

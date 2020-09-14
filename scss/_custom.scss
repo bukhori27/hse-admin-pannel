@@ -1,0 +1,9 @@
+// Here you can add other styles
+.footer{
+    &-list-bottom{
+        background: -webkit-linear-gradient(38deg, #37a9ff 0%, #a6ce39 150%);
+        background: -webkit-linear-gradient(52deg, #37a9ff 0%, #a6ce39 150%);
+        background: -o-linear-gradient(52deg, #37a9ff 0%, #a6ce39 150%);
+        background: linear-gradient(38deg, #37a9ff 0%, #a6ce39 150%);
+    }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Kartu Kredit",
+    "nama": "Nama",
+    "isiNama": "",
+    "nomorCc": "Nomor Kartu",
+    "isiNomorCc": "",
+    "bulan": "Bulan",
+    "isiBulan": "",
+    "tahun": "Tahun",
+    "isiTahun": "",
+    "cvv": "CVV/CVC",
+    "isiCvv":"",
+    "btn": "Ubah Detail Pembayaran"
+  }
+]
