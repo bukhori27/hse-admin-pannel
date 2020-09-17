@@ -550,7 +550,7 @@ li {
     margin-left: 0px !important;
 }
 .header-fixed .app-body {
-    margin-top: 30px !important;
+    margin-top: 0px !important;
 }
 .tc {
     text-align: center;
@@ -1030,7 +1030,7 @@ img-relative {
     color: #fff;
 }
 .navbar {
-    margin-top:8px;
+    margin-top:0px;
 }
 .accordion_faq {
     transition: all .3s; 
@@ -1211,7 +1211,7 @@ img-relative {
       background: #f1f1f1;
     }
     .header-fixed .app-body {
-      margin-top: 30px !important;
+      margin-top: 0px !important;
     }
     .sm-npr {
       padding-right:0 !important;
@@ -1698,4 +1698,33 @@ img-relative {
     .modal-footer{
         display: none !important;
     }
+}
+.footer-float {
+  position: absolute; 
+  bottom: 0;
+}
+.nmr {
+  margin-right: 0 !important;
+}
+
+.nml {
+  margin-left: 0 !important;
+}
+.app .content-wrapper {
+  min-height: 720px !important;
+}
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+  background-color: rgba(255,255,255,.1) !important;
+  color: #fff;
+}
+.mt-30 {
+  margin-top:30px;
+}
+.table th, .table td {
+  padding: 0.5rem !important;
+  vertical-align: top;
+  border-top: 1px solid #bcc5d0;
+}
+.pagination li {
+  margin : 0;
 }

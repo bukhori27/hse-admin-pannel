@@ -1,25 +1,27 @@
 <template>
   <div class="app">
     <AppHeader/>
-    <div class="app-body">
-      <main class="main">
-        <div class="container-fluid no-padding" style="position: relative;overflow: hidden;">
-          <router-view></router-view>
+    <AppMenu/>
+    <div class="content-wrapper">
+      <main>
+        <div class="container-fluid no-padding mt-30" style="position: relative;overflow: hidden;">
+            <router-view></router-view>
         </div>
-        <AppFooter/>
       </main>
     </div>
+    <AppFooter/>
   </div>
 </template>
 
 <script>
 import nav from '../_nav'
-import { Header as AppHeader, Footer as AppFooter } from '../components/'
+import { Header as AppHeader, Footer as AppFooter, Menu as AppMenu } from '../components/'
 
 export default {
   name: 'full',
   components: {
     AppHeader,
+    AppMenu,
     AppFooter
   },
   data () {
