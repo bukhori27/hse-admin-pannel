@@ -1,5 +1,5 @@
 <template>
-  <div class="app">
+  <div class="app layout-fixed"">
     <AppHeader/>
     <AppMenu/>
     <div class="content-wrapper">

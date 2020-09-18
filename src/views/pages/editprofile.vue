@@ -1,11 +1,11 @@
 <template>
-  <div class="row m-t-60">
+  <div class="row">
     <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12 row">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 m-b-50">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 m-b-5">
         <h1 class="tc">Edit Profile</h1> 
       </div>
     </div>
-    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12 row containerEditprofile m-b-60">
+    <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12 row containerEditprofile m-b-5">
       <div class="col-md-5 row">
         <span class="col-md-12 m-b-40" style="text-align:right;" @click="ubahphoto">ubah</span>
         <input type="file" id="fileUpload" @change="handleFileUploads($event)" ref="myFiles" hidden >

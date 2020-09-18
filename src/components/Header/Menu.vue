@@ -5,7 +5,7 @@
         <!-- Brand Logo
             <img src="dist/img/AdminLTELogo.png" alt="HSE" class="brand-image img-circle elevation-3" style="opacity: .8">
         -->
-      <span class="brand-text font-weight-light">HSE</span>
+      <span class="brand-text font-weight-light">HSE - Admin Panel</span>
     </a>
 
       <!-- Sidebar Menu -->
@@ -74,7 +74,7 @@
             </a>
           </li>  
 
-          <li class="nav-item">
+          <li class="nav-item fixed-bottom-menu-logout">
             <a @click="logout" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p>
