@@ -4,7 +4,7 @@
     <AppMenu/>
     <div class="content-wrapper">
       <main>
-        <div class="container-fluid no-padding mt-30" style="position: relative;overflow: hidden;">
+        <div class="container-fluid no-padding mt-10" style="position: relative;overflow: hidden;">
             <router-view></router-view>
         </div>
       </main>

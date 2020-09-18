@@ -1,35 +1,139 @@
 <template>
-  <div class="flex-row align-items-center">
-    <div class="container-fluid">
-      <b-row class="justify-content-center">
-        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-11">
-          <div class="col-md-12"><h1 class="tc m-b-5">List Category</h1> </div>
-          <!-- step1 -->
-            <div class="float-right m-b-10" >
-                <b-button variant="primary" @click="addCategory">Create Category</b-button>
-            </div>
-          <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
-          responsive="sm" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
-           :filter="filter" @filtered="onFiltered">
-           <template slot="id" slot-scope="row">
-              <div>{{$index + 1}} </div>
-            </template>
-            <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'view-approval-user?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
-              <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
-              <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
-            </template>
-          </b-table>
+    <section class="content">
+      <div class="container-fluid">
+        <b-row>
+          <div class="col-sm-6">
+            <h1>Issue</h1>
+          </div>
+        </b-row>
+        <b-row>
+          <div class="col-md-3">
+            <a @click="goTo('/finding')" class="btn btn-primary btn-block mb-3 button-issue">Finding</a>
 
-          <!-- <div class="col-md-12 text-green-title1" style="text-align: right; padding:10px;" >
-            <span @click="listUser(pages-1)" v-if="pages !== 1"> << previous </span>
-            <span @click="listUser(pages+1)" style="padding-left:20px" v-if="pageSize > pages"> more >> </span>
-          </div> -->
-          <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="float-right" />
-        </div>
-      </b-row>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Status</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body p-0">
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item active">
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-inbox"></i> Inbox
+                      <span class="badge bg-primary float-right">12</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-envelope"></i> Sent
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-file-alt"></i> Drafts
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="fas fa-filter"></i> Junk
+                      <span class="badge bg-warning float-right">65</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="far fa-trash-alt"></i> Trash
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.card-body -->
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="card card-primary card-outline">
+              <!-- /.card-header -->
+              <div class="card-header">
+                <h3 class="card-title">Issue</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Search Mail">
+                    <div class="input-group-append">
+                      <div class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-tools -->
+              </div>
+              <div class="card-body p-0">
+                <div class="table-responsive mailbox-messages">
+                  <table class="table table-hover table-striped">
+                    <tbody>
+                    <tr>
+                      <td>
+                        <div class="icheck-primary">
+                          <input type="checkbox" value="" id="check1">
+                          <label for="check1"></label>
+                        </div>
+                      </td>
+                      <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
+                      <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
+                      <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
+                      </td>
+                      <td class="mailbox-attachment"></td>
+                      <td class="mailbox-date">5 mins ago</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="icheck-primary">
+                          <input type="checkbox" value="" id="check2">
+                          <label for="check2"></label>
+                        </div>
+                      </td>
+                      <td class="mailbox-star"><a href="#"><i class="fas fa-star-o text-warning"></i></a></td>
+                      <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
+                      <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
+                      </td>
+                      <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
+                      <td class="mailbox-date">28 mins ago</td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <!-- /.table -->
+                </div>
+                <!-- /.mail-box-messages -->
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer p-0">
+                <div class="mailbox-controls">
+                  <div class="float-right">
+                    1-50/200
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default btn-sm">
+                        <i class="fas fa-chevron-left"></i>
+                      </button>
+                      <button type="button" class="btn btn-default btn-sm">
+                        <i class="fas fa-chevron-right"></i>
+                      </button>
+                    </div>
+                    <!-- /.btn-group -->
+                  </div>
+                  <!-- /.float-right -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </b-row>
+      </div>
     </div>
-  </div>
+    </section>
 </template>
 <style>
 .mt20 {
@@ -139,11 +243,11 @@
           })
         }
       },
-      addCategory () {
+      goTo (path) {
         let self = this
         self.LoginShow = false
-        self.$router.push('/add-category')
-      }
+        self.$router.push(path)
+      },
     },
     created: function () {
       this.listUser(1)

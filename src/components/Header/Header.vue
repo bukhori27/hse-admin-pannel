@@ -5,13 +5,25 @@
         <b-col class="bg-list-gradient"></b-col>
       </b-row> 
     -->
-    <b-row class="fs15" style="padding: 10px 0">
-      <div class="col-md-12">
+    <b-row class="fs15" style="padding: 0">
+      <div class="col-md-12 npr npl">
         <!-- this side menu -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+          </ul>
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown user-menu">
+              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                <i class="fas fa-user-circle fa-2x"></i>
+                <!-- <i class="fas fa-angle-down fa-2x right"></i> -->
+              </a>
+              <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <li role="presentation" class="m-t-10"><a @click="goTo('/profile')"><i class="icon-user"></i>Profile</a></li>
+                <li role="presentation"><a @click="logout"><i class="icon-logout m-r-xs"></i>Logout</a></li>
+              </ul>
             </li>
           </ul>
         </nav>
@@ -55,10 +67,34 @@
     components: {
     },
     methods: {
-      goTo (path, id) {
+      goTo (path) {
         let self = this
         self.LoginShow = false
         self.$router.push(path)
+      },
+      logout (e) {
+        var self = this
+          self.$router.push('/')
+        /* 
+        var parameter = {
+          token: self.token,
+          //passwor : sha256(self.Password)
+        }
+        var config = { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        axios.post(url.url_app + 'signout', parameter, config).then(function (response) {
+          if (response.data.resultCode === 'OK') {
+            localStorage.removeItem('profile')
+            localStorage.removeItem('token_ppa')
+            self.login = false
+            self.$router.push('/')
+          } else {
+            alert('SALAH...!')
+          }
+        }) */
       },
     },
     created () {

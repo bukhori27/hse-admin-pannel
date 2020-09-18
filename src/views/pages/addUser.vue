@@ -1,10 +1,14 @@
 <template>
   <div class="flex-row">
     <div class="container">
+        <b-row>
+          <div class="col-sm-6">
+            <h1>Add User</h1>
+          </div>
+        </b-row>
       <b-row>
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
           <div id="pt-pgSignin" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row npr">
-            <div class="col-md-12"><h1 class="tc m-b-50">Register</h1> </div>
             <!-- step1 -->
 
             <div id="step1" class="col-md-12 npr">

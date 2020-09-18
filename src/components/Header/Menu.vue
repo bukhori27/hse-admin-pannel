@@ -33,7 +33,7 @@
             <a class="nav-link" @click="openMenu" v-bind:class="checkMenu == true ? 'menu-open': '' ">
               <i class="nav-icon fas fa-cog"></i>
               <p>
-                CMS
+                Master Data
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -52,19 +52,60 @@
               </li>
               <li class="nav-item">
                 <a @click="goTo('/type')"class="nav-link">
-                  <i class="nav-icon fas fa-briefcase"></i>
+                  <i class="nav-icon fas fa-layer-group"></i>
                   <p>Type</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a @click="goTo('/user')" class="nav-link">
-                  <i class="nav-icon fas fa-user"></i>
-                  <p>User</p>
                 </a>
               </li>
             </ul>
           </li>
-
+          <li class="nav-item">
+            <a class="nav-link" @click="openMenu" v-bind:class="checkMenu == true ? 'menu-open': '' ">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                User
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a @click="goTo('/category')"class="nav-link">
+                  <i class="nav-icon fas fa-users"></i>
+                  <p>All User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/location')" class="nav-link">
+                  <i class="nav-icon fas fa-camera"></i>
+                  <p>Reporter</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/type')"class="nav-link">
+                  <i class="nav-icon fas fa-tools"></i>
+                  <p>Executor</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/type')"class="nav-link">
+                  <i class="nav-icon fas fa-search-location"></i>
+                  <p>Observer</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/user')" class="nav-link">
+                  <i class="nav-icon fas fa-user-friends"></i>
+                  <p>Admin</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/user')" class="nav-link">
+                  <i class="nav-icon fas fa-briefcase"></i>
+                  <p>Manager</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <!-- Hidden Menu Profile
           <li class="nav-item">
             <a @click="goTo('/profile')" class="nav-link">
               <i class="nav-icon fas fa-user-circle"></i>
@@ -82,6 +123,7 @@
               </p>
             </a>
           </li>  
+          -->
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

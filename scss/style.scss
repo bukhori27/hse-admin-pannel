@@ -26,6 +26,9 @@
 body {
     background-color: white !important;
 }
+h1, .h1 {
+  font-size: 1.8rem !important;
+}
 .fr {
     float: right;
 }
@@ -1711,7 +1714,7 @@ img-relative {
   margin-left: 0 !important;
 }
 .app .content-wrapper {
-  min-height: 720px !important;
+  min-height: 745px !important;
 }
 .sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active, .sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
   background-color: rgba(255,255,255,.1) !important;
@@ -1719,6 +1722,13 @@ img-relative {
 }
 .mt-30 {
   margin-top:30px;
+}
+.mt-10 {
+  margin-top:10px;
+}
+
+.mt-20 {
+  margin-top:20px;
 }
 .table th, .table td {
   padding: 0.5rem !important;
@@ -1733,4 +1743,31 @@ img-relative {
   bottom: 5px;
   position: fixed;
   width: 225px;
+}
+
+.dropdown-menu .divider {
+  height: 1px;
+  width: 100%;
+  margin: 9px 0;
+  overflow: hidden;
+  background-color: #e5e5e5;
+}
+.dropdown-menu {
+  width: 160px !important;
+  right: 0px !important;
+}
+.dropdown-menu li {
+  margin-bottom: 5px;
+}
+.dropdown-menu li a i {
+  margin-right: 10px;
+}
+.button-issue {
+  color: white !important;
+  font-size: 1rem;
+  --font-family-sans-serif: "Source Sans Pro",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+.card-header .btn {
+  margin-top: 0px !important;
 }
