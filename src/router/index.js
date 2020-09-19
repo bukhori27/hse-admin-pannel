@@ -24,6 +24,11 @@ import AddLocation from '@/views/pages/AddLocation'
 import Finding from '@/views/pages/Finding'
 import Issue from '@/views/pages/Issue'
 import Type from '@/views/pages/Type'
+import Reporter from '@/views/pages/Reporter'
+import Executor from '@/views/pages/Executor'
+import Observer from '@/views/pages/Observer'
+import Admin from '@/views/pages/Admin'
+import Manager from '@/views/pages/Manager'
 
 Vue.use(Router)
 
@@ -93,8 +98,8 @@ export default new Router({
     },
     // { path: '/register', name: 'Register', component: Register },
     {
-      path: '/user/',
-      redirect: 'user',
+      path: '/all-user/',
+      redirect: 'all-user',
       component: Full,
       children: [
         { path: '', name: 'user', component: user },
@@ -106,6 +111,46 @@ export default new Router({
       component: Full,
       children: [
         { path: '', name: 'Adduser', component: Adduser },
+      ]
+    },
+    {
+      path: '/reporter/',
+      redirect: 'reporter',
+      component: Full,
+      children: [
+        { path: '', name: 'Reporter', component: Reporter },
+      ]
+    },
+    {
+      path: '/executor/',
+      redirect: 'executor',
+      component: Full,
+      children: [
+        { path: '', name: 'Executor', component: Executor },
+      ]
+    },
+    {
+      path: '/observer/',
+      redirect: 'observer',
+      component: Full,
+      children: [
+        { path: '', name: 'Observer', component: Observer },
+      ]
+    },
+    {
+      path: '/admin/',
+      redirect: 'admin',
+      component: Full,
+      children: [
+        { path: '', name: 'Admin', component: Admin },
+      ]
+    },
+    {
+      path: '/manager/',
+      redirect: 'manager',
+      component: Full,
+      children: [
+        { path: '', name: 'Manager', component: Manager },
       ]
     },
     {

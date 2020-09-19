@@ -68,37 +68,37 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a @click="goTo('/category')"class="nav-link">
+                <a @click="goTo('/all-user')"class="nav-link">
                   <i class="nav-icon fas fa-users"></i>
                   <p>All User</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a @click="goTo('/location')" class="nav-link">
+                <a @click="goTo('/reporter')" class="nav-link">
                   <i class="nav-icon fas fa-camera"></i>
                   <p>Reporter</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a @click="goTo('/type')"class="nav-link">
+                <a @click="goTo('/executor')"class="nav-link">
                   <i class="nav-icon fas fa-tools"></i>
                   <p>Executor</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a @click="goTo('/type')"class="nav-link">
+                <a @click="goTo('/observer')"class="nav-link">
                   <i class="nav-icon fas fa-search-location"></i>
                   <p>Observer</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a @click="goTo('/user')" class="nav-link">
+                <a @click="goTo('/admin')" class="nav-link">
                   <i class="nav-icon fas fa-user-friends"></i>
                   <p>Admin</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a @click="goTo('/user')" class="nav-link">
+                <a @click="goTo('/manager')" class="nav-link">
                   <i class="nav-icon fas fa-briefcase"></i>
                   <p>Manager</p>
                 </a>
