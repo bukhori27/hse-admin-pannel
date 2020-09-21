@@ -30,7 +30,7 @@
             </a>
           </li>                
           <li class="nav-item">
-            <a class="nav-link" @click="openMenu" v-bind:class="checkMenu == true ? 'menu-open': '' ">
+            <a class="nav-link" @click="openMenu('a')" v-bind:class="checkMenuA == true ? 'menu-open': '' ">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 Master Data
@@ -59,7 +59,7 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a class="nav-link" @click="openMenu" v-bind:class="checkMenu == true ? 'menu-open': '' ">
+            <a class="nav-link" @click="openMenu('b')" v-bind:class="checkMenuB == true ? 'menu-open': '' ">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 User
@@ -150,16 +150,22 @@
         LoginShow: false,
         Username: '',
         Password: '',
-        checkMenu:false
+        checkMenuA:false,
+        checkMenuB:false
       }
     },
     components: {
     },
     methods: {
-      openMenu () {
+      openMenu (type) {
         let self = this
-        if (self.checkMenu) return self.checkMenu = false
-        return self.checkMenu = true
+        if(type === 'a'){
+          if (self.checkMenuA) return self.checkMenuA = false
+          return self.checkMenuA = true
+        }else {
+          if (self.checkMenuB) return self.checkMenuB = false
+          return self.checkMenuB = true
+        }
       },
       goTo (path, id) {
         let self = this

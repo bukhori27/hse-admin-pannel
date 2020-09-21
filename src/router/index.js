@@ -58,7 +58,7 @@ export default new Router({
     {
       path: '/forgot-password/:id',
       redirect: '',
-      component: Full,
+      component: Simple,
       children: [
         { path: '', name: 'Forgotpassword', component: Forgotpassword },
       ]

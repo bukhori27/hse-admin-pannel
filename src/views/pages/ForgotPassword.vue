@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-12 m-t-10 fs12" style="display: inline ">
               <div class=" tc"> Already have an Account?
-                <span @click="$router.push('/login')" style="font-weight:900;"> Login</span>
+                <span @click="$router.push('/')" style="font-weight:900;"> Login</span>
               </div>
             </div>
           </div>

@@ -1,13 +1,15 @@
 <template>
   <div class="flex-row align-items-center">
-    <div class="container-fluid">
+    <div class="container-fluid"><b-row>
+        <div class="col-sm-6">
+          <h1>Location</h1>
+        </div>
+      </b-row>
       <b-row class="justify-content-center">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-11">
-          <div class="col-md-12"><h1 class="tc m-b-5">Location</h1> </div>
-          <!-- step1 -->
-            <div class="float-right m-b-10" >
-                <b-button variant="primary" @click="addCategory">Create location</b-button>
-            </div>
+          <div class="float-right m-b-10" >
+              <b-button variant="primary" @click="addCategory">Create location</b-button>
+          </div>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="sm" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">

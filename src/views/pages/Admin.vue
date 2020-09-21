@@ -1,9 +1,23 @@
 <template>
   <div class="flex-row align-items-center">
     <div class="container-fluid">
+      <b-row>
+        <div class="col-sm-6">
+          <h1>List Admin</h1>
+        </div>
+      </b-row>
       <b-row class="justify-content-center">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-11">
-          <div class="col-md-12"><h1 class="tc m-b-5">Admin</h1> </div>
+          <div class="card-tools float-right m-b-10">
+            <div class="input-group input-group-sm">
+              <input type="text" class="form-control" placeholder="Search User">
+              <div class="input-group-append">
+                <div class="btn btn-primary">
+                  <i class="fas fa-search"></i>
+                </div>
+              </div>
+            </div>
+          </div>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="sm" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
