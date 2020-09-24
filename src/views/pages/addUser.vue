@@ -1,52 +1,41 @@
 <template>
   <div class="flex-row">
     <div class="container">
-        <b-row>
-          <div class="col-sm-6">
-            <h1>Add User</h1>
-          </div>
-        </b-row>
       <b-row>
-        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
-          <div id="pt-pgSignin" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 row npr">
-            <!-- step1 -->
-
-            <div id="step1" class="col-md-12 npr">
-              <b-input-group>
-                <label style="width: 100%; font-weight:600">Username</label>
-                <input type="text" v-model="namaOrganisasi" class="form-control mb-4 border-radius-8" placeholder="Username">
-                <b-button v-b-tooltip.hover title="Username" class="tooltips-custom">?</b-button>
-              </b-input-group>
-              <b-input-group>
-                <label style="width: 100%; font-weight:600">Email</label>
-                <input type="email" v-model="email" class="form-control mb-4 border-radius-8" placeholder="email">
-                <b-button v-b-tooltip.hover title="Digunakan untuk masuk ke dalam akun anda" class="tooltips-custom">?</b-button>
-              </b-input-group>
-              <b-input-group>
-                <label style="width: 100%; font-weight:600">Password</label>
-                <input type="password" v-model="Password" class="form-control mb-4 border-radius-8" placeholder="password">
-                <b-button v-b-tooltip.hover title="Digunakan untuk masuk ke dalam akun anda" class="tooltips-custom">?</b-button>
-              </b-input-group>
-              <b-input-group>
-                <label style="width: 100%; font-weight:600">Konfirmasi Password</label>
-                <input type="password" v-model="cPassword" class="form-control mb-4 border-radius-8" placeholder="confirm password">
-                <b-button v-b-tooltip.hover title="Digunakan untuk masuk ke dalam akun anda" class="tooltips-custom">?</b-button>
-              </b-input-group>
-              <b-input-group>
-                <label style="width: 100%; font-weight:600">Role</label>
-                  <select class="register-custom-select" v-model="provinceId" @change="regenciesFunc()">
-                    <option v-for="(provinsi, i) in provinceList" :value="provinsi.value" :key="'d' + i">{{ provinsi.nama }}</option>
-                  </select>
-                <b-button v-b-tooltip.hover title="Digunakan untuk masuk ke dalam akun anda" class="tooltips-custom">?</b-button>
-              </b-input-group>
-              <div class="col-md-12 row m-b-10 m-t-20" style="padding:0 0 0 15px">
-                <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="col-md-12" size="14" @click="registration" style="color:white; padding: 20px 0; border-radius:5px;">
-                  Simpan
-                </b-button>
-              </div>
-            </div>
-              
-          </div>
+        <div class="col-sm-6">
+          <a @click="backTo" class="nav-link df nplr">
+            <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
+            <h1>Add User</h1>
+          </a>
+        </div>
+      </b-row>
+      <b-row>
+        <div class="col-12 ">
+          <b-input-group>
+            <label style="width: 100%; font-weight:600">Username</label>
+            <input type="text" v-model="namaOrganisasi" class="form-control mb-4" placeholder="Username">
+          </b-input-group>
+          <b-input-group>
+            <label style="width: 100%; font-weight:600">Email</label>
+            <input type="email" v-model="email" class="form-control mb-4" placeholder="email">
+          </b-input-group>
+          <b-input-group>
+            <label style="width: 100%; font-weight:600">Password</label>
+            <input type="password" v-model="Password" class="form-control mb-4" placeholder="password">
+          </b-input-group>
+          <b-input-group>
+            <label style="width: 100%; font-weight:600">Konfirmasi Password</label>
+            <input type="password" v-model="cPassword" class="form-control mb-4" placeholder="confirm password">
+          </b-input-group>
+          <b-input-group>
+            <label style="width: 100%; font-weight:600">Role</label>
+              <select class="register-custom-select mb-4 " v-model="provinceId" @change="regenciesFunc()">
+                <option v-for="(provinsi, i) in provinceList" :value="provinsi.value" :key="'d' + i">{{ provinsi.nama }}</option>
+              </select>
+          </b-input-group>
+          <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="col-md-12" size="14" @click="registration" style="color:white; padding: 20px 0; border-radius:5px;">
+            Simpan
+          </b-button>
         </div>
       </b-row>
     </div>
@@ -84,11 +73,17 @@
       registration () {
 
       },
+      backTo () {
+        let self = this
+        window.history.back();
+      },
       provincesFunc () {
         let self = this
         self.provinceList = [
           {nama:'reporter', value: 'reporter'},
           {nama:'manager', value: 'manager'},
+          {nama:'admin', value: 'admin'},
+          {nama:'observer', value: 'observer'},
           {nama:'executor', value: 'executor'},
         ]
       },

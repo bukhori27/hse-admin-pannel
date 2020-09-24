@@ -10,10 +10,10 @@
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-11">
           <div class="card-tools float-right m-b-10">
             <div class="input-group input-group-sm">
-              <input type="text" class="form-control" placeholder="Search User">
+              <input type="text" class="form-control" placeholder="Search User" v-model="searchText">
               <div class="input-group-append">
                 <div class="btn btn-primary">
-                  <i class="fas fa-search"></i>
+                  <i class="fas fa-search" @click="search(searchText)"></i>
                 </div>
               </div>
             </div>
@@ -25,7 +25,7 @@
               <div>{{$index + 1}} </div>
             </template>
             <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'view-approval-user?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fa fa-search"></i></b-button></router-link>
+              <router-link  v-bind:to="'/user/edit-manager?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
               <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
               <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
@@ -64,19 +64,19 @@
         checkedNames : [],
         currentPage: 1,
         perPage: 10,
+        searchText: '',
         totalRows: 0,
         fields: [
           'nama',
           'email',
-          'nama_organisasi',
-          'tingkatan',
+          'role',
           {key: 'actions'}
         ],
         sortBy: 'creator',
         sortDesc: false,
         filter: '',
         pageOptions: [ 5, 10, 15 ],
-        token: localStorage.getItem('token_ppa'),
+        token: localStorage.getItem('token_hse'),
         pages: 1,
         pageSize: 0
       }
@@ -87,6 +87,9 @@
         // this.totalRows = filteredItems.length
         this.currentPage = 1
       },
+      search () {
+        this.listUser(1)
+      },
       listUser (page) {
         var self = this
         let status = []
@@ -94,6 +97,8 @@
         var token = self.token
         var parameter = {
           token: token,
+          filter: '2',
+          search: self.searchText,
           "page": page
         }
         var config = { 
@@ -101,18 +106,14 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'approval_user_filter', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'user_Filter', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            let dump = response.data.lembagaMasyarakat_list
+            let dump = response.data.user_list
             for (let i = 0; i < dump.length; i++) {
               let b = {
                 nama: dump[i].nama_user,
                 email: dump[i].email,
-                spesialis_bidang: dump[i].nama_spesial_bidang,
-                nama_organisasi: dump[i].nama_organisasi,
-                jenis_lembaga: dump[i].nama_jenis_lembaga,
-                date: dump[i].date,
-                tingkatan: dump[i].tingkatan, 
+                role : dump[i].type_privilege, 
                 id: dump[i].user_id,
               }
               status.push(b)
@@ -125,7 +126,7 @@
             alert('SALAH...!')
           }
         })
-      }
+      },
     },
     created: function () {
       this.listUser(1)

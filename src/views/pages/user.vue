@@ -8,19 +8,23 @@
       </b-row>
       <b-row class="justify-content-center">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-11">
-          <div class="float-right m-b-10" >
-            <b-button variant="primary" @click="addUser">Create User</b-button>
-          </div>
-          <div class="card-tools float-right mr10 p-t-3">
-            <div class="input-group input-group-sm">
-              <input type="text" class="form-control" placeholder="Search User">
-              <div class="input-group-append">
-                <div class="btn btn-primary">
-                  <i class="fas fa-search"></i>
+          <b-row>
+            <div class="col-12">
+              <div class="float-right m-b-10" >
+                <b-button variant="primary" @click="addUser">Create User</b-button>
+              </div>
+              <div class="card-tools float-left p-t-3">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" placeholder="Search User" v-model="searchText">
+                  <div class="input-group-append">
+                    <div class="btn btn-primary">
+                      <i class="fas fa-search" @click="search(searchText)"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </b-row>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="sm" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
@@ -28,7 +32,7 @@
               <div>{{$index + 1}} </div>
             </template>
             <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'view-approval-user?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fa fa-search"></i></b-button></router-link>
+              <router-link  v-bind:to="'/user/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
               <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
               <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
@@ -68,18 +72,18 @@
         currentPage: 1,
         perPage: 10,
         totalRows: 0,
+        searchText: '',
         fields: [
           'nama',
           'email',
-          'nama_organisasi',
-          'tingkatan',
+          'role',
           {key: 'actions'}
         ],
         sortBy: 'creator',
         sortDesc: false,
         filter: '',
         pageOptions: [ 5, 10, 15 ],
-        token: localStorage.getItem('token_ppa'),
+        token: localStorage.getItem('token_hse'),
         pages: 1,
         pageSize: 0
       }
@@ -90,6 +94,9 @@
         // this.totalRows = filteredItems.length
         this.currentPage = 1
       },
+      search () {
+        this.listUser(1)
+      },
       listUser (page) {
         var self = this
         let status = []
@@ -97,25 +104,22 @@
         var token = self.token
         var parameter = {
           token: token,
-          "page": page
+          search: self.searchText,
+          page: page
         }
         var config = { 
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'approval_user_filter', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'user_Filter', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            let dump = response.data.lembagaMasyarakat_list
+            let dump = response.data.user_list
             for (let i = 0; i < dump.length; i++) {
               let b = {
                 nama: dump[i].nama_user,
                 email: dump[i].email,
-                spesialis_bidang: dump[i].nama_spesial_bidang,
-                nama_organisasi: dump[i].nama_organisasi,
-                jenis_lembaga: dump[i].nama_jenis_lembaga,
-                date: dump[i].date,
-                tingkatan: dump[i].tingkatan, 
+                role : dump[i].type_privilege, 
                 id: dump[i].user_id,
               }
               status.push(b)
@@ -132,7 +136,7 @@
       addUser () {
         let self = this
         self.LoginShow = false
-        self.$router.push('/add-user')
+        self.$router.push('/user/add')
       },
       deleted(id) {
         var self = this

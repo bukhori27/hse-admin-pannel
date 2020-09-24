@@ -76,33 +76,27 @@
                 <div class="table-responsive mailbox-messages">
                   <table class="table table-hover table-striped">
                     <tbody>
-                    <tr>
+                    
+                    <tr v-for="(indexs, id) in finding">
                       <td>
                         <div class="icheck-primary">
-                          <input type="checkbox" value="" id="check1">
-                          <label for="check1"></label>
+                          <b-img :src="indexs.img" alt="Responsive image" style="height:auto; width:50px !important;" v-if="indexs.img"/>
                         </div>
                       </td>
-                      <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                      <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                      <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
+                      <td class="mailbox-name">{{indexs.name}}</a></td>
+                      <td class="mailbox-subject"><b>{{indexs.title}} </b><p>{{indexs.description}}</p>
                       </td>
                       <td class="mailbox-attachment"></td>
-                      <td class="mailbox-date">5 mins ago</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="icheck-primary">
-                          <input type="checkbox" value="" id="check2">
-                          <label for="check2"></label>
+                      <td class="mailbox-date">{{indexs.date}}</td>
+                      <td class="mailbox-date">
+                        <a class="nav-link p0 f-black" data-toggle="dropdown" href="#">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" tabindex="-1" href="#">Create New Issue</a>
+                          <a class="dropdown-item" tabindex="-1" href="#">Merge Issue</a>
                         </div>
                       </td>
-                      <td class="mailbox-star"><a href="#"><i class="fas fa-star-o text-warning"></i></a></td>
-                      <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                      <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
-                      </td>
-                      <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
-                      <td class="mailbox-date">28 mins ago</td>
                     </tr>
                     </tbody>
                   </table>
@@ -131,6 +125,28 @@
             </div>
           </div>
         </b-row>
+        <!-- start Modal-->
+        <div class="modal fade m-t-80" id="modal-default">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Action</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>One fine body&hellip;</p>
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+        </div>
+        <!-- end modal -->
       </div>
     </div>
     </section>
@@ -154,25 +170,21 @@
         checked: false,
         listing: [],
         pageNumber: 0,
+        imgContent: 'static/img/icons/logo.png',
         paginate: ['listing'],
         checkedNames : [],
         currentPage: 1,
         perPage: 10,
         totalRows: 0,
-        fields: [
-          'nama',
-          'email',
-          'nama_organisasi',
-          'tingkatan',
-          {key: 'actions'}
-        ],
+        finding: [],
         sortBy: 'creator',
         sortDesc: false,
         filter: '',
         pageOptions: [ 5, 10, 15 ],
-        token: localStorage.getItem('token_ppa'),
+        token: localStorage.getItem('token_hse'),
         pages: 1,
-        pageSize: 0
+        pageSize: 0,
+        popup: false
       }
     },
     methods: {
@@ -183,6 +195,12 @@
       },
       listUser (page) {
         var self = this
+        self.finding = [{name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
+        {name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
+        {name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
+        {name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
+        {name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 }]
+        /** 
         let status = []
         let dump2 =''
         var token = self.token
@@ -218,7 +236,7 @@
           } else {
             alert('SALAH...!')
           }
-        })
+        }) **/
       },
       deleted(id) {
         var self = this

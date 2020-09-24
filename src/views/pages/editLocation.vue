@@ -5,15 +5,15 @@
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
-            <h1>Add Category</h1>
+            <h1>Edit Location</h1>
           </a>
         </div>
       </b-row>
       <b-row>
-        <div id="pt-pgSignin" class="col-12">
+        <div class="col-12">
           <b-input-group>
-            <label style="width: 100%; font-weight:600">Name Category</label>
-            <input type="text" v-model="namacategory" class="form-control mb-4 border-radius-8" placeholder="nama category">
+            <label style="width: 100%; font-weight:600">Name type</label>
+            <input type="text" v-model="namacategory" class="form-control mb-4 border-radius-8" placeholder="nama location">
             <b-button v-b-tooltip.hover title="namacategory" class="tooltips-custom">?</b-button>
           </b-input-group>
           <b-input-group>
@@ -42,7 +42,7 @@
   import sha256 from 'sha256'
 
   export default {
-    name: 'AddCategory',
+    name: 'EditLocation',
     axios,
     data () {
       return {

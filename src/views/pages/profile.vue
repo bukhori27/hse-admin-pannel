@@ -5,25 +5,33 @@
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
-            <h1>Edit Profile</h1>
+            <h1>Profile</h1>
           </a>
         </div>
       </b-row>
-      <div class="row m-t-10">
-        <div class="col-12 ">
-          <b-input-group  >
-            <input type="text" v-model="user.nama" class="form-control mb-4"placeholder="username">
-            <b-button v-b-tooltip.hover title="Diisi Nama Organisasi/Lembaga/Komunitas sesuai dengan nama legal" class="tooltips-custom">?</b-button>
-          </b-input-group>
-          <b-input-group >
-            <input type="email" v-model="user.email" class="form-control mb-4" placeholder="email">
-            <b-button v-b-tooltip.hover title="email" class="tooltips-custom">?</b-button>
-          </b-input-group>
-          <b-button button-rounded-border-radius variant="primary" rounded class="col-md-12" size="14" @click="goToChangePassword" style=" color:white; padding: 15px 0; border-radius:5px; margin-right:-15px;">
-            submit
+      <b-row>
+        <div class="col-md-12 m-b-10 m-t-10">
+          <div>
+            <p><span> Username </span><span> coba </span> </p>
+          </div>
+          <div>
+            <p><span> Email </span><span> coba@gmail.com </span> </p>
+          </div>
+          <div>
+            <p><span> Perusahaan </span><span> coba rasa cv </span> </p>
+          </div>
+        </div>
+        <div class="col-md-6 m-b-10">
+          <b-button button-rounded-border-radius variant="primary" rounded class="col-md-12" size="14" @click="goTo('/profile/edit')" style=" color:white; padding: 15px 0; border-radius:5px;">
+            Edit Profile
           </b-button>
         </div>
-      </div>
+        <div class="col-md-6 m-b-10">
+          <b-button button-rounded-border-radius variant="primary" rounded class="col-md-12" size="14" @click="goTo('/change-password')" style=" color:white; padding: 15px 0; border-radius:5px; margin-right:-15px;">
+            Change password
+          </b-button>
+        </div>
+      </b-row>
     </div>
   </div>
 </template>
@@ -39,7 +47,7 @@
   import sha256 from 'sha256'
 
   export default {
-    name: 'EditProfile',
+    name: 'Profile',
     axios,
     data () {
       return {
@@ -85,11 +93,6 @@
         }) 
       },
       submit () {},
-      goToChangePassword () {
-        let index = 'index=1&url=coba'
-        console.log(index)
-        // this.$router.push({name: 'changePassword', params: index})
-      },
       backTo () {
         let self = this
         window.history.back();
@@ -125,7 +128,11 @@
             //handle error
             console.log(response);
         });
-      }
+      },
+      goTo (path) {
+        let self = this
+        self.$router.push(path)
+      },
     },
     created: function () {
       // this.user = this.$route.params;

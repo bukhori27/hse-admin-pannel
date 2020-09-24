@@ -89,7 +89,7 @@
         typeAdmin: 'internal',
         provinceId: '',
         provinceList: [],
-        token: localStorage.getItem('token_ppa')
+        token: localStorage.getItem('token_hse')
       }
     },
     methods: {

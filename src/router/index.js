@@ -5,7 +5,6 @@ import Router from 'vue-router'
 import Full from '@/containers/Full'
 import Simple from '@/containers/Simple'
 
-import Dashboard from '@/views/Dashboard'
 import Page404 from '@/views/pages/Page404'
 import Page500 from '@/views/pages/Page500'
 import Index from '@/views/pages/index'
@@ -15,20 +14,31 @@ import Forgotpassword from '@/views/pages/ForgotPassword'
 import Resetpassword from '@/views/pages/ResetPassword'
 import changePassword from '@/views/pages/changepassword'
 import editProfile from '@/views/pages/editprofile'
+import Profile from '@/views/pages/profile'
 import Adduser from '@/views/pages/Adduser'
 import user from '@/views/pages/User'
 import Category from '@/views/pages/Category'
 import AddCategory from '@/views/pages/AddCategory'
+import EditCategory from '@/views/pages/EditCategory'
 import Location from '@/views/pages/Location'
 import AddLocation from '@/views/pages/AddLocation'
+import EditLocation from '@/views/pages/EditLocation'
+import Type from '@/views/pages/Type'
+import AddType from '@/views/pages/AddType'
+import EditType from '@/views/pages/EditType'
 import Finding from '@/views/pages/Finding'
 import Issue from '@/views/pages/Issue'
-import Type from '@/views/pages/Type'
 import Reporter from '@/views/pages/Reporter'
 import Executor from '@/views/pages/Executor'
 import Observer from '@/views/pages/Observer'
 import Admin from '@/views/pages/Admin'
 import Manager from '@/views/pages/Manager'
+import editUser from '@/views/pages/editUser'
+import editReporter from '@/views/pages/editReporter'
+import editExecutor from '@/views/pages/editExecutor'
+import editObserver from '@/views/pages/editObserver'
+import editAdmin from '@/views/pages/editAdmin'
+import editManager from '@/views/pages/editManager'
 
 Vue.use(Router)
 
@@ -43,24 +53,11 @@ export default new Router({
       redirect: '',
       component: Simple,
       children: [
-        { path: '', name: 'Login', component: Login }
+        { path: '', name: 'Login', component: Login },
+        { path: 'register', name: 'Register', component: Register },
+        { path: 'forgot-password/:id', name: 'Forgotpassword', component: Forgotpassword },
+        { path: 'reset-password', name: 'Resetpassword', component: Resetpassword },
 
-      ]
-    },
-    {
-      path: '/register',
-      redirect: '',
-      component: Simple,
-      children: [
-        { path: '', name: 'Register', component: Register },
-      ]
-    },
-    {
-      path: '/forgot-password/:id',
-      redirect: '',
-      component: Simple,
-      children: [
-        { path: '', name: 'Forgotpassword', component: Forgotpassword },
       ]
     },
     {
@@ -72,20 +69,12 @@ export default new Router({
       ]
     },
     {
-      path: '/profile',
+      path: '/profile/',
       redirect: '',
       component: Full,
       children: [
-        { path: '', name: 'editProfile', component: editProfile },
-      ]
-    },
-    {
-      path: '/reset-password',
-      redirect: '',
-      component: Simple,
-      children: [
-        { path: '/reset-password', name: 'Resetpassword', component: Resetpassword },
-
+        { path: '', name: 'Profile', component: Profile },
+        { path: 'edit', name: 'editProfile', component: editProfile },
       ]
     },
     {
@@ -93,104 +82,64 @@ export default new Router({
       redirect: '',
       component: Full,
       children: [
-        { path: '', name: 'changePassword', component: changePassword },
-      ]
-    },
-    // { path: '/register', name: 'Register', component: Register },
-    {
-      path: '/all-user/',
-      redirect: 'all-user',
-      component: Full,
-      children: [
-        { path: '', name: 'user', component: user },
+        { path: '', name: 'changePassword', component: changePassword }
       ]
     },
     {
-      path: '/add-user/',
-      redirect: 'add-user',
+      path: '/user/',
       component: Full,
       children: [
-        { path: '', name: 'Adduser', component: Adduser },
-      ]
-    },
-    {
-      path: '/reporter/',
-      redirect: 'reporter',
-      component: Full,
-      children: [
-        { path: '', name: 'Reporter', component: Reporter },
-      ]
-    },
-    {
-      path: '/executor/',
-      redirect: 'executor',
-      component: Full,
-      children: [
-        { path: '', name: 'Executor', component: Executor },
-      ]
-    },
-    {
-      path: '/observer/',
-      redirect: 'observer',
-      component: Full,
-      children: [
-        { path: '', name: 'Observer', component: Observer },
-      ]
-    },
-    {
-      path: '/admin/',
-      redirect: 'admin',
-      component: Full,
-      children: [
-        { path: '', name: 'Admin', component: Admin },
-      ]
-    },
-    {
-      path: '/manager/',
-      redirect: 'manager',
-      component: Full,
-      children: [
-        { path: '', name: 'Manager', component: Manager },
+        { path: 'all', name: 'user', component: user },
+        { path: 'add', name: 'Adduser', component: Adduser },
+        { path: 'reporter', name: 'Reporter', component: Reporter },
+        { path: 'observer', name: 'Observer', component: Observer },
+        { path: 'executor', name: 'Executor', component: Executor },
+        { path: 'admin', name: 'Admin', component: Admin },
+        { path: 'manager', name: 'Manager', component: Manager },
+        { path: 'edit', name: 'edituser', component: editUser },
+        { path: 'edit-reporter', name: 'editReporter', component: editReporter },
+        { path: 'edit-observer', name: 'editObserver', component: editObserver },
+        { path: 'edit-executor', name: 'editExecutor', component: editExecutor },
+        { path: 'edit-admin', name: 'editAdmin', component: editAdmin },
+        { path: 'edit-manager', name: 'editManager', component: editManager },
       ]
     },
     {
       path: '/category/',
-      redirect: 'category',
       component: Full,
       children: [
         { path: '', name: 'Category', component: Category },
-      ]
-    },
-    {
-      path: '/add-category/',
-      redirect: 'add-category',
-      component: Full,
-      children: [
-        { path: '', name: 'AddCategory', component: AddCategory },
+        { path: 'add', name: 'AddCategory', component: AddCategory },
+        { path: 'edit', name: 'EditCategory', component: EditCategory },
+
       ]
     },
     {
       path: '/location/',
-      redirect: 'location',
       component: Full,
       children: [
         { path: '', name: 'Location', component: Location },
+        { path: 'add', name: 'AddLocation', component: AddLocation },
+        { path: 'edit', name: 'EditLocation', component: EditLocation },
+
       ]
     },
     {
       path: '/type/',
-      redirect: 'type',
       component: Full,
       children: [
         { path: '', name: 'Type', component: Type },
+        { path: 'add', name: 'AddType', component: AddType },
+        { path: 'edit', name: 'EditType', component: EditType },
+
       ]
     },
     {
-      path: '/issue',
-      redirect: 'issue',
+      path: '/issue/',
       component: Full,
       children: [
         { path: '', name: 'Issue', component: Issue },
+        { path: 'detail/:id', name: 'detailIssue', component: Issue },
       ]
     },
     {
@@ -202,14 +151,6 @@ export default new Router({
       ]
     },
     {
-      path: '/add-location/',
-      redirect: 'add-location',
-      component: Full,
-      children: [
-        { path: '', name: 'AddLocation', component: AddLocation },
-      ]
-    },
-    {
       path: '/pages',
       redirect: '/pages/404',
       name: 'Pages',
@@ -217,17 +158,9 @@ export default new Router({
         render (c) { return c('router-view') }
       },
       children: [
-        {
-          path: '500',
-          name: 'Page500',
-          component: Page500
-        },
+        { path: '500', name: 'Page500', component: Page500 },
       ]
     },
-    {
-      path: '*',
-      name: 'Page404',
-      component: Page404
-    },
+    { path: '*', name: 'Page404', component: Page404 },
   ]
 })

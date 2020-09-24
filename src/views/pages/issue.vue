@@ -53,6 +53,37 @@
               </div>
               <!-- /.card-body -->
             </div>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Prio</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body p-0">
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item active">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-circle text-danger"></i> Important
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-circle text-warning"></i> Medium
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="#" class="nav-link">
+                      <i class="nav-icon far fa-circle text-info"></i> Low
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <!-- /.card-body -->
+            </div>
           </div>
           <div class="col-md-9">
             <div class="card card-primary card-outline">
@@ -76,33 +107,22 @@
                 <div class="table-responsive mailbox-messages">
                   <table class="table table-hover table-striped">
                     <tbody>
-                    <tr>
+                    <tr v-for="(indexs, id) in issue" @click="detailIssue(indexs.id)">
                       <td>
                         <div class="icheck-primary">
-                          <input type="checkbox" value="" id="check1">
-                          <label for="check1"></label>
+                          <b-img :src="indexs.img" alt="Responsive image" style="height:auto; width:50px !important;" v-if="indexs.img"/>
                         </div>
                       </td>
-                      <td class="mailbox-star"><a href="#"><i class="fas fa-star text-warning"></i></a></td>
-                      <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                      <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
+                      <td class="mailbox-name">{{indexs.name}} <p class="p-t-5" >{{checkStatus(indexs.state)}}</p></td>
+                      <td class="mailbox-subject"><b>{{indexs.title}} </b><p class="npb">{{indexs.description}}</p><p v-bind:class="changeColor(indexs.state)" class="npb"> {{checkType(indexs.state)}}</p>
                       </td>
                       <td class="mailbox-attachment"></td>
-                      <td class="mailbox-date">5 mins ago</td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="icheck-primary">
-                          <input type="checkbox" value="" id="check2">
-                          <label for="check2"></label>
-                        </div>
+                      <td class="mailbox-date">{{indexs.date}}</td> 
+                      <td class="mailbox-date">
+                        <a @click="detailIssue(indexs.id)">
+                          <i class="fas fa-ellipsis-v"></i>
+                        </a>
                       </td>
-                      <td class="mailbox-star"><a href="#"><i class="fas fa-star-o text-warning"></i></a></td>
-                      <td class="mailbox-name"><a href="read-mail.html">Alexander Pierce</a></td>
-                      <td class="mailbox-subject"><b>AdminLTE 3.0 Issue</b> - Trying to find a solution to this problem...
-                      </td>
-                      <td class="mailbox-attachment"><i class="fas fa-paperclip"></i></td>
-                      <td class="mailbox-date">28 mins ago</td>
                     </tr>
                     </tbody>
                   </table>
@@ -153,26 +173,23 @@
       return {
         checked: false,
         listing: [],
+        imgContent: 'static/img/icons/logo.png',
         pageNumber: 0,
         paginate: ['listing'],
         checkedNames : [],
         currentPage: 1,
         perPage: 10,
         totalRows: 0,
-        fields: [
-          'nama',
-          'email',
-          'nama_organisasi',
-          'tingkatan',
-          {key: 'actions'}
-        ],
+        issue: [],
         sortBy: 'creator',
         sortDesc: false,
         filter: '',
         pageOptions: [ 5, 10, 15 ],
-        token: localStorage.getItem('token_ppa'),
+        token: localStorage.getItem('token_hse'),
         pages: 1,
-        pageSize: 0
+        pageSize: 0,
+        popup: false,
+        fontColor: ''
       }
     },
     methods: {
@@ -181,10 +198,58 @@
         // this.totalRows = filteredItems.length
         this.currentPage = 1
       },
+      showPopup () {
+        let self = this
+        console.log(self.popup)
+        if (self.popup == true) return self.popup = false
+        else return self.popup = true
+      },
+      checkStatus (index) {
+        let self = this
+        if (index == 1) {
+          return 'Important' 
+        }
+        else if (index == 2) { 
+          return 'Warning' 
+          }
+        else { 
+          return 'Low' 
+        }
+      },
+      checkType (index) {
+        let self = this
+        if (index == 1) {
+          return 'Important' 
+        }
+        else if (index == 2) { 
+          return 'Warning' 
+          }
+        else { 
+          return 'Low' 
+        }
+      },
+      changeColor (index) {
+        let self = this
+        if (index == 1) {
+          return'font-red'
+        }
+        else if (index == 2) { 
+          return'font-yellow'
+          }
+        else { 
+          return'font-blue'
+        }
+      },
       listUser (page) {
         var self = this
         let status = []
         let dump2 =''
+        self.issue = [{id: 1, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 1, state: 1 },
+        {id: 2, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 2, state: 2 },
+        {id: 3, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 3, state: 3 },
+        {id: 4, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 2, state: 4 },
+        {id: 5, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 1, state: 5 }]
+        /** 
         var token = self.token
         var parameter = {
           token: token,
@@ -219,6 +284,7 @@
             alert('SALAH...!')
           }
         })
+        **/
       },
       deleted(id) {
         var self = this
@@ -248,6 +314,11 @@
         self.LoginShow = false
         self.$router.push(path)
       },
+      detailIssue(index) {
+        let self = this
+        self.$router.push('/issue/detail/' + index)
+        console.log(index)
+      }
     },
     created: function () {
       this.listUser(1)

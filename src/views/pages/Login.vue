@@ -59,10 +59,10 @@
     methods: {
       login () {
         var self = this
-        self.$router.push('/dashboard')
-      /**
-        console.log(self.Username)
-        console.log(self.Password)
+          self.$router.push('/dashboard')
+          self.token = url.token
+          localStorage.setItem('token_hse', self.token)
+        /** 
         var parameter = {
           username: self.Username,
           password: sha256(self.Password)
@@ -72,17 +72,16 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        // axios.post(url + 'signin.php', {
         axios.post(url.url_app + 'signin', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
             self.listing = response.data
-            localStorage.setItem('token_rise', self.listing.token)
+            localStorage.setItem('token_hse', self.listing.token)
             localStorage.setItem('profile', JSON.stringify(self.listing.profile))
-            self.$router.push('/user')
+            self.$router.push('/dashboard')
           } else {
             alert('SALAH...!')
           }
-        })  
+        })
         **/
       },
       onLogin() {

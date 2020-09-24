@@ -17,7 +17,7 @@
               <div>{{$index + 1}} </div>
             </template>
             <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'view-approval-user?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
+              <router-link  v-bind:to="'location/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
               <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
               <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
@@ -59,16 +59,14 @@
         totalRows: 0,
         fields: [
           'nama',
-          'email',
-          'nama_organisasi',
-          'tingkatan',
+          'description',
           {key: 'actions'}
         ],
         sortBy: 'creator',
         sortDesc: false,
         filter: '',
         pageOptions: [ 5, 10, 15 ],
-        token: localStorage.getItem('token_ppa'),
+        token: localStorage.getItem('token_hse'),
         pages: 1,
         pageSize: 0
       }
@@ -93,18 +91,13 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'approval_user_filter', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'location_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            let dump = response.data.lembagaMasyarakat_list
+            let dump = response.data.location_list
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].nama_user,
-                email: dump[i].email,
-                spesialis_bidang: dump[i].nama_spesial_bidang,
-                nama_organisasi: dump[i].nama_organisasi,
-                jenis_lembaga: dump[i].nama_jenis_lembaga,
-                date: dump[i].date,
-                tingkatan: dump[i].tingkatan, 
+                nama: dump[i].nama,
+                description: dump[i].description,
                 id: dump[i].user_id,
               }
               status.push(b)
@@ -144,7 +137,7 @@
       addCategory () {
         let self = this
         self.LoginShow = false
-        self.$router.push('/add-location')
+        self.$router.push('/location/add')
       }
     },
     created: function () {
