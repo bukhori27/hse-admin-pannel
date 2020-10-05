@@ -89,12 +89,12 @@
                       <td class="mailbox-attachment"></td>
                       <td class="mailbox-date">{{indexs.date}}</td>
                       <td class="mailbox-date">
-                        <a class="nav-link p0 f-black" data-toggle="dropdown" href="#">
+                        <a class="nav-link p0 f-black" @click="toogledropwdown(indexs.id)" data-toggle="dropdown" href="#"> 
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
-                        <div class="dropdown-menu">
-                          <a class="dropdown-item" tabindex="-1" href="#">Create New Issue</a>
-                          <a class="dropdown-item" tabindex="-1" href="#">Merge Issue</a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                          <a class="dropdown-item" tabindex="-1" @click="createIssue()">Create New Issue</a>
+                          <a class="dropdown-item" tabindex="-1" @click="showPopup" >Merge Issue</a>
                         </div>
                       </td>
                     </tr>
@@ -126,12 +126,12 @@
           </div>
         </b-row>
         <!-- start Modal-->
-        <div class="modal fade m-t-80" id="modal-default">
+        <div class="modal fade m-t-80" id="modal-default" v-bind:class="popup == true ? 'show popup-show': '' ">
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-header">
                 <h4 class="modal-title">Action</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="showPopup">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
@@ -139,8 +139,8 @@
                 <p>One fine body&hellip;</p>
               </div>
               <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" @click="showPopup">Close</button>
+                <button type="button" class="btn btn-primary" @click="submit">Submit</button>
               </div>
             </div>
             <!-- /.modal-content -->
@@ -184,7 +184,8 @@
         token: localStorage.getItem('token_hse'),
         pages: 1,
         pageSize: 0,
-        popup: false
+        popup: false,
+        toogledrop: false
       }
     },
     methods: {
@@ -193,13 +194,34 @@
         // this.totalRows = filteredItems.length
         this.currentPage = 1
       },
+      createIssue () {
+        let self = this
+        let path = '/issue/create'
+        self.$router.push(path)
+      },
+      toogledropwdown(id) {
+        let self = this
+        console.log(id)   
+        if (self.toogledrop == true) return self.toogledrop = false
+        else return self.toogledrop = true
+      },
+      showPopup () {
+        let self = this 
+        self.toogledrop = false
+        if (self.popup == true) return self.popup = false
+        else return self.popup = true
+      },
+      submit (){
+        let self = this
+        return self.popup = false
+      },
       listUser (page) {
         var self = this
-        self.finding = [{name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
-        {name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
-        {name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
-        {name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
-        {name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 }]
+        self.finding = [{id: 1, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
+        {id: 2, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
+        {id: 3, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
+        {id: 4, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 },
+        {id: 5, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', state: 1 }]
         /** 
         let status = []
         let dump2 =''

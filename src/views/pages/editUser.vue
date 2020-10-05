@@ -10,18 +10,16 @@
         </div>
       </b-row>
       <div class="row">
-        <div class="col-md-12 m-b-5 m-t-30">
+        <div class="col-md-12 m-b-5 m-t-10">
             <b-input-group  >
               <input type="text" v-model="user.nama" class="form-control mb-4"placeholder="username">
-              <b-button v-b-tooltip.hover title="Diisi Nama Organisasi/Lembaga/Komunitas sesuai dengan nama legal" class="tooltips-custom">?</b-button>
             </b-input-group>
             <b-input-group >
               <input type="email" v-model="user.email" class="form-control mb-4" placeholder="email">
-              <b-button v-b-tooltip.hover title="email" class="tooltips-custom">?</b-button>
             </b-input-group>
         </div>
           <div class="col-md-12">
-              <b-button button-rounded-border-radius variant="primary" rounded class="col-md-12" size="14" @click="goToChangePassword" style=" color:white; padding: 15px 0; border-radius:5px;">
+              <b-button button-rounded-border-radius variant="primary" rounded size="14" class="float-right" @click="goToChangePassword" style=" color:white; padding: 10px 25px; border-radius:5px;">
                 submit
               </b-button>
           </div>

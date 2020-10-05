@@ -8,31 +8,24 @@
             <!-- step1 -->
             <b-input-group>
               <input type="text" v-model="Username" class="form-control mb-4" placeholder="username">
-              <b-button v-b-tooltip.hover title="Diisi Nama Organisasi/Lembaga/Komunitas sesuai dengan nama legal" class="tooltips-custom">?</b-button>
             </b-input-group>
             <b-input-group>
               <input type="email" v-model="email" class="form-control mb-4" placeholder="email">
-              <b-button v-b-tooltip.hover title="Breakdown Provinsi, Breakdown Kota, Manual Alamat lengkap" class="tooltips-custom">?</b-button>
             </b-input-group>
             <b-input-group>
               <input type="password" v-model="Password" class="form-control mb-4" placeholder="password">
-              <b-button v-b-tooltip.hover title="Digunakan untuk masuk ke dalam akun anda" class="tooltips-custom">?</b-button>
             </b-input-group>
             <b-input-group>
               <input type="password" v-model="cPassword" class="form-control mb-4" placeholder="confirm password">
-              <b-button v-b-tooltip.hover title="Digunakan untuk masuk ke dalam akun anda" class="tooltips-custom">?</b-button>
             </b-input-group>
             <b-input-group>
               <input type="text" v-model="alamat" class="form-control mb-4" placeholder="alamat ">
-              <b-button v-b-tooltip.hover title="Alamat" class="tooltips-custom">?</b-button>
             </b-input-group>
             <b-input-group>
               <input type="text" v-model="penanggungJawab" class="form-control mb-4" placeholder="nama penanggung jawab ">
-              <b-button v-b-tooltip.hover title="Nama Penanggung Jawab" class="tooltips-custom">?</b-button>
             </b-input-group>
             <b-input-group>
               <input type="text" v-model="noHP" class="form-control mb-4" placeholder="no kontak yang bisa dihubungi">
-              <b-button v-b-tooltip.hover title="Nomer hp" class="tooltips-custom">?</b-button>
             </b-input-group>
             <b-input-group class="m-b-20">
                 <label style="width: 100%; font-weight:600">Admin</label>
@@ -51,7 +44,7 @@
                 <label for="Penilai" style="margin-left:5px; margin-right:20px;">Penilai</label>
             </b-input-group>
             <div class="col-md-12 row m-b-10" style="padding:0">
-              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="Register" style="background:#6cbf16; color:white; padding: 20px 0 20px 0px; border-radius:5px;">
+              <b-button button-rounded-border-radius label="Verify" rounded class="float-right"  size="14" @click="Register" style="background:#6cbf16; color:white; padding: 10px 25px; border-radius:5px;">
                 submit
               </b-button>
             </div>

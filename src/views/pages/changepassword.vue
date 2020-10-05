@@ -19,17 +19,10 @@
               <b-input-group>
                 <input type="password" v-model="cPassword" class="form-control mb-4" placeholder="confirm password">
               </b-input-group>
-              <div class="row m-b-10 m-t-20" style="padding:0">
-                <div class="col-md-6 " style="padding:0 0 0 15px">
-                  <b-button button-rounded-border-radius label="Verify" variant="danger" rounded class="col-md-12" size="14" @click="cancel" style="color:white; padding: 20px 0; border-radius:5px;">
-                    Cancel
-                  </b-button>
-                </div>
-                <div class="col-md-6 " style="padding:0 15px">
-                  <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="col-md-12" size="14" @click="login" style="color:white; padding: 20px 0; border-radius:5px;">
-                    Simpan
-                  </b-button>
-                </div>
+              <div class="m-b-10 m-t-20">
+                <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="login" style="color:white; padding: 10px 25px; border-radius:5px;">
+                  Simpan
+                </b-button>
               </div>
               <div class="col-md-12 row m-b-10 m-t-20 nplr nml" >
               </div>

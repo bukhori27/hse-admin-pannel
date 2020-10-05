@@ -1,7 +1,7 @@
 <template>
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
     
-    <a href="index3.html" class="brand-link">
+    <a @click="goTo('/dashboard')" class="brand-link">
         <!-- Brand Logo
             <img src="dist/img/AdminLTELogo.png" alt="HSE" class="brand-image img-circle elevation-3" style="opacity: .8">
         -->

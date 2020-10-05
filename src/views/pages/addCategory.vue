@@ -14,14 +14,12 @@
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name Category</label>
             <input type="text" v-model="namacategory" class="form-control mb-4 border-radius-8" placeholder="nama category">
-            <b-button v-b-tooltip.hover title="namacategory" class="tooltips-custom">?</b-button>
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Description</label>
             <textarea type="email" v-model="description" class="form-control mb-4 border-radius-8" placeholder="description" rows="15"/>
-            <b-button v-b-tooltip.hover title="Digunakan untuk masuk ke dalam akun anda" class="tooltips-custom">?</b-button>
           </b-input-group>
-          <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="col-md-12" size="14" @click="submit" style="color:white; padding: 20px 0; border-radius:5px;">
+          <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
             Simpan
           </b-button>
         </div>

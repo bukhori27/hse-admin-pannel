@@ -33,7 +33,7 @@
                 <option v-for="(provinsi, i) in provinceList" :value="provinsi.value" :key="'d' + i">{{ provinsi.nama }}</option>
               </select>
           </b-input-group>
-          <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="col-md-12" size="14" @click="registration" style="color:white; padding: 20px 0; border-radius:5px;">
+          <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="registration" style="color:white; padding: 10px 25px; border-radius:5px;">
             Simpan
           </b-button>
         </div>

@@ -13,13 +13,11 @@
         <div class="col-12 ">
           <b-input-group  >
             <input type="text" v-model="user.nama" class="form-control mb-4"placeholder="username">
-            <b-button v-b-tooltip.hover title="Diisi Nama Organisasi/Lembaga/Komunitas sesuai dengan nama legal" class="tooltips-custom">?</b-button>
           </b-input-group>
           <b-input-group >
             <input type="email" v-model="user.email" class="form-control mb-4" placeholder="email">
-            <b-button v-b-tooltip.hover title="email" class="tooltips-custom">?</b-button>
           </b-input-group>
-          <b-button button-rounded-border-radius variant="primary" rounded class="col-md-12" size="14" @click="goToChangePassword" style=" color:white; padding: 15px 0; border-radius:5px; margin-right:-15px;">
+          <b-button button-rounded-border-radius variant="primary" rounded class="float-right" size="14" @click="goToChangePassword" style=" color:white; padding: 10px 25px; border-radius:5px;">
             submit
           </b-button>
         </div>

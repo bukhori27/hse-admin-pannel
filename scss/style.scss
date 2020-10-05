@@ -1786,6 +1786,9 @@ img-relative {
 .p-t-5 {
   padding-top:3px;
 }
+.popup-show {
+  display: block;
+}
 .menu-show {
   display: block;
   position: absolute;
@@ -1823,4 +1826,11 @@ img-relative {
 
 .arrow-left{
   padding:10px 10px 10px 0;
+}
+.toogledropdown {
+  position: absolute;
+  // transform: translate3d(404px, 87px, 0px);
+  top: 0px;
+  left: 0px;
+  // will-change: transform;
 }

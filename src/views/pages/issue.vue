@@ -207,13 +207,19 @@
       checkStatus (index) {
         let self = this
         if (index == 1) {
-          return 'Important' 
+          return 'Progresss' 
         }
         else if (index == 2) { 
-          return 'Warning' 
-          }
+          return 'Checking by Observer' 
+        }
+        else if (index == 3) { 
+          return 'repaired by executor' 
+        }
+        else if (index == 4) { 
+          return 'confirmation by Observer' 
+        }
         else { 
-          return 'Low' 
+          return 'closed Issue' 
         }
       },
       checkType (index) {

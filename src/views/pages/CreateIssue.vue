@@ -5,7 +5,7 @@
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
-            <h1>Edit Location</h1>
+            <h1>Create Issue</h1>
           </a>
         </div>
       </b-row>
@@ -13,7 +13,7 @@
         <div class="col-12">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name type</label>
-            <input type="text" v-model="namacategory" class="form-control mb-4 border-radius-8" placeholder="nama location">
+            <input type="text" v-model="namacategory" class="form-control mb-4 border-radius-8" placeholder="nama category">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Description</label>
@@ -40,7 +40,7 @@
   import sha256 from 'sha256'
 
   export default {
-    name: 'EditLocation',
+    name: 'CreateIssue',
     axios,
     data () {
       return {
