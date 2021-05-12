@@ -22,15 +22,15 @@
             </a>
           </li>
           <li class="nav-item">
-            <a @click="goTo('/finding')" class="nav-link">
+            <a @click="goTo('/issue')" class="nav-link">
               <i class="nav-icon fas fa-exclamation"></i>
               <p>
-                Finding / Issue
+                Issue
               </p>
             </a>
           </li>                
-          <li class="nav-item">
-            <a class="nav-link" @click="openMenu('a')" v-bind:class="checkMenuA == true ? 'menu-open': '' ">
+          <li class="nav-item" v-bind:class="checkMenuA">
+            <a class="nav-link" @click="openMenu('a')" >
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 Master Data
@@ -58,8 +58,8 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" @click="openMenu('b')" v-bind:class="checkMenuB == true ? 'menu-open': '' ">
+          <li class="nav-item" v-bind:class="checkMenuB">
+            <a class="nav-link" @click="openMenu('b')">
               <i class="nav-icon fas fa-user"></i>
               <p>
                 User
@@ -85,12 +85,14 @@
                   <p>Executor</p>
                 </a>
               </li>
+              <!--
               <li class="nav-item">
                 <a @click="goTo('/user/observer')"class="nav-link">
                   <i class="nav-icon fas fa-search-location"></i>
                   <p>Observer</p>
                 </a>
               </li>
+              -->
               <li class="nav-item">
                 <a @click="goTo('/user/admin')" class="nav-link">
                   <i class="nav-icon fas fa-user-friends"></i>
@@ -101,6 +103,12 @@
                 <a @click="goTo('/user/manager')" class="nav-link">
                   <i class="nav-icon fas fa-briefcase"></i>
                   <p>Manager</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/user/picarea')" class="nav-link">
+                  <i class="nav-icon fas fa-briefcase"></i>
+                  <p>PIC Area</p>
                 </a>
               </li>
             </ul>
@@ -150,8 +158,8 @@
         LoginShow: false,
         Username: '',
         Password: '',
-        checkMenuA:false,
-        checkMenuB:false
+        checkMenuA: '',
+        checkMenuB: ''
       }
     },
     components: {
@@ -160,11 +168,11 @@
       openMenu (type) {
         let self = this
         if(type === 'a'){
-          if (self.checkMenuA) return self.checkMenuA = false
-          return self.checkMenuA = true
+          if (self.checkMenuA) return self.checkMenuA = ''
+          return self.checkMenuA = 'menu-open'
         }else {
-          if (self.checkMenuB) return self.checkMenuB = false
-          return self.checkMenuB = true
+          if (self.checkMenuB) return self.checkMenuB = ''
+          return self.checkMenuB = 'menu-open'
         }
       },
       goTo (path, id) {

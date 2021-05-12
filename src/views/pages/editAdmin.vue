@@ -52,10 +52,11 @@
       }
     },
     methods: {
-      index () {
+      index (id) {
         var self = this
         var parameter = {
-          token: self.token
+          token: self.token,
+          id: id
         }
         var config = { 
           headers: {
@@ -129,9 +130,10 @@
       }
     },
     created: function () {
-      // this.user = this.$route.params;
-      console.log(this.user)
-      this.index();
+      let self = this
+      self.id = self.$route.query.id
+      console.log(self.id)
+      this.index(self.id);
     }
   }
 </script>

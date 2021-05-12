@@ -59,10 +59,9 @@
     methods: {
       login () {
         var self = this
-          self.$router.push('/dashboard')
+          // self.$router.push('/dashboard')
           self.token = url.token
-          localStorage.setItem('token_hse', self.token)
-        /** 
+          // localStorage.setItem('token_hse', self.token)
         var parameter = {
           username: self.Username,
           password: sha256(self.Password)
@@ -82,7 +81,6 @@
             alert('SALAH...!')
           }
         })
-        **/
       },
       onLogin() {
         this.isConnected = true

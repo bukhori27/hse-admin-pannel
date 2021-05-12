@@ -17,6 +17,9 @@ export const pluktime = {
     }
   },
   methods: {
+    test () {
+      return 'coba';
+    },
     pluktimeGetDeviceInfo () {
       let deviceCordova = window.device
       // console.log(deviceCordova)

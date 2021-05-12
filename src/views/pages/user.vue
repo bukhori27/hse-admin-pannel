@@ -58,10 +58,12 @@
   import axios from 'axios'
   import { url } from '../../url'
   import sha256 from 'sha256'
+  import { changeStatus } from '../../mixins/helper'
 
   export default {
     name: 'User',
     axios,
+    changeStatus,
     data () {
       return {
         checked: false,
@@ -84,6 +86,7 @@
         filter: '',
         pageOptions: [ 5, 10, 15 ],
         token: localStorage.getItem('token_hse'),
+        profile: JSON.parse(localStorage.getItem('profile')),
         pages: 1,
         pageSize: 0
       }
@@ -99,12 +102,14 @@
       },
       listUser (page) {
         var self = this
+        console.log(self.profile.pengguna_level)
         let status = []
         let dump2 =''
         var token = self.token
         var parameter = {
           token: token,
           search: self.searchText,
+          type: parseInt(self.profile.pengguna_level),
           page: page
         }
         var config = { 
@@ -112,14 +117,15 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'user_Filter', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'user_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
             let dump = response.data.user_list
+            // console.log(changeStatus(1));
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].nama_user,
+                nama: dump[i].nama,
                 email: dump[i].email,
-                role : dump[i].type_privilege, 
+                role : changeStatus(dump[i].type_privilege), 
                 id: dump[i].user_id,
               }
               status.push(b)
@@ -143,18 +149,18 @@
         var token = self.token
         var parameter = {
           token: token,
-          user_id: id
+          id: id
         }
         var config = { 
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-
-        var del = confirm('Apakah anda yakin akan mereject lembaga masyarakat ini?')
+        var del = confirm('Apakah anda yakin menghapus user?')
         if (del) {
-          axios.post(url.url_app + 'approval_user_reject', parameter, config).then(function (response) {
+          axios.post(url.url_app + 'user_delete', parameter, config).then(function (response) {
             if (response.data.resultCode == 'OK') {
+              alert ('sukses menghapus user');
               self.listUser(1)
             } else {
             }

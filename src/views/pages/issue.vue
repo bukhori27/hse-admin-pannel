@@ -8,8 +8,9 @@
         </b-row>
         <b-row>
           <div class="col-md-3">
-            <a @click="goTo('/finding')" class="btn btn-primary btn-block mb-3 button-issue">Finding</a>
-
+            <!--
+              <a @click="goTo('/finding')" class="btn btn-primary btn-block mb-3 button-issue">Finding</a>
+            -->
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Status</h3>
@@ -23,30 +24,34 @@
               <div class="card-body p-0">
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
-                    <a href="#" class="nav-link">
-                      <i class="fas fa-inbox"></i> Inbox
+                    <a @click="filterStatus('open')" class="nav-link">
+                      <i class="far fa-folder-open"></i> Open
+                      <!-- <i class="fas fa-inbox"></i> -->
                       <span class="badge bg-primary float-right">12</span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-envelope"></i> Sent
+                    <a @click="filterStatus('onprogress')" class="nav-link">
+                      <i class="far fa-paper-plane"></i> OnProgress
+                      <!-- <i class="fas fa-filter"></i> -->
                     </a>
                   </li>
+                  <!--
+                    <li class="nav-item">
+                      <a @click="filterPrio('draft')" class="nav-link">
+                        <i class="far fa-file-alt"></i> Drafts
+                      </a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="#" class="nav-link">
+                        <i class="fas fa-filter"></i> Junk
+                        <span class="badge bg-warning float-right">65</span>
+                      </a>
+                    </li>
+                  -->
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-file-alt"></i> Drafts
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="fas fa-filter"></i> Junk
-                      <span class="badge bg-warning float-right">65</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a href="#" class="nav-link">
-                      <i class="far fa-trash-alt"></i> Trash
+                    <a @click="filterStatus('status')" class="nav-link">
+                      <i class="fas fa-archive"></i> Closed
                     </a>
                   </li>
                 </ul>
@@ -66,17 +71,17 @@
               <div class="card-body p-0">
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
-                    <a href="#" class="nav-link">
+                    <a @click="filterPrio('1')" class="nav-link">
                       <i class="nav-icon far fa-circle text-danger"></i> Important
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a @click="filterPrio('2')" class="nav-link">
                       <i class="nav-icon far fa-circle text-warning"></i> Medium
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a @click="filterPrio('3')" class="nav-link">
                       <i class="nav-icon far fa-circle text-info"></i> Low
                     </a>
                   </li>
@@ -93,7 +98,7 @@
 
                 <div class="card-tools">
                   <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" placeholder="Search Mail">
+                    <input type="text" class="form-control" placeholder="Search issue">
                     <div class="input-group-append">
                       <div class="btn btn-primary">
                         <i class="fas fa-search"></i>
@@ -197,6 +202,14 @@
 
         // this.totalRows = filteredItems.length
         this.currentPage = 1
+      },
+      filterStatus (status) {
+        let self = this
+        console.log(status)
+      },
+      filterPrio (data) {
+        let self = this
+        console.log(data)
       },
       showPopup () {
         let self = this

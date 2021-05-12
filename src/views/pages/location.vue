@@ -13,9 +13,6 @@
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="sm" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
-           <template slot="id" slot-scope="row">
-              <div>{{$index + 1}} </div>
-            </template>
             <template slot="actions" slot-scope="row">
               <router-link  v-bind:to="'location/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
               <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
@@ -58,6 +55,7 @@
         perPage: 10,
         totalRows: 0,
         fields: [
+          'no',
           'nama',
           'description',
           {key: 'actions'}
@@ -93,19 +91,22 @@
         }
         axios.post(url.url_app + 'location_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
+            self.pages = response.data.current_page
+            self.pageSize = response.data.page_size
+
             let dump = response.data.location_list
             for (let i = 0; i < dump.length; i++) {
               let b = {
+                no: parseInt( (i+1) + (self.pages - 1) * self.perPage), 
                 nama: dump[i].nama,
-                description: dump[i].description,
-                id: dump[i].user_id,
+                description: dump[i].description, 
+                id: dump[i].id
               }
               status.push(b)
               self.totalRows = response.data.count_data
             }
+            console.log(status)
             self.listing = status 
-            self.pages = response.data.current_page
-            self.pageSize = response.data.page_size
           } else {
             alert('SALAH...!')
           }
@@ -116,18 +117,18 @@
         var token = self.token
         var parameter = {
           token: token,
-          user_id: id
+          id: id
         }
         var config = { 
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-
-        var del = confirm('Apakah anda yakin akan mereject lembaga masyarakat ini?')
+        var del = confirm('Apakah anda yakin menghapus location?')
         if (del) {
-          axios.post(url.url_app + 'approval_user_reject', parameter, config).then(function (response) {
+          axios.post(url.url_app + 'location_delete', parameter, config).then(function (response) {
             if (response.data.resultCode == 'OK') {
+              alert ('sukses menghapus location');
               self.listUser(1)
             } else {
             }

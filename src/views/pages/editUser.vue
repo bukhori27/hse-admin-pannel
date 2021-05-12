@@ -12,10 +12,10 @@
       <div class="row">
         <div class="col-md-12 m-b-5 m-t-10">
             <b-input-group  >
-              <input type="text" v-model="user.nama" class="form-control mb-4"placeholder="username">
+              <input type="text" v-model="nama" class="form-control mb-4"placeholder="username">
             </b-input-group>
             <b-input-group >
-              <input type="email" v-model="user.email" class="form-control mb-4" placeholder="email">
+              <input type="email" v-model="email" class="form-control mb-4" placeholder="email">
             </b-input-group>
         </div>
           <div class="col-md-12">
@@ -44,18 +44,17 @@
     axios,
     data () {
       return {
-        password: '',
-        cPassword: '',
-        profile: '',
+        nama: '',
+        email: '',
         token: localStorage.getItem('token_hse'),
-        user: ''
       }
     },
     methods: {
-      index () {
+      index (id) {
         var self = this
         var parameter = {
-          token: self.token
+          token: self.token,
+          id: id
         }
         var config = { 
           headers: {
@@ -65,21 +64,8 @@
         axios.post(url.url_app + 'user_view', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
             let listing = response.data.user_view
-            if (listing.photo_profile) {
-              self.imgContent = url.url_image + listing.photo_profile
-            }else {
-               self.imgContent = url.url_image + '/uploads/images/defaultphoto.png'
-            }
-            self.profile = {
-              penanggung_jawab: listing.penanggung_jawab,
-              pengguna_level: 1,
-              no_HP: listing.no_hp,
-              alamat: listing.alamat,
-              imgContent: self.imgContent,
-              province_id: listing.province_id
-            }
-            
-            console.log(self.user)
+            self.email= listing.email
+            self.nama= listing.nama
           } else {
             alert('SALAH...!')
           }
@@ -129,9 +115,10 @@
       }
     },
     created: function () {
-      // this.user = this.$route.params;
-      console.log(this.user)
-      this.index();
+      let self = this
+      self.id = self.$route.query.id
+      console.log(self.id)
+      this.index(self.id);
     }
   }
 </script>

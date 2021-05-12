@@ -13,7 +13,7 @@
         <div class="col-12">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name type</label>
-            <input type="text" v-model="namacategory" class="form-control mb-4 border-radius-8" placeholder="nama type">
+            <input type="text" v-model="nama" class="form-control mb-4 border-radius-8" placeholder="nama type">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Description</label>
@@ -44,8 +44,10 @@
     axios,
     data () {
       return {
-        namacategory: '',
+        nama: '',
         description: '',
+        token: localStorage.getItem('token_hse'),
+        id: ''
       }
     },
     methods: {
@@ -56,17 +58,56 @@
         let self = this
         window.history.back();
       },
-      provincesFunc () {
-        let self = this
-        self.provinceList = [
-          {nama:'reporter', value: 'reporter'},
-          {nama:'manager', value: 'manager'},
-          {nama:'executor', value: 'executor'},
-        ]
+      getDetail (id) {
+        var self = this
+        var token = self.token
+        var parameter = {
+          token: token,
+          "id": id
+        }
+        var config = { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        axios.post(url.url_app + 'type_view', parameter, config).then(function (response) {
+          if (response.data.resultCode == 'OK') {
+            let dump = response.data.type_view
+            self.nama = dump.nama
+            self.description = dump.description
+          } else {
+            alert('SALAH...!')
+          }
+        })
       },
+      submit () {
+        var self = this
+        var token = self.token
+        var parameter = {
+          token: token,
+          id: self.id,
+          nama: self.nama,
+          description: self.description,
+        }
+        var config = { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        axios.post(url.url_app + 'type_edit', parameter, config).then(function (response) {
+          if (response.data.resultCode == 'OK') {
+            self.$router.push('/type')
+          } else {
+            alert('SALAH...!')
+          }
+        })
+      }
     },
     created: function () {
-      this.provincesFunc()
+      let self = this
+      console.log(self.$route.query)
+      self.id = self.$route.query.id
+      self.getDetail(self.id)
     }
   }
 </script>

@@ -13,7 +13,7 @@
         <div class="col-12">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name location</label>
-            <input type="text" v-model="namacategory" class="form-control mb-4 border-radius-8" placeholder="nama category">
+            <input type="text" v-model="nama" class="form-control mb-4 border-radius-8" placeholder="nama lokasi">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Description</label>
@@ -44,13 +44,31 @@
     axios,
     data () {
       return {
-        namacategory: '',
+        nama: '',
         description: '',
+        token: localStorage.getItem('token_hse'),
       }
     },
     methods: {
       submit () {
-
+        let self = this
+        var parameter = {
+          nama: self.nama,
+          description: self.description,
+          token: self.token
+        }
+        var config = { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        axios.post(url.url_app + 'location_add', parameter, config).then(function (response) {
+          if (response.data.resultCode == 'OK') {
+            self.$router.push('/location')
+          } else {
+            alert('SALAH...!')
+          }
+        })
       },
       backTo () {
         let self = this
@@ -66,7 +84,7 @@
       },
     },
     created: function () {
-      this.provincesFunc()
+      console.log(this.token)
     }
   }
 </script>

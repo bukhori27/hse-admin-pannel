@@ -51,10 +51,12 @@
   import axios from 'axios'
   import { url } from '../../url'
   import sha256 from 'sha256'
+  import { changeStatus } from '../../mixins/helper'
 
   export default {
     name: 'Manager',
     axios,
+    changeStatus,
     data () {
       return {
         checked: false,
@@ -99,6 +101,7 @@
           token: token,
           filter: '2',
           search: self.searchText,
+          type: 4,
           "page": page
         }
         var config = { 
@@ -106,14 +109,14 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'user_Filter', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'user_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
             let dump = response.data.user_list
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].nama_user,
+                nama: dump[i].nama,
                 email: dump[i].email,
-                role : dump[i].type_privilege, 
+                role : changeStatus(dump[i].type_privilege), 
                 id: dump[i].user_id,
               }
               status.push(b)
@@ -127,6 +130,29 @@
           }
         })
       },
+      deleted(id) {
+        var self = this
+        var token = self.token
+        var parameter = {
+          token: token,
+          id: id
+        }
+        var config = { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        var del = confirm('Apakah anda yakin menghapus user?')
+        if (del) {
+          axios.post(url.url_app + 'user_delete', parameter, config).then(function (response) {
+            if (response.data.resultCode == 'OK') {
+              alert ('sukses menghapus user');
+              self.listUser(1)
+            } else {
+            }
+          })
+        }
+      }
     },
     created: function () {
       this.listUser(1)

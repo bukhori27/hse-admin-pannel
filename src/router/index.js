@@ -30,16 +30,19 @@ import Finding from '@/views/pages/Finding'
 import Issue from '@/views/pages/Issue'
 import CreateIssue from '@/views/pages/CreateIssue'
 import DetailIssue from '@/views/pages/DetailIssue'
+import Menu from '@/views/pages/Menu'
 import Reporter from '@/views/pages/Reporter'
 import Executor from '@/views/pages/Executor'
 import Observer from '@/views/pages/Observer'
 import Admin from '@/views/pages/Admin'
 import Manager from '@/views/pages/Manager'
+import Picarea from '@/views/pages/picArea'
 import editUser from '@/views/pages/editUser'
 import editReporter from '@/views/pages/editReporter'
 import editExecutor from '@/views/pages/editExecutor'
 import editObserver from '@/views/pages/editObserver'
 import editAdmin from '@/views/pages/editAdmin'
+import editPicArea from '@/views/pages/editPicArea'
 import editManager from '@/views/pages/editManager'
 
 Vue.use(Router)
@@ -98,12 +101,15 @@ export default new Router({
         { path: 'executor', name: 'Executor', component: Executor },
         { path: 'admin', name: 'Admin', component: Admin },
         { path: 'manager', name: 'Manager', component: Manager },
+        { path: 'picarea', name: 'picarea', component: Picarea },
         { path: 'edit', name: 'edituser', component: editUser },
         { path: 'edit-reporter', name: 'editReporter', component: editReporter },
         { path: 'edit-observer', name: 'editObserver', component: editObserver },
         { path: 'edit-executor', name: 'editExecutor', component: editExecutor },
         { path: 'edit-admin', name: 'editAdmin', component: editAdmin },
         { path: 'edit-manager', name: 'editManager', component: editManager },
+        { path: 'edit-area', name: 'editPicArea', component: editPicArea },
+        
       ]
     },
     {
@@ -143,6 +149,13 @@ export default new Router({
         { path: '', name: 'Issue', component: Issue },
         { path: 'create', name: 'CreateIssue', component: CreateIssue },
         { path: 'detail/:id', name: 'detailIssue', component: DetailIssue },
+      ]
+    },
+    {
+      path: '/menu/',
+      component: Full,
+      children: [
+        { path: '', name: 'Menu', component: Menu },
       ]
     },
     {
