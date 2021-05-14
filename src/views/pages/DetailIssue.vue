@@ -1,6 +1,6 @@
 <template>
   <div class="flex-row">
-    <div class="container">
+    <div class="container-fluid">
         <b-row>
             <div class="col-sm-6">
             <a @click="backTo" class="nav-link df nplr">

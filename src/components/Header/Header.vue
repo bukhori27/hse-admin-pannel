@@ -9,11 +9,12 @@
       <div class="col-md-12 npr npl">
         <!-- this side menu -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-          <ul class="navbar-nav">
+          <ul class="navbar-nav" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2 || profil.pengguna_level == 4">
             <li class="nav-item">
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
           </ul>
+          <ul v-else><span class="brand-text font-weight-light" @click="goTo('/dashboard')">HSE - Admin Panel</span></ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -42,6 +43,7 @@
     data (){
       return {
         nama_lengkap: sessionStorage.getItem('fullname'),
+        profil: JSON.parse(localStorage.getItem('profile')),
         menus: [
           {
             path: '/lembaga-masyarakat',

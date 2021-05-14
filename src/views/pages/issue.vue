@@ -1,5 +1,5 @@
 <template>
-    <section class="content">
+    <section class="flex-row">
       <div class="container-fluid">
         <b-row>
           <div class="col-sm-6">
@@ -24,14 +24,14 @@
               <div class="card-body p-0">
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
-                    <a @click="filterStatus('open')" class="nav-link">
+                    <a @click="filterStatus('1')" class="nav-link">
                       <i class="far fa-folder-open"></i> Open
                       <!-- <i class="fas fa-inbox"></i> -->
-                      <span class="badge bg-primary float-right">12</span>
+                      <span class="badge bg-primary float-right"></span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a @click="filterStatus('onprogress')" class="nav-link">
+                    <a @click="filterStatus('2')" class="nav-link">
                       <i class="far fa-paper-plane"></i> OnProgress
                       <!-- <i class="fas fa-filter"></i> -->
                     </a>
@@ -50,7 +50,7 @@
                     </li>
                   -->
                   <li class="nav-item">
-                    <a @click="filterStatus('status')" class="nav-link">
+                    <a @click="filterStatus('3')" class="nav-link">
                       <i class="fas fa-archive"></i> Closed
                     </a>
                   </li>
@@ -112,19 +112,19 @@
                 <div class="table-responsive mailbox-messages">
                   <table class="table table-hover table-striped">
                     <tbody>
-                    <tr v-for="(indexs, id) in issue" @click="detailIssue(indexs.id)">
+                    <tr v-for="(indexs, id) in issue" @click="detailIssue(indexs.issue_id)">
                       <td>
                         <div class="icheck-primary">
-                          <b-img :src="indexs.img" alt="Responsive image" style="height:auto; width:50px !important;" v-if="indexs.img"/>
+                          <b-img :src="indexs.img" alt="Responsive image" style="height:100px; width:auto;" v-if="indexs.img"/>
                         </div>
                       </td>
-                      <td class="mailbox-name">{{indexs.name}} <p class="p-t-5" >{{checkStatus(indexs.state)}}</p></td>
-                      <td class="mailbox-subject"><b>{{indexs.title}} </b><p class="npb">{{indexs.description}}</p><p v-bind:class="changeColor(indexs.state)" class="npb"> {{checkType(indexs.state)}}</p>
+                      <td class="mailbox-name">{{title(indexs.user_name)}} <p class="p-t-5" >{{checkStatus(indexs.state)}}</p></td>
+                      <td class="mailbox-subject"><b>{{paragrafCase(indexs.issue_name)}} </b><p class="npb">{{indexs.issue_description}}</p><p v-bind:class="changeColor(indexs.type_id)" class="npb"> {{checkType(indexs.type_id)}}</p>
                       </td>
                       <td class="mailbox-attachment"></td>
                       <td class="mailbox-date">{{indexs.date}}</td> 
                       <td class="mailbox-date">
-                        <a @click="detailIssue(indexs.id)">
+                        <a @click="detailIssue(indexs.issue_id)">
                           <i class="fas fa-ellipsis-v"></i>
                         </a>
                       </td>
@@ -139,7 +139,7 @@
               <div class="card-footer p-0">
                 <div class="mailbox-controls">
                   <div class="float-right">
-                    1-50/200
+                    1-{{countData}}/{{countData}}
                     <div class="btn-group">
                       <button type="button" class="btn btn-default btn-sm">
                         <i class="fas fa-chevron-left"></i>
@@ -193,23 +193,35 @@
         token: localStorage.getItem('token_hse'),
         pages: 1,
         pageSize: 0,
+        countData: 1,
         popup: false,
-        fontColor: ''
+        fontColor: '',
       }
     },
     methods: {
       onFiltered (filteredItems) {
-
         // this.totalRows = filteredItems.length
         this.currentPage = 1
       },
       filterStatus (status) {
         let self = this
         console.log(status)
+        self.listUser(1, 1, status)
       },
       filterPrio (data) {
         let self = this
         console.log(data)
+        self.listUser(1, 2, data)
+      },
+      title(str) {
+        return str.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
+      },
+      paragrafCase(str) {
+        var sentence = str.toLowerCase().split(" ");
+        for(var i = 0; i< sentence.length; i++){
+          sentence[i] = sentence[i][0].toUpperCase() + sentence[i].slice(1);
+        }
+        return sentence.join(" ");
       },
       showPopup () {
         let self = this
@@ -217,6 +229,7 @@
         if (self.popup == true) return self.popup = false
         else return self.popup = true
       },
+      /*
       checkStatus (index) {
         let self = this
         if (index == 1) {
@@ -234,7 +247,21 @@
         else { 
           return 'closed Issue' 
         }
+      }, 
+      */
+      checkStatus (index) {
+        let self = this
+        if (index == 1) {
+          return 'Open' 
+        }
+        else if (index == 2) { 
+          return 'Onprogress' 
+        }
+        else { 
+          return 'Closed' 
+        }
       },
+      
       checkType (index) {
         let self = this
         if (index == 1) {
@@ -259,74 +286,72 @@
           return'font-blue'
         }
       },
-      listUser (page) {
-        var self = this
+      
+      listUser (page, type, data) {
+        let self = this
         let status = []
         let dump2 =''
-        self.issue = [{id: 1, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 1, state: 1 },
-        {id: 2, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 2, state: 2 },
-        {id: 3, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 3, state: 3 },
-        {id: 4, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 2, state: 4 },
-        {id: 5, name: 'Alexander', title: 'Keramik Pecah', description: 'testing menggunakan description apa yang terjadi apakah menjadi panjang atau gimana??', img: self.imgContent, date : '2020-09-22', type: 1, state: 5 }]
-        /** 
-        var token = self.token
-        var parameter = {
-          token: token,
-          "page": page
+        let parameter = ''
+        if (type === ''){
+          parameter = {
+            token: self.token,
+            "page": page,
+            "type" : "",
+            "filter" : data
+          }
+        }else if(type === 1) {
+          parameter = {
+            token: self.token,
+            "page": page,
+            "type" : "status",
+            "filter" : data
+          }
+        }else{
+          parameter = {
+            token: self.token,
+            "page": page,
+            "type" : "type",
+            "filter" : data
+          }
         }
+        console.log(parameter)
         var config = { 
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'approval_user_filter', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'issue_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            let dump = response.data.lembagaMasyarakat_list
+            var dump = response.data.issue_list
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].nama_user,
-                email: dump[i].email,
-                spesialis_bidang: dump[i].nama_spesial_bidang,
-                nama_organisasi: dump[i].nama_organisasi,
-                jenis_lembaga: dump[i].nama_jenis_lembaga,
-                date: dump[i].date,
-                tingkatan: dump[i].tingkatan, 
-                id: dump[i].user_id,
+                issue_name: dump[i].issue_name, 
+                category_description: dump[i].category_description, 
+                category_name: dump[i].category_name,  
+                date: dump[i].date, 
+                image_name: dump[i].image_name, 
+                issue_id: dump[i].issue_id, 
+                issue_description: dump[i].issue_description,
+                location_description: dump[i].location_description, 
+                location_nama: dump[i].location_nama, 
+                img: url.url_image + dump[i].path, 
+                type_description: dump[i].type_description, 
+                type_id: dump[i].type_id, 
+                type_nama: dump[i].type_nama,  
+                state: parseInt(dump[i].state),  
+                user_name: dump[i].user_name, 
               }
               status.push(b)
               self.totalRows = response.data.count_data
             }
-            self.listing = status 
+            self.issue = status 
             self.pages = response.data.current_page
             self.pageSize = response.data.page_size
+            self.countData = response.data.count_data
           } else {
             alert('SALAH...!')
           }
         })
-        **/
-      },
-      deleted(id) {
-        var self = this
-        var token = self.token
-        var parameter = {
-          token: token,
-          user_id: id
-        }
-        var config = { 
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        }
-
-        var del = confirm('Apakah anda yakin akan mereject lembaga masyarakat ini?')
-        if (del) {
-          axios.post(url.url_app + 'approval_user_reject', parameter, config).then(function (response) {
-            if (response.data.resultCode == 'OK') {
-              self.listUser(1)
-            } else {
-            }
-          })
-        }
       },
       goTo (path) {
         let self = this
@@ -337,10 +362,12 @@
         let self = this
         self.$router.push('/issue/detail/' + index)
         console.log(index)
-      }
+      },
+      
     },
     created: function () {
-      this.listUser(1)
+      let self = this
+      self.listUser(1,"", 1)
     }
   }
 </script>

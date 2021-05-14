@@ -150,10 +150,10 @@
     data (){
       return {
         nama_lengkap: sessionStorage.getItem('fullname'),
+        profil: JSON.parse(localStorage.getItem('profile')),
         menus: [
         ],
         token: localStorage.getItem('token_ppa'),
-        profile: JSON.parse(localStorage.getItem('profile')),
         login: false,
         LoginShow: false,
         Username: '',
@@ -206,6 +206,14 @@
       },
     },
     created () {
+      let self = this
+      if (self.profil.pengguna_level != 1 && self.profil.pengguna_level != 2 && self.profil.pengguna_level != 4){
+        var body = document.body;
+        body.classList.add("sidebar-collapse");
+      }else{
+        var body = document.body;
+        body.classList.remove("sidebar-collapse");
+      }
     }
   }
 </script>
