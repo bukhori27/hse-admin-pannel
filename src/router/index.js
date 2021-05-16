@@ -29,7 +29,9 @@ import EditType from '@/views/pages/EditType'
 import Finding from '@/views/pages/Finding'
 import Issue from '@/views/pages/Issue'
 import CreateIssue from '@/views/pages/CreateIssue'
+import AssignIssue from '@/views/pages/AssignIssue'
 import DetailIssue from '@/views/pages/DetailIssue'
+import confirmation from '@/views/pages/confirmation'
 import Menu from '@/views/pages/Menu'
 import Reporter from '@/views/pages/Reporter'
 import Executor from '@/views/pages/Executor'
@@ -148,7 +150,9 @@ export default new Router({
       children: [
         { path: '', name: 'Issue', component: Issue },
         { path: 'create', name: 'CreateIssue', component: CreateIssue },
+        { path: 'assign/:id', name: 'AssignIssue', component: AssignIssue },
         { path: 'detail/:id', name: 'detailIssue', component: DetailIssue },
+        { path: 'confirmation/:id', name: 'confirmation', component: confirmation },
       ]
     },
     {

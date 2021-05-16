@@ -29,6 +29,10 @@ body {
 h1, .h1 {
   font-size: 1.8rem !important;
 }
+.brand-link:hover {
+  color: #6c757d !important;
+  text-decoration: none;
+}
 .fr {
     float: right;
 }

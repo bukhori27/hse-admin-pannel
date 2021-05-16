@@ -14,7 +14,7 @@
               <input type="text" v-model="email" class="form-control mb-4" placeholder="Input Email">
             </b-input-group>
             <div class="col-md-12 row m-b-10" style="padding:0">
-              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="login" style="background:#6cbf16; color:white; padding: 15px 0 15px 20px; border-radius:5px; margin-left:15px; margin-right:-15px;">
+              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="login" style="background:#20a8d8; color:white; padding: 15px 0 15px 20px; border-radius:5px; margin-left:15px; margin-right:-15px;">
                 Request Password Reset
               </b-button>
             </div>

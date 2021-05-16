@@ -11,7 +11,7 @@
             <!--
               <a @click="goTo('/finding')" class="btn btn-primary btn-block mb-3 button-issue">Finding</a>
             -->
-            <div class="card">
+            <div class="card" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">
               <div class="card-header">
                 <h3 class="card-title">Status</h3>
 
@@ -24,14 +24,14 @@
               <div class="card-body p-0">
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item active">
-                    <a @click="filterStatus('1')" class="nav-link">
+                    <a @click="filterStatus('Open')" class="nav-link">
                       <i class="far fa-folder-open"></i> Open
                       <!-- <i class="fas fa-inbox"></i> -->
                       <span class="badge bg-primary float-right"></span>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a @click="filterStatus('2')" class="nav-link">
+                    <a @click="filterStatus('OnProgress')" class="nav-link">
                       <i class="far fa-paper-plane"></i> OnProgress
                       <!-- <i class="fas fa-filter"></i> -->
                     </a>
@@ -50,7 +50,7 @@
                     </li>
                   -->
                   <li class="nav-item">
-                    <a @click="filterStatus('3')" class="nav-link">
+                    <a @click="filterStatus('Closed')" class="nav-link">
                       <i class="fas fa-archive"></i> Closed
                     </a>
                   </li>
@@ -191,6 +191,7 @@
         filter: '',
         pageOptions: [ 5, 10, 15 ],
         token: localStorage.getItem('token_hse'),
+        profil: JSON.parse(localStorage.getItem('profile')),
         pages: 1,
         pageSize: 0,
         countData: 1,
@@ -254,7 +255,7 @@
         if (index == 1) {
           return 'Open' 
         }
-        else if (index == 2) { 
+        else if (index == 2 || index == 3 || index == 4 || index == 5) { 
           return 'Onprogress' 
         }
         else { 

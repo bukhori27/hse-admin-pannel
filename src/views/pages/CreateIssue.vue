@@ -81,9 +81,6 @@
       }
     },
     methods: {
-      submit () {
-
-      },
       backTo () {
         let self = this
         window.history.back();
@@ -179,12 +176,10 @@
           token: self.token,
           nama: self.nama,
           description: self.description,
-          location_id: self.locationId,
           category_id: self.categoryId,
           type_id: self.typeId,
           location_id: self.locationId,
           image_id: 6
-          // file_id: self.fileId
         }
         console.log(parameter)
         var config = { 

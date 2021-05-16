@@ -29,7 +29,7 @@
               </p>
             </a>
           </li>                
-          <li class="nav-item" v-bind:class="checkMenuA">
+          <li class="nav-item" v-bind:class="checkMenuA" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">
             <a class="nav-link" @click="openMenu('a')" >
               <i class="nav-icon fas fa-cog"></i>
               <p>
@@ -58,7 +58,7 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item" v-bind:class="checkMenuB">
+          <li class="nav-item" v-bind:class="checkMenuB" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">
             <a class="nav-link" @click="openMenu('b')">
               <i class="nav-icon fas fa-user"></i>
               <p>
@@ -112,6 +112,12 @@
                 </a>
               </li>
             </ul>
+          </li>
+          <li class="nav-item" v-if="profil.pengguna_level == 4">
+            <a @click="goTo('/user/executor')"class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Staff</p>
+            </a>
           </li>
           <!-- Hidden Menu Profile
           <li class="nav-item">

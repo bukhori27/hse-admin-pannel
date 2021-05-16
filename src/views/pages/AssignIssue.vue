@@ -1,71 +1,53 @@
 <template>
   <div class="flex-row">
     <div class="container-fluid">
-        <b-row>
-            <div class="col-sm-6">
-            <a @click="backTo" class="nav-link df nplr">
-                <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
-                <h1>Detail Issue</h1>
-            </a>
-            </div>
-        </b-row>
-        <b-row>
-            <div class="col-md-8">
-              <div>
-                <span> Title </span><br/><b><p> {{detailIssue.title}} </p></b>
-              </div>
-              <div>
-                <span> Reporter </span><br/><b><p> {{detailIssue.reporter}} </p></b>
-              </div>
-              <div>
-                <span> Observer </span><br/><b><p> {{ detailIssue.observer ? paragrafCase(detailIssue.observer) : '-'}}</p></b>
-              </div>
-              <div>
-                <span> Executor </span><br/><b><p> {{detailIssue.executor ? paragrafCase(detailIssue.executor) : '-'}} </p></b>
-              </div>
-              <div>
-                <span> Status </span><br/><b><p> {{checkStatus(detailIssue.state)}}</p></b>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="col-md-12 row nplr" v-if="detailIssue.state == 1 && (profil.pengguna_level == 1 || profil.pengguna_level == 2) ">
-                <div class="col-md-6 npl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(detailIssue.id)">Closed</a></div>
-                <div class="col-md-6 npr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="assign(detailIssue.id)">Assign</a></div>
-                </div>
-              <div class="col-md-12 row nplr" v-if="detailIssue.state == 2 || detailIssue.state == 3 || detailIssue.state == 4 || detailIssue.state == 5">
-                <div class="col-md-6 npl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(detailIssue.id)" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">Closed</a></div>
-                <div class="col-md-6 npr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="confirmation(detailIssue.id)">Confirmation</a></div>
-              </div>
-              <div class="col-md-12 row nplr" v-else>
-              </div>
-            </div>
-            <div class="col-md-12" v-if="finding.length > 0">
-                <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Status</h3>
-
-                    <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    </div>
-                </div>
-                <div class="card-body p-0 mt-10">
-                    <div v-for="(indexs, id) in finding" class="row" >
-                        <div class="col-md-4">
-                            <a class="btn btn-secondary btn-block mb-2 button-issue ml10">{{checkType(indexs.state)}}</a>
-                            <p class="tar">{{indexs.date}}</p>
-                        </div>
-                        <div class="col-md-8">
-                            <b><span>{{indexs.name}}</span></b> <br/>
-                            <p>{{indexs.description}}</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-                </div>
-            </div>
-        </b-row>
+      <b-row>
+        <div class="col-sm-6">
+          <a @click="backTo" class="nav-link df nplr">
+            <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
+            <h1>Assign Issue</h1>
+          </a>
+        </div>
+      </b-row>
+      <b-row>
+        <div class="col-2">
+          <div>
+            <span> Title </span><br/><b><p> {{detailIssue.title}} </p></b>
+          </div>
+          <div>
+            <span> Reporter </span><br/><b><p> {{detailIssue.reporter}} </p></b>
+          </div>
+          <div>
+            <span> Observer </span><br/><b><p> {{ detailIssue.observer ? paragrafCase(detailIssue.observer) : '-'}}</p></b>
+          </div>
+          <div>
+            <span> Executor </span><br/><b><p> {{detailIssue.executor ? paragrafCase(detailIssue.executor) : '-'}} </p></b>
+          </div>
+          <div>
+            <span> Status </span><br/><b><p> {{checkStatus(detailIssue.state)}}</p></b>
+          </div>
+        </div>
+        <div class="col-5">
+          <b-input-group>
+            <label style="width: 100%; font-weight:600">Description</label>
+            <textarea type="text" v-model="description" class="form-control mb-4 border-radius-8" placeholder="Penjelasan" rows="12"/>
+          </b-input-group>
+          <b-input-group>
+            <label style="width: 100%; font-weight:600">Assign To</label>
+            <select v-model="userId" class="register-custom-select mb-4">
+              <option v-for="(user, i) in userList" :value="user.nama" :key="'user' + i">{{ user.nama }}</option>
+            </select>
+          </b-input-group>
+        </div>
+        <div class="col-5">
+          photo
+        </div>
+        <div class="col-12">
+          <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
+            Assign
+          </b-button>
+        </div>
+      </b-row>
     </div>
   </div>
 </template>
@@ -82,16 +64,18 @@
   import sha256 from 'sha256'
 
   export default {
-    name: 'DetailIssue',
+    name: 'AssignIssue',
     axios,
     data () {
       return {
         namacategory: '',
         description: '',
         finding: [],
+        userList: [],
+        userId: {},
         detailIssue: {},
+        issueId: '',
         token: localStorage.getItem('token_hse'),
-        profil: JSON.parse(localStorage.getItem('profile')),
       }
     },
     methods: {
@@ -195,12 +179,55 @@
           }
         })
       },
+      userFunct () {
+        let self = this
+        var token = self.token
+        var parameter = {
+          token: self.token,
+          page: 1,
+          type: 6,
+        }
+        var config = { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        axios.post(url.url_app + 'user_list', parameter, config).then(function (response) {
+          if (response.data.resultCode == 'OK') {
+            self.userList = response.data.user_list
+            console.log(response.data.userList)
+          } else {
+            alert('SALAH...!')
+          }
+        })
+      },
+      submit () {
+        let self = this
+        console.log(self.userId)
+        var token = self.token
+        var parameter = {
+          token: self.token,
+          description: self.description,
+          issue_id: self.issueId.id,
+          assign: self.userId,
+          state: 2, 
+          image_id: ""
+        }
+        var config = { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        axios.post(url.url_app + 'assignto', parameter, config).then(function (response) {
+          if (response.data.resultCode == 'OK') {
+            window.history.back();
+          } else {
+            alert('SALAH...!')
+          }
+        })
+      },
       closed () {
         alert ('apakah anda yakin untuk mengclosed issue?')
-      },
-      confirmation(index) {
-        let self = this
-        self.$router.push('/issue/confirmation/' + index)
       },
       assign (index) {
         let self = this
@@ -208,9 +235,11 @@
       }
     },
     created: function () {
-      this.user = this.$route.params;
-      console.log(this.user)
-      this.provincesFunc(this.user.id)
+      this.issueId = this.$route.params;
+      console.log(this.issueId)
+      this.provincesFunc(this.issueId.id)
+      this.userFunct()
     }
   }
 </script>
+
