@@ -9,23 +9,18 @@
               <h1 class="m-b-50">Login</h1> 
             </div>
             <b-input-group>
-              <input type="text" v-model="Username" class="form-control mb-4" placeholder="username">
+              <input type="text" v-model="Username" class="form-control mb-4" placeholder="username" v-on:keyup.enter="submit">
             </b-input-group>
             <b-input-group>
-              <input type="password" v-model="Password" class="form-control mb-4" placeholder="password">
+              <input type="password" v-model="Password" class="form-control mb-4" placeholder="password" v-on:keyup.enter="submit">
             </b-input-group>
             <div class="col-md-12 fs12 m-b-20" style="padding:0; display: inline; margin-top:-20px; ">
               <div class="tar" @click="$router.push('/reset-password')"> forgot password ?  </div>
             </div>
             <div class="col-md-12 row m-b-10" style="padding:0">
-              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="login" style="background:#6cbf16; color:white; padding: 20px 0 20px 20px; border-radius:5px; margin-left:15px; margin-right:-15px;">
+              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="login" style="background:#20a8d8; color:white; padding: 20px 0; border-radius:5px; margin-left:15px; margin-right:-15px;">
                 Login
               </b-button>
-            </div>
-            <div class="col-md-12 m-t-10 fs12" style="display: inline ">
-              <div class=" tc"> Don't have Account? 
-                <span @click="$router.push('/register')" style="font-weight:900;"> Register</span>
-              </div>
             </div>
           </div>
         </div>
@@ -81,6 +76,12 @@
             alert('SALAH...!')
           }
         })
+      },
+      submit () {
+        let self = this
+        if (!self.Username) return alert('SALAH...!')
+        if (!self.Password) return alert('SALAH...!')
+        else self.login()
       },
       onLogin() {
         this.isConnected = true

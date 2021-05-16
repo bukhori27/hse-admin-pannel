@@ -232,14 +232,15 @@
           is3D: true,
         },
         dataCategory: [
-          ['Type', 'Count']
+          ['Type', 'Count', { role: 'style' }]
         ],
         barOptions: {
           chart: {
             title: 'Issue',
             subtitle: ''
           },
-          bars: 'horizontal'
+          bars: 'horizontal',
+          legend: { position: "none" }
         },
         dateData: [
           ['month', 'issue']
@@ -314,7 +315,8 @@
             for (let i = 0; i < report.length; i++) {
               let a =  {
                 type: report[i].nama,
-                count: parseInt(report[i].count)
+                count: parseInt(report[i].count),
+                style: self.rndColor()
               }
               data.push(a)
             }
@@ -385,6 +387,9 @@
         self.LoginShow = false
         self.$router.push(path)
       },
+      rndColor () {
+        return Math.floor(Math.random()*16777215).toString(16);
+      }
     },
     created: function () {
       let self = this
