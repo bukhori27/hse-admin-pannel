@@ -1,22 +1,23 @@
-`<template>
+<template>
   <div class="flex-row align-items-center">
     <div class="container-fluid">
       <b-row>
         <div class="col-sm-6">
-          <h1>Category</h1>
+          <h1>List Article</h1>
         </div>
       </b-row>
       <b-row class="justify-content-center">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
           <div class="float-right m-b-10" >
-              <b-button variant="primary" @click="addCategory">Create Category</b-button>
+            <b-button variant="primary" @click="addArticle">Create Article</b-button>
           </div>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
             <template slot="actions" slot-scope="row">
               <!-- <b-button variant="warning" style="border-radius: 20%" @click="edit(row.item)"><i class="fas fa-pencil-alt"></i></b-button> -->
-              <router-link  v-bind:to="'category/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
+              <router-link  v-bind:to="'list-article/view?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-eye"></i></i></b-button></router-link>
+              <router-link  v-bind:to="'list-article/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
               <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
               <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
@@ -44,7 +45,7 @@
   import sha256 from 'sha256'
 
   export default {
-    name: 'Category',
+    name: 'listArticle',
     axios,
     data () {
       return {
@@ -91,15 +92,15 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'category_list', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'article_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            let dump = response.data.category_list
+            let dump = response.data.article_list
             self.pages = response.data.current_page
             self.pageSize = response.data.page_size
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].nama,
-                description: dump[i].description,
+                nama: self.batasintitle(dump[i].name),
+                description: self.batasin(dump[i].description),
                 no: parseInt( (i+1) + (self.pages - 1) * self.perPage), 
                 id: dump[i].id
               }
@@ -113,6 +114,12 @@
         })
       },
       
+      batasin (index) {
+        return index.substr(0, 200);
+      },
+      batasintitle (index) {
+        return index.substr(0, 50);
+      },
       edit (data) {
         let self = this
         self.$router.push({name: 'EditCategory', params: data})
@@ -140,10 +147,10 @@
           })
         }
       },
-      addCategory () {
+      addArticle () {
         let self = this
         self.LoginShow = false
-        self.$router.push('/category/add')
+        self.$router.push('/list-article/add')
       }
     },
     created: function () {

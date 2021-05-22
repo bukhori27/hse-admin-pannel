@@ -10,8 +10,16 @@ import Page500 from '@/views/pages/Page500'
 import Dashboard from '@/views/pages/Dashboard'
 import Index from '@/views/pages/Index'
 import Article from '@/views/pages/Article'
+import ListArticle from '@/views/pages/listArticle'
+import AddArticle from '@/views/pages/AddArticle'
+import EditArticle from '@/views/pages/EditArticle'
+import ViewArticle from '@/views/pages/ViewArticle'
+import listForm from '@/views/pages/listForm'
+import Form from '@/views/pages/Form'
 import detailberita from '@/views/pages/detailberita'
 import Document from '@/views/pages/Document'
+import ListDocument from '@/views/pages/listDocument'
+import addDocument from '@/views/pages/addDocument'
 import Login from '@/views/pages/login'
 import Register from '@/views/pages/Register'
 import Forgotpassword from '@/views/pages/ForgotPassword'
@@ -129,6 +137,42 @@ export default new Router({
         { path: '', name: 'Category', component: Category },
         { path: 'add', name: 'AddCategory', component: AddCategory },
         { path: 'edit', name: 'EditCategory', component: EditCategory },
+
+      ]
+    },
+    {
+      path: '/list-article/',
+      component: Full,
+      children: [
+        { path: '', name: 'listArticle', component: ListArticle },
+        { path: 'add', name: 'AddArticle', component: AddArticle },
+        { path: 'edit', name: 'EditArticle', component: EditArticle },
+        { path: 'view', name: 'ViewArticle', component: ViewArticle },
+
+      ]
+    },
+    {
+      path: '/list-form/',
+      component: Full,
+      children: [
+        { path: '', name: 'listForm', component: listForm },
+
+      ]
+    },
+    {
+      path: '/list-document/',
+      component: Full,
+      children: [
+        { path: '', name: 'ListDocument', component: ListDocument },
+        { path: 'add', name: 'addDocument', component: addDocument },
+
+      ]
+    },
+    {
+      path: '/form/',
+      component: Full,
+      children: [
+        { path: '', name: 'Form', component: Form },
 
       ]
     },

@@ -1,15 +1,15 @@
-`<template>
+<template>
   <div class="flex-row align-items-center">
     <div class="container-fluid">
       <b-row>
         <div class="col-sm-6">
-          <h1>Category</h1>
+          <h1>List Document</h1>
         </div>
       </b-row>
       <b-row class="justify-content-center">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
           <div class="float-right m-b-10" >
-              <b-button variant="primary" @click="addCategory">Create Category</b-button>
+              <b-button variant="primary" @click="addDocument">Create Document</b-button>
           </div>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
@@ -44,7 +44,7 @@
   import sha256 from 'sha256'
 
   export default {
-    name: 'Category',
+    name: 'listDocument',
     axios,
     data () {
       return {
@@ -140,10 +140,10 @@
           })
         }
       },
-      addCategory () {
+      addDocument () {
         let self = this
         self.LoginShow = false
-        self.$router.push('/category/add')
+        self.$router.push('/list-document/add')
       }
     },
     created: function () {

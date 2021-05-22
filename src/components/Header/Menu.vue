@@ -39,6 +39,24 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
+                <a @click="goTo('/list-article')"class="nav-link">
+                  <i class="nav-icon fas fa-clipboard-list"></i>
+                  <p>Article</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/list-document')"class="nav-link">
+                  <i class="nav-icon fas fa-clipboard-list"></i>
+                  <p>Document</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/list-form')"class="nav-link">
+                  <i class="nav-icon fas fa-clipboard-list"></i>
+                  <p>Form</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a @click="goTo('/category')"class="nav-link">
                   <i class="nav-icon fas fa-clipboard-list"></i>
                   <p>Category</p>
@@ -117,6 +135,12 @@
             <a @click="goTo('/user/executor')"class="nav-link">
               <i class="nav-icon fas fa-user"></i>
               <p>Staff</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a @click="goTo('/form')"class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>Form</p>
             </a>
           </li>
           <!-- Hidden Menu Profile

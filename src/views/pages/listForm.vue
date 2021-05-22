@@ -1,31 +1,20 @@
-`<template>
+<template>
   <div class="flex-row align-items-center">
     <div class="container-fluid">
       <b-row>
         <div class="col-sm-6">
-          <h1>Category</h1>
+          <h1>List Form</h1>
         </div>
       </b-row>
       <b-row class="justify-content-center">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
-          <div class="float-right m-b-10" >
-              <b-button variant="primary" @click="addCategory">Create Category</b-button>
-          </div>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
             <template slot="actions" slot-scope="row">
-              <!-- <b-button variant="warning" style="border-radius: 20%" @click="edit(row.item)"><i class="fas fa-pencil-alt"></i></b-button> -->
               <router-link  v-bind:to="'category/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
-              <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
-              <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
           </b-table>
-
-          <!-- <div class="col-md-12 text-green-title1" style="text-align: right; padding:10px;" >
-            <span @click="listUser(pages-1)" v-if="pages !== 1"> << previous </span>
-            <span @click="listUser(pages+1)" style="padding-left:20px" v-if="pageSize > pages"> more >> </span>
-          </div> -->
           <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="float-right" />
         </div>
       </b-row>
@@ -44,7 +33,7 @@
   import sha256 from 'sha256'
 
   export default {
-    name: 'Category',
+    name: 'listForm',
     axios,
     data () {
       return {

@@ -47,6 +47,9 @@
               <li class="nav-item dropdown" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown01" aria-haspopup="true" aria-expanded="false">Master Data</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" @click="goTo('/list-article')">List Article</a>
+                  <a class="dropdown-item" @click="goTo('/list-form')">List Form</a>
+                  <a class="dropdown-item" @click="goTo('/list-document')">List Document</a>
                   <a class="dropdown-item" @click="goTo('/category')">Category</a>
                   <a class="dropdown-item" @click="goTo('/location')">Location</a>
                   <a class="dropdown-item" @click="goTo('/type')">Type</a>
@@ -66,6 +69,7 @@
               <li class="nav-item" v-if="profil.pengguna_level == 4">
                 <a @click="goTo('/user/executor')" class="nav-link">Staff</a>
               </li>
+              <li class="nav-item m-t-10"><a @click="goTo('/form')" class="nav-link">Form</a></li>
               <li class="nav-item m-t-10"><a @click="goTo('/profile')" class="nav-link">Profile</a></li>
               <li class="nav-item"><a @click="logout"  class="nav-link">Logout</a></li>
             </ul>
