@@ -184,6 +184,8 @@
       goTo (path, id) {
         let self = this
         self.LoginShow = false
+        var body = document.body;
+        body.classList.add("sidebar-collapse");
         self.$router.push(path)
       },
       logout (e) {

@@ -3,7 +3,7 @@
     <div class="container-fluid">
       <div class="row nmr nml">
         <div class="col-sm-12 col-xs-12 row">
-          <div class="m-t-30 col-lg-4 col-sm-6 col-xs-12" v-for="(indexs, id) in berita" style="cursor: pointer;"> 
+          <div class="m-t-30 col-lg-4 col-md-6 col-xs-12" v-for="(indexs, id) in berita" style="cursor: pointer;"> 
             <div class="col-xs-12" style="border: 1px solid black; padding:10px; border-radius:10px;">
               <div class="text-green-title1 col-12 fs18" style="text-transform: capitalize; margin: auto;"@click="detailBerita(indexs.id)" > {{indexs.name}}</div>
               <b-img :src="urlImage + indexs.image" fluid-grow alt="Responsive image" style="height:250px; border-radius: 8px"/>

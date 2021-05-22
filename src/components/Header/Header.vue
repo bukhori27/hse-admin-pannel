@@ -29,7 +29,7 @@
           </ul>
         </nav>
         <nav class="navbar navbar-white navbar-light nplr d-block d-md-none">
-          <ul class="navbar-nav pl-15" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2 || profil.pengguna_level == 4">
+          <ul class="navbar-nav pl-15">
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" data-target="#navbarsExample01" role="button"><i class="fas fa-bars"></i></a>
             </li>
@@ -115,6 +115,10 @@
       goTo (path) {
         let self = this
         self.LoginShow = false
+        var body = document.body;
+        body.classList.add("sidebar-collapse");
+        var element = document.getElementById("navbarsExample01");
+        element.classList.remove("show");
         self.$router.push(path)
       },
       logout (e) {
