@@ -10,7 +10,7 @@
         </div>
       </b-row>
       <b-row>
-        <div id="pt-pgSignin" class="col-12">
+        <div class="col-12">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name Category</label>
             <input type="text" v-model="nama" class="form-control mb-4 border-radius-8" placeholder="nama category">

@@ -8,7 +8,7 @@
     <b-row class="fs15" style="padding: 0">
       <div class="col-md-12 npr npl">
         <!-- this side menu -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light i-md-flex">
           <ul class="navbar-nav" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2 || profil.pengguna_level == 4">
             <li class="nav-item">
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
@@ -27,6 +27,49 @@
               </ul>
             </li>
           </ul>
+        </nav>
+        <nav class="navbar navbar-white navbar-light nplr d-block d-md-none">
+          <ul class="navbar-nav pl-15" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2 || profil.pengguna_level == 4">
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="collapse" data-target="#navbarsExample01" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+          </ul>
+          <div class="navbar-collapse navbar-dark-primary collapse col-md-12" id="navbarsExample01" style="">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a @click="goTo('/dashboard')" class="nav-link">
+                  Dashboard
+                </a>
+              </li>
+              <li class="nav-item">
+                <a @click="goTo('/issue')" class="nav-link">Issue</a>
+              </li>
+              <li class="nav-item dropdown" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown01" aria-haspopup="true" aria-expanded="false">Master Data</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                  <a class="dropdown-item" @click="goTo('/category')">Category</a>
+                  <a class="dropdown-item" @click="goTo('/location')">Location</a>
+                  <a class="dropdown-item" @click="goTo('/type')">Type</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown02" aria-haspopup="true" aria-expanded="false">User</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown02">
+                  <a class="dropdown-item" @click="goTo('/user/all')">All User</a>
+                  <a class="dropdown-item" @click="goTo('/user/reporter')">Reporter</a>
+                  <a class="dropdown-item" @click="goTo('/user/executor')">Executor</a>
+                  <a class="dropdown-item" @click="goTo('/user/admin')">Admin</a>
+                  <a class="dropdown-item" @click="goTo('/user/manager')">Manager</a>
+                  <a class="dropdown-item" @click="goTo('/user/picarea')">PIC Area</a>
+                </div>
+              </li>
+              <li class="nav-item" v-if="profil.pengguna_level == 4">
+                <a @click="goTo('/user/executor')" class="nav-link">Staff</a>
+              </li>
+              <li class="nav-item m-t-10"><a @click="goTo('/profile')" class="nav-link">Profile</a></li>
+              <li class="nav-item"><a @click="logout"  class="nav-link">Logout</a></li>
+            </ul>
+          </div>
         </nav>
       </div>
     </b-row>

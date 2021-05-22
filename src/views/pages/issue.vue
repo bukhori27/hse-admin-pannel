@@ -112,14 +112,14 @@
                 <div class="table-responsive mailbox-messages">
                   <table class="table table-hover table-striped">
                     <tbody>
-                    <tr v-for="(indexs, id) in issue" @click="detailIssue(indexs.issue_id)">
+                    <tr v-for="(indexs, id) in issue" @click="detailIssue(indexs.issue_id)" class="d-none d-md-block">
                       <td>
                         <div class="icheck-primary">
-                          <b-img :src="indexs.img" alt="Responsive image" style="height:100px; width:auto;" v-if="indexs.img"/>
+                          <b-img :src="indexs.img" alt="Responsive image" style="height:auto; width:230px;" v-if="indexs.img"/>
                         </div>
                       </td>
                       <td class="mailbox-name">{{title(indexs.user_name)}} <p class="p-t-5" >{{checkStatus(indexs.state)}}</p></td>
-                      <td class="mailbox-subject"><b>{{paragrafCase(indexs.issue_name)}} </b><p class="npb">{{indexs.issue_description}}</p><p v-bind:class="changeColor(indexs.type_id)" class="npb"> {{checkType(indexs.type_id)}}</p>
+                      <td class="mailbox-subject"><b>{{indexs.issue_name}} </b><p class="npb">{{title(indexs.issue_description)}}</p><p v-bind:class="changeColor(indexs.type_id)" class="npb"> {{checkType(indexs.type_id)}}</p>
                       </td>
                       <td class="mailbox-attachment"></td>
                       <td class="mailbox-date">{{indexs.date}}</td> 
@@ -129,6 +129,21 @@
                         </a>
                       </td>
                     </tr>
+                    <!-- start show in mobile only -->
+                    <tr v-for="(indexs, id) in issue" @click="detailIssue(indexs.issue_id)" class="d-block d-md-none">
+                      <td>
+                        <div class="icheck-primary" @click="detailIssue(indexs.issue_id)">
+                          <p class="m-b-10"><b>{{indexs.issue_name}} </b> <br/></p>
+                          <b-img class="m-b-10" :src="indexs.img" alt="Responsive image" style="height:auto; width:230px; margin-bottom:10px;" v-if="indexs.img"/>
+                          <p>From: {{title(indexs.user_name)}} </p><p>{{indexs.date}}</p>
+                          <p class="m-b-10">{{title(indexs.issue_description)}}</p>
+                          <p class="m-b-10"> Prio : <span v-bind:class="changeColor(indexs.type_id)">{{checkType(indexs.type_id)}}</span></p>
+                          <p class="p-t-5 m-b-10" >State : {{checkStatus(indexs.state)}}</p>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <!-- end show in mobile only -->
                     </tbody>
                   </table>
                   <!-- /.table -->

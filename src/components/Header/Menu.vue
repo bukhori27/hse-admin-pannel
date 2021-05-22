@@ -1,5 +1,5 @@
 <template>
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-dark-primary elevation-4 d-none d-md-block">
     
     <a @click="goTo('/dashboard')" class="brand-link">
         <!-- Brand Logo

@@ -7,7 +7,11 @@ import Simple from '@/containers/Simple'
 
 import Page404 from '@/views/pages/Page404'
 import Page500 from '@/views/pages/Page500'
-import Index from '@/views/pages/index'
+import Dashboard from '@/views/pages/Dashboard'
+import Index from '@/views/pages/Index'
+import Article from '@/views/pages/Article'
+import detailberita from '@/views/pages/detailberita'
+import Document from '@/views/pages/Document'
 import Login from '@/views/pages/login'
 import Register from '@/views/pages/Register'
 import Forgotpassword from '@/views/pages/ForgotPassword'
@@ -60,7 +64,11 @@ export default new Router({
       redirect: '',
       component: Simple,
       children: [
-        { path: '', name: 'Login', component: Login },
+        { path: '', name: 'Index', component: Index },
+        { path: 'signin', name: 'Login', component: Login },
+        { path: 'article', name: 'Article', component: Article },
+        { path: 'detail-berita', name: 'detailberita', component: detailberita },
+        { path: 'document', name: 'Document', component: Document },
         { path: 'register', name: 'Register', component: Register },
         { path: 'forgot-password/:id', name: 'Forgotpassword', component: Forgotpassword },
         { path: 'reset-password', name: 'Resetpassword', component: Resetpassword },
@@ -72,7 +80,7 @@ export default new Router({
       redirect: '',
       component: Full,
       children: [
-        { path: '', name: 'dashboard', component: Index },
+        { path: '', name: 'dashboard', component: Dashboard },
       ]
     },
     {

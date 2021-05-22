@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <AppHeader/>
     <div>
       <main class="main">
         <div class="container-fluid no-padding" style="position: relative;overflow: hidden;">
@@ -13,11 +14,12 @@
 
 <script>
 import nav from '../_nav'
-import { FooterLogin as AppFooter } from '../components/'
+import { Headers as AppHeader, FooterLogin as AppFooter } from '../components/'
 
 export default {
   name: 'simple',
   components: {
+    AppHeader,
     AppFooter
   },
   data () {

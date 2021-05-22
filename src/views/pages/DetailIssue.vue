@@ -1,71 +1,70 @@
 <template>
   <div class="flex-row">
     <div class="container-fluid">
-        <b-row>
-            <div class="col-sm-6">
-            <a @click="backTo" class="nav-link df nplr">
-                <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
-                <h1>Detail Issue</h1>
-            </a>
+      <b-row>
+        <div class="col-sm-6">
+        <a @click="backTo" class="nav-link df nplr">
+          <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
+          <h1>Detail Issue</h1>
+        </a>
+        </div>
+      </b-row>
+      <b-row>
+        <div class="col-md-8">
+          <div>
+            <span> Title </span><br/><b><p> {{detailIssue.title}} </p></b>
+          </div>
+          <div>
+            <span> Reporter </span><br/><b><p> {{detailIssue.reporter}} </p></b>
+          </div>
+          <div>
+            <span> Observer </span><br/><b><p> {{ detailIssue.observer ? paragrafCase(detailIssue.observer) : '-'}}</p></b>
+          </div>
+          <div>
+            <span> Executor </span><br/><b><p> {{detailIssue.executor ? paragrafCase(detailIssue.executor) : '-'}} </p></b>
+          </div>
+          <div>
+            <span> Status </span><br/><b><p> {{checkStatus(detailIssue.state)}}</p></b>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="col-md-12 row nplr" v-if="detailIssue.state == 1 && (profil.pengguna_level == 1 || profil.pengguna_level == 2) ">
+            <div class="col-md-6 smnpl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(detailIssue.id)">Closed</a></div>
+            <div class="col-md-6 smnpr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="assign(detailIssue.id)">Assign</a></div>
             </div>
-        </b-row>
-        <b-row>
-            <div class="col-md-8">
-              <div>
-                <span> Title </span><br/><b><p> {{detailIssue.title}} </p></b>
+          <div class="col-md-12 row nplr" v-if="detailIssue.state == 2 || detailIssue.state == 3 || detailIssue.state == 4 || detailIssue.state == 5">
+            <div class="col-md-6 smnpl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(detailIssue.id)" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">Closed</a></div>
+            <div class="col-md-6 smnpr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="confirmation(detailIssue.id)">Confirmation</a></div>
+          </div>
+          <div class="col-md-12 row nplr" v-else>
+          </div>
+        </div>
+        <div class="col-md-12" v-if="finding.length > 0">
+          <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">Status</h3>
+            <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse">
+              <i class="fas fa-minus"></i>
+            </button>
+            </div>
+          </div>
+          <div class="card-body p-0 mt-10">
+            <div v-for="(indexs, id) in finding" class="row" >
+              <div class="col-md-4 col-xs-12">
+                <p class="xspl-15 xpr-15"><a class="btn btn-secondary btn-block mb-2 button-issue ">{{checkType(indexs.state)}}</a> </p>
+                <p class="tar xpl-15 xpr-15">{{indexs.date}}</p>
               </div>
-              <div>
-                <span> Reporter </span><br/><b><p> {{detailIssue.reporter}} </p></b>
-              </div>
-              <div>
-                <span> Observer </span><br/><b><p> {{ detailIssue.observer ? paragrafCase(detailIssue.observer) : '-'}}</p></b>
-              </div>
-              <div>
-                <span> Executor </span><br/><b><p> {{detailIssue.executor ? paragrafCase(detailIssue.executor) : '-'}} </p></b>
-              </div>
-              <div>
-                <span> Status </span><br/><b><p> {{checkStatus(detailIssue.state)}}</p></b>
+              <div class="col-md-8 col-xs-12">
+                <b><p class="xpl-15">{{indexs.name}}</p></b>
+                <p class="xpl-15 xpr-15">{{indexs.description}}</p>
               </div>
             </div>
-            <div class="col-md-4">
-              <div class="col-md-12 row nplr" v-if="detailIssue.state == 1 && (profil.pengguna_level == 1 || profil.pengguna_level == 2) ">
-                <div class="col-md-6 npl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(detailIssue.id)">Closed</a></div>
-                <div class="col-md-6 npr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="assign(detailIssue.id)">Assign</a></div>
-                </div>
-              <div class="col-md-12 row nplr" v-if="detailIssue.state == 2 || detailIssue.state == 3 || detailIssue.state == 4 || detailIssue.state == 5">
-                <div class="col-md-6 npl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(detailIssue.id)" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">Closed</a></div>
-                <div class="col-md-6 npr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="confirmation(detailIssue.id)">Confirmation</a></div>
-              </div>
-              <div class="col-md-12 row nplr" v-else>
-              </div>
-            </div>
-            <div class="col-md-12" v-if="finding.length > 0">
-                <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Status</h3>
-
-                    <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                    </div>
-                </div>
-                <div class="card-body p-0 mt-10">
-                    <div v-for="(indexs, id) in finding" class="row" >
-                        <div class="col-md-4">
-                            <a class="btn btn-secondary btn-block mb-2 button-issue ml10">{{checkType(indexs.state)}}</a>
-                            <p class="tar">{{indexs.date}}</p>
-                        </div>
-                        <div class="col-md-8">
-                            <b><span>{{indexs.name}}</span></b> <br/>
-                            <p>{{indexs.description}}</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.card-body -->
-                </div>
-            </div>
-        </b-row>
+          </div>
+          <!-- /.card-body -->
+          </div>
+        </div>
+      </b-row>
     </div>
   </div>
 </template>
@@ -172,7 +171,7 @@
               description: self.title(issue_view.issue_description), 
               img: url.url_image + issue_view.path,
               executor: issue_view.executor,
-              observer: issue_view.observer,
+              observer: issue_view.assign_to,
               date: issue_view.issue_date,
               state: issue_view.state,
             }
@@ -197,6 +196,28 @@
       },
       closed () {
         alert ('apakah anda yakin untuk mengclosed issue?')
+        let self = this
+        console.log(self.userId)
+        var token = self.token
+        var parameter = {
+          token: self.token,
+          description: "",
+          issue_id: self.issueId.id,
+          state: 6, 
+          image_id: ""
+        }
+        var config = { 
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        }
+        axios.post(url.url_app + 'confirmation', parameter, config).then(function (response) {
+          if (response.data.resultCode == 'OK') {
+            window.history.back();
+          } else {
+            alert('SALAH...!')
+          }
+        })
       },
       confirmation(index) {
         let self = this

@@ -6,12 +6,12 @@
         </div>
       </b-row>
       <b-row class="justify-content-center">
-        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-11">
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
           <div class="float-right m-b-10" >
               <b-button variant="primary" @click="addCategory">Create location</b-button>
           </div>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
-          responsive="sm" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
+          responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
             <template slot="actions" slot-scope="row">
               <router-link  v-bind:to="'location/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>

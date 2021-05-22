@@ -2,7 +2,7 @@
   <div class="app flex-row align-items-center">
     <div class="container">
       <b-row class="justify-content-center nmr nml">
-        <div class="col-md-8 col-sm-12 col-lg-6 col-xl-6 col-xs-11" style="padding-right: 0px;">
+        <div class="col-md-8 col-sm-12 col-lg-6 col-xl-6 col-xs-12" style="padding-right: 0px;">
           <div id="pt-pgSignin" class="col-md-12 row register-form">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 tc">
               <!-- <b-img src="static/img/icons/logo.png" alt="Responsive image" style="height:60px; width:70px;"/> -->

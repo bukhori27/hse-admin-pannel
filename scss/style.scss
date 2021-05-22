@@ -34,7 +34,7 @@ h1, .h1 {
   text-decoration: none;
 }
 .fr {
-    float: right;
+  float: right;
 }
 .row_description {
   width: 400px;
@@ -1156,111 +1156,133 @@ img-relative {
     }
 }
 @media only screen and (max-width:767px) {
-    .title-forum{
-      margin-left: 0px !important;
-    }
-    .container4 {
-      padding-right: 25px;
-      padding-left: 75px;
-    }
-    .container3-left {
-      padding-left: 15.33333% !important;
-    }
-    .container5 {
-      margin-left: 40px;
-      padding-right: 20px;
-    }
-    .container5-1 {
-      padding-right: 40px;
-    }
-    .container5-2 {
-      padding-right: 30px;
-    }
-    .container6 {
-      margin-left: 40px;
-      padding-right: 20px;
-    }
-    .containerEditprofile {
-      margin-left: 20px;
-      padding-right: 20px;
-    }
-    .container-detail {
-      margin-left: 40px;
-      padding-right: 20px;
-    }
-    .container7 {
-      width:100%;
-      margin-left: 10%; 
-      margin-right: 0%;
-    }
-    .img30 {
-      top: -66%;
-      left: 40%;
-    }
-    .menu1-right {
-      text-align: right;
-    }
-    .btn-footer-register {
-      margin-top:30px;
-    }
-    .sosmed {
-      margin-top:20px;
-    }
-    .smt10 {
-      margin-top:10px;
-    }
-    .smt20 {
-      margin-top:20px;
-    }
-    .contact-m {
-      padding: 5px 6px;
-    }
-    .btn-login-menu, .btn-register-menu {
-      margin-left: 0px;
-    }
-    .btn-register-menu {
-      margin-top: 20px;
-      margin-bottom:20px;
-    }
-    .navbar-light {
-      background: #f1f1f1;
-    }
-    .header-fixed .app-body {
-      margin-top: 0px !important;
-    }
-    .sm-npr {
-      padding-right:0 !important;
-    }
-    .sm-pr20 {
-      padding-right:20px !important;
-    }
-    .skema-left1 {
-      padding-left: 75px;
-      padding-right: 0;
-    }
-    .skema-left2 {
-      padding-left: 25px;
-      padding-right: 0;
-    }
-    .text-skema-top-sm {
-      margin-top: 10px;
-      padding-right: 0;
-    }
-    .xsplr {
-      padding-left:0px;
-      padding-right:45px;
-    }
-    .xs-nmr {
-      margin-left: 0px !important;
-    }
-    .btnquote { 
-      margin-top:15px;
-    }
+  .xpl-15{
+    padding-left: 15px;
+  }
+  .xpr-15{
+    padding-right: 15px;
+  }
+  .title-forum{
+    margin-left: 0px !important;
+  }
+  .container4 {
+    padding-right: 25px;
+    padding-left: 75px;
+  }
+  .container3-left {
+    padding-left: 15.33333% !important;
+  }
+  .container5 {
+    margin-left: 40px;
+    padding-right: 20px;
+  }
+  .container5-1 {
+    padding-right: 40px;
+  }
+  .container5-2 {
+    padding-right: 30px;
+  }
+  .container6 {
+    margin-left: 40px;
+    padding-right: 20px;
+  }
+  .containerEditprofile {
+    margin-left: 20px;
+    padding-right: 20px;
+  }
+  .container-detail {
+    margin-left: 40px;
+    padding-right: 20px;
+  }
+  .container7 {
+    width:100%;
+    margin-left: 10%; 
+    margin-right: 0%;
+  }
+  .img30 {
+    top: -66%;
+    left: 40%;
+  }
+  .menu1-right {
+    text-align: right;
+  }
+  .btn-footer-register {
+    margin-top:30px;
+  }
+  .sosmed {
+    margin-top:20px;
+  }
+  .smt10 {
+    margin-top:10px;
+  }
+  .smt20 {
+    margin-top:20px;
+  }
+  .contact-m {
+    padding: 5px 6px;
+  }
+  .btn-login-menu, .btn-register-menu {
+    margin-left: 0px;
+  }
+  .btn-register-menu {
+    margin-top: 20px;
+    margin-bottom:20px;
+  }
+  .navbar-light {
+    background: #f1f1f1;
+  }
+  .header-fixed .app-body {
+    margin-top: 0px !important;
+  }
+  .sm-npr {
+    padding-right:0 !important;
+  }
+  .sm-pr20 {
+    padding-right:20px !important;
+  }
+  .skema-left1 {
+    padding-left: 75px;
+    padding-right: 0;
+  }
+  .skema-left2 {
+    padding-left: 25px;
+    padding-right: 0;
+  }
+  .text-skema-top-sm {
+    margin-top: 10px;
+    padding-right: 0;
+  }
+  .xsplr {
+    padding-left:0px;
+    padding-right:45px;
+  }
+  .xs-nmr {
+    margin-left: 0px !important;
+  }
+  .btnquote { 
+    margin-top:15px;
+  }
+  .smnpl {
+    padding-right:0px;
+  }
+  .smnpr {
+    padding-right:0px;
+  }
+  .i-md-flex {
+    display: none !important;
+  }
+  .register-form {
+    padding: 40px 0 !important;
+  }
 }
 @media (min-width: 1200px) {
   .container {
       max-width: 1380px !important;
   }
+}
+
+.xspl-15{
+  padding-left: 15px;
 }
 @media only screen and (max-width:575px) {
     .container5 {
@@ -1335,20 +1357,31 @@ img-relative {
 }
 
 @media only screen and (min-width:768px) {
-    .contact-section {
-        margin-top:-10px !important;
-    }
-    .navbar-expand-md .navbar-nav .nav-link, .navbar-expand-md .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-expand-md .navbar-nav .dropdown-toggle {
-        padding-right: 0px !important;
-        padding-left: 0px!important;
-    }
-    .logoHome{
-      padding-left:60px;
-    }
+  .contact-section {
+      margin-top:-10px !important;
+  }
+  .navbar-expand-md .navbar-nav .nav-link, .navbar-expand-md .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-expand-md .navbar-nav .dropdown-toggle {
+      padding-right: 0px !important;
+      padding-left: 0px!important;
+  }
+  .logoHome{
+    padding-left:60px;
+  }
 
-    .logoHome2{
-      padding-left:20px;
-    }
+  .logoHome2{
+    padding-left:20px;
+  }
+  
+  .smnplr {
+    padding-left:0px;
+    padding-right:0px;
+  }
+  .smnpl {
+    padding-left:0px;
+  }
+  .smnpr {
+    padding-right:0px;
+  }
 }
 @media only screen and (min-width:848px) {
     .navbar-expand-md .navbar-nav .nav-link, .navbar-expand-md .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-expand-md .navbar-nav .dropdown-toggle, .navbar-expand-md .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-expand-md .navbar-nav .dropdown-toggle {
@@ -1738,6 +1771,12 @@ img-relative {
 .mt-10 {
   margin-top:10px;
 }
+.pl-15{
+  padding-left:15px;
+}
+.pr-15{
+  padding-right:15px;
+}
 
 .mt-20 {
   margin-top:20px;
@@ -1837,4 +1876,13 @@ img-relative {
   top: 0px;
   left: 0px;
   // will-change: transform;
+}
+.i-md-flex {
+  display: flex;
+}
+.navbar-dark-primary{
+  background-color: #343a40;
+}
+.navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-light .navbar-nav .dropdown-toggle, .navbar-light .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-light .navbar-nav .dropdown-toggle {
+  color: #6c757d !important;
 }

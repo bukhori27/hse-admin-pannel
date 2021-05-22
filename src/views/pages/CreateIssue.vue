@@ -10,14 +10,20 @@
         </div>
       </b-row>
       <b-row>
-        <div class="col-8">
+        <div class="col-xs-12 col-md-4 d-block d-sm-none">
+          <div class="col-12">
+            <img :src="!imageData ? 'static/img/icons/defaultImage.jpg' : imageData" class="rounded mx-auto d-block" style="height:140px;" @click="chooseFiles()">
+          </div>
+          <input type="file" class="form-control mb-4" @change="openFile" style="display:none;" id="fileUpload">
+        </div>
+        <div class="col-xs-12 col-md-8">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name</label>
             <input type="text" v-model="nama" class="form-control mb-4 border-radius-8" placeholder="nama">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">description</label>
-            <input type="text" v-model="nama" class="form-control mb-4 border-radius-8" placeholder="description">
+            <input type="text" v-model="description" class="form-control mb-4 border-radius-8" placeholder="description">
           </b-input-group>
             <label style="width: 100%; font-weight:600">Location</label>
               <select v-model="locationId" class="register-custom-select mb-4">
@@ -37,8 +43,11 @@
             </select>
           </b-input-group>
         </div>
-        <div class="col-4">
-          photo
+        <div class="col-xs-12 col-md-4 d-none d-sm-block">
+          <div class="col-12">
+            <img :src="!imageData ? 'static/img/icons/defaultImage.jpg' : imageData" class="rounded mx-auto d-block" style="height:140px;" @click="chooseFiles()">
+          </div>
+          <input type="file" class="form-control mb-4" @change="openFile" style="display:none;" id="fileUpload">
         </div>
         <div class="col-12">
           <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
@@ -100,11 +109,13 @@
         axios.post(url.url_app + 'category_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
             self.categoryList = response.data.category_list
-            console.log(response.data.category_list)
           } else {
             alert('SALAH...!')
           }
         })
+      },
+      chooseFiles: function() {
+        document.getElementById("fileUpload").click()
       },
       locationFunct () {
         let self = this
@@ -121,7 +132,6 @@
         axios.post(url.url_app + 'location_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
             self.locationList = response.data.location_list
-            console.log(response.data.location_list)
           } else {
             alert('SALAH...!')
           }
@@ -142,33 +152,41 @@
         axios.post(url.url_app + 'type_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
             self.typeList = response.data.type_list
-            console.log(response.data.type_list)
           } else {
             alert('SALAH...!')
           }
         })
       },
+      openFile (event){
+        let self = this
+        var input = event.target
+        self.imageFile = input.files[0];
+        self.uploadImage()
+      },
       uploadImage () {
         let self = this
-        let parameter = {
-          token: self.token,
-          file: self.imageFile
-        }
-        console.log(parameter)
-        var config = { 
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-        }
-        axios.post(url.url_app + 'upload_image', parameter, config).then(function (response) {
-          if (response.data.resultCode == 'OK') {
-            self.imageData = response.data.data.file
-            self.fileId = response.data.data.id
-            console.log(response.data.type_list)
-          } else {
-            alert('SALAH...!')
+        let fd = new FormData()
+        fd.append('token', self.token)
+        fd.append('photo_cover', self.imageFile)
+        let urls = url.url_app + 'upload_document'
+        axios({
+          method: 'post',
+          url: urls,
+          data: fd,
+          config: { headers: {'Content-Type': 'multipart/form-data' }}
+          })
+          .then(function (response) {
+            let responseData = response.data
+            if (responseData.resultCode === 'OK') {
+              self.fileId = responseData.data.id
+              self.imageData = url.url_image + responseData.data.file.path
+              console.log(self.imageData)
           }
         })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
       },
       submit (){
         let self = this
@@ -179,7 +197,7 @@
           category_id: self.categoryId,
           type_id: self.typeId,
           location_id: self.locationId,
-          image_id: 6
+          image_id: self.fileId
         }
         console.log(parameter)
         var config = { 

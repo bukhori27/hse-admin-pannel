@@ -10,7 +10,7 @@
         </div>
       </b-row>
       <b-row>
-        <div class="col-2">
+        <div class="col-xs-12 col-md-6">
           <div>
             <span> Title </span><br/><b><p> {{detailIssue.title}} </p></b>
           </div>
@@ -27,16 +27,17 @@
             <span> Status </span><br/><b><p> {{checkStatus(detailIssue.state)}}</p></b>
           </div>
         </div>
-        <div class="col-5">
+        <div class="col-xs-12 col-md-6">
+          <div class="col-12">
+            <img src="static/img/icons/defaultImage.jpg" class="rounded mx-auto d-block" style="height:140px;" @click="chooseFiles()">
+          </div>
+          <input type="file" class="form-control mb-4" @change="openFile" style="display:none;" id="fileUpload">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Description</label>
             <textarea type="text" v-model="description" class="form-control mb-4 border-radius-8" placeholder="Penjelasan" rows="12"/>
           </b-input-group>
         </div>
-        <div class="col-5">
-          photo
-        </div>
-        <div class="col-12">
+        <div class="col-12 m-b-20">
           <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
             Submit
           </b-button>
@@ -70,6 +71,7 @@
         detailIssue: {},
         issueId: '',
         token: localStorage.getItem('token_hse'),
+        photoDefault: ''
       }
     },
     methods: {
@@ -79,6 +81,9 @@
       backTo () {
         let self = this
         window.history.back();
+      },
+      chooseFiles: function() {
+        document.getElementById("fileUpload").click()
       },
       title(str) {
         return str.replace(/(^|\s)\S/g, function(t) { return t.toUpperCase() });
@@ -173,6 +178,35 @@
           }
         })
       },
+      openFile (event){
+        let self = this
+        var input = event.target
+        self.imageFile = input.files[0];
+        self.uploadImage()
+      },
+      uploadImage () {
+        let self = this
+        let fd = new FormData()
+        fd.append('token', self.token)
+        fd.append('photo_cover', self.imageFile)
+        let urls = url.url_app + 'upload_document'
+        axios({
+          method: 'post',
+          url: urls,
+          data: fd,
+          config: { headers: {'Content-Type': 'multipart/form-data' }}
+          })
+          .then(function (response) {
+            let responseData = response.data
+            if (responseData.resultCode === 'OK') {
+              self.fileId = responseData.data.id
+          }
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
+      },
       submit () {
         let self = this
         console.log(self.userId)
@@ -182,7 +216,7 @@
           description: self.description,
           issue_id: self.issueId.id,
           state: 4, 
-          image_id: ""
+          image_id: self.fileId
         }
         var config = { 
           headers: {

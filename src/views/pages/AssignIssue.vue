@@ -10,7 +10,7 @@
         </div>
       </b-row>
       <b-row>
-        <div class="col-2">
+        <div class="col-6">
           <div>
             <span> Title </span><br/><b><p> {{detailIssue.title}} </p></b>
           </div>
@@ -27,7 +27,7 @@
             <span> Status </span><br/><b><p> {{checkStatus(detailIssue.state)}}</p></b>
           </div>
         </div>
-        <div class="col-5">
+        <div class="col-6">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Description</label>
             <textarea type="text" v-model="description" class="form-control mb-4 border-radius-8" placeholder="Penjelasan" rows="12"/>
@@ -39,8 +39,8 @@
             </select>
           </b-input-group>
         </div>
-        <div class="col-5">
-          photo
+        <div class="col-5" style="display:none">
+          <input type="file" class="form-control mb-4" @change="openFile">
         </div>
         <div class="col-12">
           <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
@@ -76,6 +76,8 @@
         detailIssue: {},
         issueId: '',
         token: localStorage.getItem('token_hse'),
+        fileId: '',
+        imageFile: '',
       }
     },
     methods: {
@@ -201,6 +203,35 @@
           }
         })
       },
+      openFile (event){
+        let self = this
+        var input = event.target
+        self.imageFile = input.files[0];
+        self.uploadImage()
+      },
+      uploadImage () {
+        let self = this
+        let fd = new FormData()
+        fd.append('token', self.token)
+        fd.append('photo_cover', self.imageFile)
+        let urls = url.url_app + 'upload_document'
+        axios({
+          method: 'post',
+          url: urls,
+          data: fd,
+          config: { headers: {'Content-Type': 'multipart/form-data' }}
+          })
+          .then(function (response) {
+            let responseData = response.data
+            if (responseData.resultCode === 'OK') {
+              self.fileId = responseData.data.id
+          }
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
+      },
       submit () {
         let self = this
         console.log(self.userId)
@@ -211,7 +242,7 @@
           issue_id: self.issueId.id,
           assign: self.userId,
           state: 2, 
-          image_id: ""
+          image_id: self.fileId
         }
         var config = { 
           headers: {
