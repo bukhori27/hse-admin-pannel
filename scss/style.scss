@@ -1886,3 +1886,14 @@ img-relative {
 .navbar-light .navbar-nav .nav-link, .navbar-light .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-light .navbar-nav .dropdown-toggle, .navbar-light .navbar-nav .navbar .dropdown-toggle, .navbar .navbar-light .navbar-nav .dropdown-toggle {
   color: #6c757d !important;
 }
+@media screen and (min-width: 576px) {
+  .navbar-ib {
+    flex-flow: row nowrap;
+  }
+  .navbar-expand-lg .navbar-nav {
+    flex-direction: row;
+  }
+  .d-sm-flex{
+    display: flex;
+  }
+}
