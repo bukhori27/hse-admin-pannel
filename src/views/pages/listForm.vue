@@ -49,6 +49,8 @@
           'no',
           'nama',
           'description',
+          'staff',
+          'date',
           {key: 'actions'}
         ],
         sortBy: 'creator',
@@ -80,15 +82,17 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'category_list', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'form_hse_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            let dump = response.data.category_list
+            let dump = response.data.form_hse_list
             self.pages = response.data.current_page
             self.pageSize = response.data.page_size
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].nama,
+                nama: dump[i].name,
                 description: dump[i].description,
+                staff: dump[i].author,
+                date: dump[i].date,
                 no: parseInt( (i+1) + (self.pages - 1) * self.perPage), 
                 id: dump[i].id
               }

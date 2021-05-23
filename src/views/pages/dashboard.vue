@@ -137,6 +137,14 @@
   <div v-else>
     <div class="flex-row">
       <div class="container-fluid">
+      <IssueTempate > </IssueTempate>
+      </div>
+      <!-- ./col -->
+    </div>
+  </div>
+  <div v-else style="display:none">
+    <div class="flex-row">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-lg-3 col-6">
             <!-- small box -->
@@ -207,11 +215,13 @@
   import { url } from '../../url'
   import sha256 from 'sha256'
   import { GChart } from 'vue-google-charts'
+  import IssueTempate from '../../components/Layout/IssueTempate.vue'    
 
   export default {
     name: 'Index',
     components: {
-      GChart
+      GChart,
+      IssueTempate
     },
     axios,
     data () {
@@ -393,10 +403,12 @@
     },
     created: function () {
       let self = this
-      self.getData()
-      self.reportTypeFunct()
-      self.reportDateFunct()
-      self.reportCategoryFunct();
+      if (self.profil.pengguna_level == 1 || self.profil.pengguna_level == 2 || self.profil.pengguna_level == 4) {
+        self.getData()
+        self.reportTypeFunct()
+        self.reportDateFunct()
+        self.reportCategoryFunct();
+      }
     }
   }
 </script>

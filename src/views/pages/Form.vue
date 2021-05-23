@@ -62,9 +62,9 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'location_add', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'form_hse_add', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            self.$router.push('/location')
+            self.$router.push('/dashboard')
           } else {
             alert('SALAH...!')
           }

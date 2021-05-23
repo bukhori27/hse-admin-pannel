@@ -14,7 +14,14 @@
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
             </li>
           </ul>
-          <ul v-else><span class="brand-text font-weight-light" @click="goTo('/dashboard')">HSE - Admin Panel</span></ul>
+          <ul v-else>
+            <span class="brand-text font-weight-bold " @click="goTo('/dashboard')">HSE - Admin Panel</span>
+            <li class="nav-item">
+                <a @click="goTo('/issue')" class="nav-link">Issue</a>
+              </li>
+              <li class="nav-item m-t-10"><a @click="goTo('/form')" class="nav-link">Form</a></li>
+          </ul>
+          
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown user-menu">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
@@ -31,7 +38,8 @@
         <nav class="navbar navbar-white navbar-light nplr d-block d-md-none">
           <ul class="navbar-nav pl-15">
             <li class="nav-item">
-              <a class="nav-link" data-toggle="collapse" data-target="#navbarsExample01" role="button"><i class="fas fa-bars"></i></a>
+              <a data-toggle="collapse" data-target="#navbarsExample01" role="button"><i class="fas fa-bars"></i></a>
+              <span class="brand-text font-weight-bold xspl-15" @click="goTo('/dashboard')">HSE - Admin Panel</span>
             </li>
           </ul>
           <div class="navbar-collapse navbar-dark-primary collapse col-md-12" id="navbarsExample01" style="">
