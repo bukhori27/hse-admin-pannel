@@ -11,9 +11,9 @@
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
-            <template slot="actions" slot-scope="row">
+            <!-- <template slot="actions" slot-scope="row">
               <router-link  v-bind:to="'category/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
-            </template>
+            </template> -->
           </b-table>
           <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="float-right" />
         </div>
@@ -50,8 +50,7 @@
           'nama',
           'description',
           'staff',
-          'date',
-          {key: 'actions'}
+          'date'
         ],
         sortBy: 'creator',
         sortDesc: false,

@@ -11,13 +11,13 @@
       </b-row>
       <b-row>
         <div class="col-12">
+          <div class="col-12">
+            <img :src="!imageData ? 'static/img/icons/pdf.jpg' : imageData" class="rounded d-block" style="height:140px;" @click="chooseFiles()">
+          </div>
+          <input type="file" class="form-control mb-4" @change="openFile" style="display:none;" id="fileUpload">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name location</label>
             <input type="text" v-model="nama" class="form-control mb-4 border-radius-8" placeholder="nama lokasi">
-          </b-input-group>
-          <b-input-group>
-            <label style="width: 100%; font-weight:600">Description</label>
-            <textarea type="email" v-model="description" class="form-control mb-4 border-radius-8" placeholder="description" rows="15"/>
           </b-input-group>
             <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right"  size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
               Simpan
@@ -45,8 +45,10 @@
     data () {
       return {
         nama: '',
-        description: '',
         token: localStorage.getItem('token_hse'),
+        fileId: '',
+        imageData: '',
+        imageFile: '',
       }
     },
     methods: {
@@ -54,7 +56,7 @@
         let self = this
         var parameter = {
           nama: self.nama,
-          description: self.description,
+          file_id: self.fileId,
           token: self.token
         }
         var config = { 
@@ -62,25 +64,52 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'location_add', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'document_add', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            self.$router.push('/location')
+            self.$router.push('/list-document')
           } else {
             alert('SALAH...!')
           }
         })
       },
+      chooseFiles: function() {
+        document.getElementById("fileUpload").click()
+      },
       backTo () {
         let self = this
         window.history.back();
       },
-      provincesFunc () {
+      openFile (event){
         let self = this
-        self.provinceList = [
-          {nama:'reporter', value: 'reporter'},
-          {nama:'manager', value: 'manager'},
-          {nama:'executor', value: 'executor'},
-        ]
+        var input = event.target
+        self.imageFile = input.files[0];
+        self.uploadImage()
+      },
+      uploadImage () {
+        let self = this
+        let fd = new FormData()
+        fd.append('token', self.token)
+        fd.append('photo_cover', self.imageFile)
+        fd.append('type', 2)
+        let urls = url.url_app + 'upload_file'
+        axios({
+          method: 'post',
+          url: urls,
+          data: fd,
+          config: { headers: {'Content-Type': 'multipart/form-data' }}
+          })
+          .then(function (response) {
+            let responseData = response.data
+            if (responseData.resultCode === 'OK') {
+              self.fileId = responseData.data.id
+              self.imageData = url.url_image + responseData.data.file.path
+              console.log(self.imageData)
+          }
+        })
+        .catch(function (response) {
+          //handle error
+          console.log(response);
+        });
       },
     },
     created: function () {

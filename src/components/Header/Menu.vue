@@ -40,13 +40,13 @@
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a @click="goTo('/list-article')"class="nav-link">
-                  <i class="nav-icon fas fa-clipboard-list"></i>
+                  <i class="nav-icon far fa-newspaper"></i>
                   <p>Article</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a @click="goTo('/list-document')"class="nav-link">
-                  <i class="nav-icon fas fa-clipboard-list"></i>
+                  <i class="nav-icon fas fa-file-pdf"></i>
                   <p>Document</p>
                 </a>
               </li>
@@ -58,7 +58,7 @@
               </li>
               <li class="nav-item">
                 <a @click="goTo('/category')"class="nav-link">
-                  <i class="nav-icon fas fa-clipboard-list"></i>
+                  <i class="nav-icon far fa-list-alt"></i>
                   <p>Category</p>
                 </a>
               </li>
@@ -139,7 +139,7 @@
           </li>
           <li class="nav-item">
             <a @click="goTo('/form')"class="nav-link">
-              <i class="nav-icon fas fa-user"></i>
+              <i class="nav-icon fas fa-clipboard-list"></i>
               <p>Form</p>
             </a>
           </li>

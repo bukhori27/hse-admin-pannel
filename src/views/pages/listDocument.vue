@@ -14,8 +14,11 @@
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
+            <template slot="document" slot-scope="row">
+              <b-img :src="'static/img/icons/pdf.jpg'" alt="Responsive image" style="width:50px; height:auto; border-radius: 8px" @click="viewDocument(row.item.image)"/>
+            </template>
             <template slot="actions" slot-scope="row">
-              <!-- <b-button variant="warning" style="border-radius: 20%" @click="edit(row.item)"><i class="fas fa-pencil-alt"></i></b-button> -->
+              <b-button variant="warning" style="border-radius: 20%" @click="viewDocument(row.item.image)"><i class="far fa-eye"></i></b-button>
               <router-link  v-bind:to="'category/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
               <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
               <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
@@ -59,7 +62,7 @@
         fields: [
           'no',
           'nama',
-          'description',
+          {key: 'document'},
           {key: 'actions'}
         ],
         sortBy: 'creator',
@@ -91,15 +94,15 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'category_list', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'document_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            let dump = response.data.category_list
+            let dump = response.data.document_list
             self.pages = response.data.current_page
             self.pageSize = response.data.page_size
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].nama,
-                description: dump[i].description,
+                nama: dump[i].name,
+                image: url.url_image + dump[i].image,
                 no: parseInt( (i+1) + (self.pages - 1) * self.perPage), 
                 id: dump[i].id
               }
@@ -107,14 +110,21 @@
               self.totalRows = response.data.count_data
             }
             self.listing = status 
+            console.log(self.listing)
           } else {
             alert('SALAH...!')
           }
         })
       },
       
+      viewDocument (url, id) {
+        let self = this
+        window.open(url);
+        // self.$router.push('/document?url='+ url + '&id=' + id)
+      },
       edit (data) {
         let self = this
+        // window.open(url);
         self.$router.push({name: 'EditCategory', params: data})
       },
       deleted(id) {
