@@ -7,4 +7,5 @@ const token = 'tQoEmgDFd5yFdoSPCcGc-ZL9RYF6yFLOkzPKiEKhZ-vSqoyEjihykdKXMghGxq-rZ
 export const url = {
 	url_app: app,
 	url_image: url_images,
-	token: token}
+	token: token
+}

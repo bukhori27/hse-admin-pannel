@@ -18,7 +18,7 @@
               <div class="tar" @click="$router.push('/reset-password')"> Forgot Password ?  </div>
             </div>
             <div class="col-md-12 row m-b-10" style="padding:0">
-              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="login" style="background:#20a8d8; color:white; padding: 20px 0; border-radius:5px; margin-left:15px; margin-right:-15px;">
+              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="login" style="background:#f58931; color:white; padding: 20px 0; border-radius:5px; margin-left:15px; margin-right:-15px;">
                 Login
               </b-button>
             </div>
