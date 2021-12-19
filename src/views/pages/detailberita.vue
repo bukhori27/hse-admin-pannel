@@ -46,7 +46,7 @@
         email: '',
         namaUser: '',
         message: '',
-        token: localStorage.getItem('token_ppa'),
+        token: localStorage.getItem('token_hse'),
         urlImage: url.url_image,
         newsupdate: [],
         beritahot: [],

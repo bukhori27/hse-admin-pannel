@@ -1,12 +1,12 @@
 <template>
-  <div class="app">
+  <div class="app simple" style="background-image: url(static/img/bg/fabio-mangione.jpg) ">
     <AppHeader/>
     <div>
       <main class="main">
-        <div class="container-fluid no-padding" style="position: relative;overflow: hidden;">
+        <div class="container-fluid no-padding" style="">
           <router-view></router-view>
+          <AppFooter/>
         </div>
-        <AppFooter/>
       </main>
     </div>
   </div>
@@ -14,7 +14,7 @@
 
 <script>
 import nav from '../_nav'
-import { Headers as AppHeader, FooterLogin as AppFooter } from '../components/'
+import { Headers as AppHeader, Footer as AppFooter } from '../components/'
 
 export default {
   name: 'simple',

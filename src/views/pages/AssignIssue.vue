@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-row">
+  <div class="flex-row card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-header">
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
@@ -9,7 +9,7 @@
           </a>
         </div>
       </b-row>
-      <b-row>
+      <b-row class="card-body">
         <div class="col-6">
           <div>
             <span> Title </span><br/><b><p> {{detailIssue.title}} </p></b>
@@ -30,7 +30,7 @@
         <div class="col-6">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Description</label>
-            <textarea type="text" v-model="description" class="form-control mb-4 border-radius-8" placeholder="Penjelasan" rows="12"/>
+            <textarea type="text" v-model="description" class="form-control mb-4 border-radius-8 border-left" placeholder="Penjelasan" rows="12"/>
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Assign To</label>

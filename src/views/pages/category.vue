@@ -1,23 +1,39 @@
-`<template>
-  <div class="flex-row align-items-center">
+<template>
+
+  <div class="flex-row align-items-center card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-header">
         <div class="col-sm-6">
-          <h1>Category</h1>
+          <h3 class="card-title">Category</h3>
         </div>
       </b-row>
-      <b-row class="justify-content-center">
-        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
-          <div class="float-right m-b-10" >
-              <b-button variant="primary" @click="addCategory">Create Category</b-button>
-          </div>
+      <b-row class="justify-content-center card-body">
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-1s">
+          <b-row>
+            <div class="col-12">
+              <div class="float-right m-b-10 " >
+                <b-button variant="primary" @click="addCategory">Create Category</b-button>
+              </div>
+              <div class="card-tools float-left p-t-3">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" placeholder="Search Category" v-model="searchText">
+                  <div class="input-group-append">
+                    <div class="btn btn-primary">
+                      <i class="fas fa-search" @click="search(searchText)"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </b-row>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
+            <template slot="id" slot-scope="row">
+            {{row.item.id}}
+            </template>
             <template slot="actions" slot-scope="row">
-              <!-- <b-button variant="warning" style="border-radius: 20%" @click="edit(row.item)"><i class="fas fa-pencil-alt"></i></b-button> -->
-              <router-link  v-bind:to="'category/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
-              <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
+              <router-link  v-bind:to="'category/edit/id=' + row.item.id"  data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
               <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
           </b-table>
@@ -76,6 +92,9 @@
 
         // this.totalRows = filteredItems.length
         this.currentPage = 1
+      },
+      search () {
+        this.listUser(1)
       },
       listUser (page) {
         var self = this

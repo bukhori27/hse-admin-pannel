@@ -1,32 +1,35 @@
 <template>
-  <div class="flex-row align-items-center">
+  <div class="flex-row align-items-center card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-header">
         <div class="col-sm-6">
-          <h1>List Executor</h1>
+          <h3 class="card-title">List Executor</h3>
         </div>
       </b-row>
-      <b-row class="justify-content-center">
-        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-11">
-          <div class="card-tools float-right m-b-10">
-            <div class="input-group input-group-sm">
-              <input type="text" class="form-control" placeholder="Search User" v-model="searchText">
-              <div class="input-group-append">
-                <div class="btn btn-primary">
-                  <i class="fas fa-search" @click="search(searchText)"></i>
+      <b-row class="justify-content-center card-body">
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-1s">
+          <b-row>
+            <div class="col-12">
+              <div class="card-tools float-left p-t-3">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" placeholder="Search Executor" v-model="searchText">
+                  <div class="input-group-append">
+                    <div class="btn btn-primary">
+                      <i class="fas fa-search" @click="search(searchText)"></i>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </b-row>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
-          responsive="sm" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
+          responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
-           <template slot="id" slot-scope="row">
-              <div>{{$index + 1}} </div>
+            <template slot="id" slot-scope="row">
+            {{row.item.id}}
             </template>
             <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'/user/edit-executor/?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
-              <!-- <b-button variant="success" style="border-radius: 20%" @click="approve(row.item.id)">approve</b-button> -->
+              <router-link  v-bind:to="'/user/edit-executor?id=' + row.item.id"  data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
               <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
           </b-table>

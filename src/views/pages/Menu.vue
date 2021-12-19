@@ -1,57 +1,76 @@
 <template>
   <div>
     <div class="row">
-      <div class="col-lg-3 col-6">
+      <div class="col-lg-3 col-6 m-b-20" @click="goTo('/issue/create')">
         <!-- small box -->
-        <div class="small-box bg-info">
+        <div class="tc pb8 bg-white">
+          <div class="pt8 pb8 fs40">
+            <i class="fas fa-plus-circle"></i>
+          </div>
           <div class="inner">
-            <p>Create Issue</p>
+            <p class="fs20">Create Issue</p>
           </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-          <a @click="goTo('/issue/create')" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
-      <div class="col-lg-3 col-6">
+      <div class="col-lg-3 col-6 m-b-20" @click="goTo('/issue')">
         <!-- small box -->
-        <div class="small-box bg-success">
+        <div class="tc pb8 bg-white">
+          <div class="pt8 pb8 fs40">
+            <i class="fa fa-ticket"></i>
+          </div>
           <div class="inner">
-            <p>List Issue</p>
+            <p class="fs20">List Issue</p>
           </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-          <a @click="goTo('/issue/')" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
-      <div class="col-lg-3 col-6">
+      <div class="col-lg-3 col-6 m-b-20" @click="goTo('/user/list')">
         <!-- small box -->
-        <div class="small-box bg-warning">
+        <div class="tc pb8 bg-white">
+          <div class="pt8 pb8 fs40">
+            <i class="fa fa-users"></i>
+          </div>
           <div class="inner">
 
-            <p>User</p>
+            <p class="fs20">User</p>
           </div>
-          <div class="icon">
-            <i class="ion ion-person-add"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
         </div>
       </div>
       <!-- ./col -->
-      <div class="col-lg-3 col-6">
+      <div class="col-lg-3 col-6 m-b-20" @click="goTo('/category')">
         <!-- small box -->
-        <div class="small-box bg-danger">
+        <div class="tc pb8 bg-white">
+          <div class="pt8 pb8 fs40">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
           <div class="inner">
-
-            <p>Unique</p>
+            <p class="fs20">Category</p>
           </div>
-          <div class="icon">
-            <i class="ion ion-pie-graph"></i>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-6 m-b-20" @click="goTo('/location')">
+        <!-- small box -->
+        <div class="tc pb8 bg-white">
+          <div class="pt8 pb8 fs40">
+            <i class="fas fa-map-marker-alt"></i>
           </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+          <div class="inner">
+            <p class="fs20">Location</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-3 col-6 m-b-20" @click="goTo('/type')">
+        <!-- small box -->
+        <div class="tc pb8 bg-white">
+          <div class="pt8 pb8 fs40">
+            <i class="fas fa-clipboard-list"></i>
+          </div>
+          <div class="inner">
+            <p class="fs20">Type</p>
+          </div>
         </div>
       </div>
       <!-- ./col -->
@@ -72,6 +91,7 @@
     axios,
     data () {
       return {
+        active: false
       }
     },
     methods: {

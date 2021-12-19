@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-row">
+  <div class="flex-row card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-header">
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
@@ -9,23 +9,23 @@
           </a>
         </div>
       </b-row>
-      <b-row>
+      <b-row class="card-body">
         <div class="col-12 ">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Username</label>
-            <input type="text" v-model="namaOrganisasi" class="form-control mb-4" placeholder="Username">
+            <input type="text" v-model="namaOrganisasi" class="form-control mb-4 border-left" placeholder="Username">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Email</label>
-            <input type="email" v-model="email" class="form-control mb-4" placeholder="email">
+            <input type="email" v-model="email" class="form-control mb-4 border-left" placeholder="email">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Password</label>
-            <input type="password" v-model="password" class="form-control mb-4" placeholder="password">
+            <input type="password" v-model="password" class="form-control mb-4 border-left" placeholder="password">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Konfirmasi Password</label>
-            <input type="password" v-model="cPassword" class="form-control mb-4" placeholder="confirm password">
+            <input type="password" v-model="cPassword" class="form-control mb-4 border-left" placeholder="confirm password">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Role</label>

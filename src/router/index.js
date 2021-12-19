@@ -4,6 +4,7 @@ import Router from 'vue-router'
 // Containers
 import Full from '@/containers/Full'
 import Simple from '@/containers/Simple'
+import Public from '@/containers/Public'
 
 import Page404 from '@/views/pages/Page404'
 import Page500 from '@/views/pages/Page500'
@@ -29,6 +30,7 @@ import editProfile from '@/views/pages/editprofile'
 import Profile from '@/views/pages/profile'
 import Adduser from '@/views/pages/Adduser'
 import user from '@/views/pages/User'
+import listusers from '@/views/pages/listusers'
 import Category from '@/views/pages/Category'
 import AddCategory from '@/views/pages/AddCategory'
 import EditCategory from '@/views/pages/EditCategory'
@@ -74,13 +76,27 @@ export default new Router({
       children: [
         { path: '', name: 'Index', component: Index },
         { path: 'signin', name: 'Login', component: Login },
-        { path: 'article', name: 'Article', component: Article },
         { path: 'detail-berita', name: 'detailberita', component: detailberita },
-        { path: 'document', name: 'Document', component: Document },
         { path: 'register', name: 'Register', component: Register },
         { path: 'forgot-password/:id', name: 'Forgotpassword', component: Forgotpassword },
         { path: 'reset-password', name: 'Resetpassword', component: Resetpassword },
 
+      ]
+    },
+    {
+      path: '/article',
+      redirect: '',
+      component: Public,
+      children: [
+        { path: '', name: 'Article', component: Article },
+      ]
+    },
+    {
+      path: '/document',
+      redirect: '',
+      component: Public,
+      children: [ 
+        { path: '', name: 'Document', component: Document },
       ]
     },
     {
@@ -112,6 +128,7 @@ export default new Router({
       path: '/user/',
       component: Full,
       children: [
+        { path: 'list', name: 'listusers', component: listusers },
         { path: 'all', name: 'user', component: user },
         { path: 'add', name: 'Adduser', component: Adduser },
         { path: 'reporter', name: 'Reporter', component: Reporter },

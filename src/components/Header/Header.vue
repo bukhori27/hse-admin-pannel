@@ -1,91 +1,123 @@
 <template>
-  <b-container class="bv-example-row" fluid>
-    <!-- hidden gradient
-      <b-row class="text-center fixed-top">
-        <b-col class="bg-list-gradient"></b-col>
-      </b-row> 
-    -->
-    <b-row class="fs15" style="padding: 0">
-      <div class="col-md-12 npr npl">
-        <!-- this side menu -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light i-md-flex">
-          <ul class="navbar-nav" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2 || profil.pengguna_level == 4">
-            <li class="nav-item">
-              <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-            </li>
-          </ul>
-          <ul v-else>
-            <span class="brand-text font-weight-bold " @click="goTo('/dashboard')">HSE - Admin Panel</span>
-            <li class="nav-item">
-                <a @click="goTo('/issue')" class="nav-link">Issue</a>
-              </li>
-              <li class="nav-item m-t-10"><a @click="goTo('/form')" class="nav-link">Form</a></li>
-          </ul>
-          
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown user-menu">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <i class="fas fa-user-circle fa-2x"></i>
-                <!-- <i class="fas fa-angle-down fa-2x right"></i> -->
-              </a>
-              <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                <li role="presentation" class="m-t-10"><a @click="goTo('/profile')"><i class="icon-user"></i>Profile</a></li>
-                <li role="presentation"><a @click="logout"><i class="icon-logout m-r-xs"></i>Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </nav>
-        <nav class="navbar navbar-white navbar-light nplr d-block d-md-none">
-          <ul class="navbar-nav pl-15">
-            <li class="nav-item">
-              <a data-toggle="collapse" data-target="#navbarsExample01" role="button"><i class="fas fa-bars"></i></a>
-              <span class="brand-text font-weight-bold xspl-15" @click="goTo('/dashboard')">HSE - Admin Panel</span>
-            </li>
-          </ul>
-          <div class="navbar-collapse navbar-dark-primary collapse col-md-12" id="navbarsExample01" style="">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a @click="goTo('/dashboard')" class="nav-link">
-                  Dashboard
-                </a>
-              </li>
-              <li class="nav-item">
-                <a @click="goTo('/issue')" class="nav-link">Issue</a>
-              </li>
-              <li class="nav-item dropdown" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown01" aria-haspopup="true" aria-expanded="false">Master Data</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown01">
-                  <a class="dropdown-item" @click="goTo('/list-article')">List Article</a>
-                  <a class="dropdown-item" @click="goTo('/list-form')">List Form</a>
-                  <a class="dropdown-item" @click="goTo('/list-document')">List Document</a>
-                  <a class="dropdown-item" @click="goTo('/category')">Category</a>
-                  <a class="dropdown-item" @click="goTo('/location')">Location</a>
-                  <a class="dropdown-item" @click="goTo('/type')">Type</a>
-                </div>
-              </li>
-              <li class="nav-item dropdown" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdown02" aria-haspopup="true" aria-expanded="false">User</a>
-                <div class="dropdown-menu" aria-labelledby="dropdown02">
-                  <a class="dropdown-item" @click="goTo('/user/all')">All User</a>
-                  <a class="dropdown-item" @click="goTo('/user/reporter')">Reporter</a>
-                  <a class="dropdown-item" @click="goTo('/user/executor')">Executor</a>
-                  <a class="dropdown-item" @click="goTo('/user/admin')">Admin</a>
-                  <a class="dropdown-item" @click="goTo('/user/manager')">Manager</a>
-                  <a class="dropdown-item" @click="goTo('/user/picarea')">PIC Area</a>
-                </div>
-              </li>
-              <li class="nav-item" v-if="profil.pengguna_level == 4">
-                <a @click="goTo('/user/executor')" class="nav-link">Staff</a>
-              </li>
-              <li class="nav-item m-t-10"><a @click="goTo('/form')" class="nav-link">Form</a></li>
-              <li class="nav-item m-t-10"><a @click="goTo('/profile')" class="nav-link">Profile</a></li>
-              <li class="nav-item"><a @click="logout"  class="nav-link">Logout</a></li>
-            </ul>
+  <div class="sidebar ps" data-color="default" data-active-color="danger">
+      <div class="logo">
+        <a href="https://www.creative-tim.com" class="simple-text logo-mini">
+          <div class="logo-image-small">
+            <img src="static/img/logo-small.png">
           </div>
-        </nav>
+          <!-- <p>CT</p> -->
+        </a>
+        <a href="https://www.creative-tim.com" class="simple-text logo-normal">
+          Safety Patrol
+        </a>
       </div>
-    </b-row>
-  </b-container>
+      <div class="sidebar-wrapper ps ps--active-x">
+        <ul class="nav">
+          <li v-bind:class="classActive === 1 ? 'actived': ''">
+            <a @click="goTo('/dashboard', 1)">
+              <i class="nc-icon nc-bank"></i>
+              <p>Dashboard</p>
+            </a>
+          </li>
+          <li v-bind:class="classActive === 2 ? 'actived': ''">
+            <a data-toggle="collapse" href="#pagesExamples">
+              <i class="nc-icon nc-book-bookmark"></i>
+              <p>
+                Pages <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse " id="pagesExamples">
+              <ul class="nav">
+                <li>
+                  <a @click="goTo('/user/all', 2)">
+                    <span class="sidebar-mini-icon">T</span>
+                    <span class="sidebar-normal"> All User </span>
+                  </a>
+                </li>
+                <li>
+                  <a @click="goTo('/user/reporter', 2)">
+                    <span class="sidebar-mini-icon">R</span>
+                    <span class="sidebar-normal"> Reporter </span>
+                  </a>
+                </li>
+                <li>
+                  <a @click="goTo('/user/executor', 2)">
+                    <span class="sidebar-mini-icon">E</span>
+                    <span class="sidebar-normal"> Executor </span>
+                  </a>
+                </li>
+                <li>
+                  <a @click="goTo('/user/admin', 2)">
+                    <span class="sidebar-mini-icon">LS</span>
+                    <span class="sidebar-normal"> Admin </span>
+                  </a>
+                </li>
+                <li>
+                  <a @click="goTo('/user/manager', 2)">
+                    <span class="sidebar-mini-icon">M</span>
+                    <span class="sidebar-normal">Manager </span>
+                  </a>
+                </li>
+                <li>
+                  <a @click="goTo('/user/picarea', 2)">
+                    <span class="sidebar-mini-icon">PA</span>
+                    <span class="sidebar-normal">PIC Area </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li v-bind:class="classActive === 3 ? 'actived': ''">
+            <a data-toggle="collapse" href="#MasterData">
+              <i class="nc-icon nc-book-bookmark"></i>
+              <p>
+                Master Data <b class="caret"></b>
+              </p>
+            </a>
+            <div class="collapse " id="MasterData">
+              <ul class="nav">
+                <li>
+                  <a @click="goTo('/list-article', 3)">
+                    <span class="sidebar-mini-icon">A</span>
+                    <span class="sidebar-normal">Article</span>
+                  </a>
+                </li>
+                <li>
+                  <a @click="goTo('/category', 3)">
+                    <span class="sidebar-mini-icon">C</span>
+                    <span class="sidebar-normal">Category</span>
+                  </a>
+                </li>
+                <li>
+                  <a @click="goTo('/location', 3)">
+                    <span class="sidebar-mini-icon">L</span>
+                    <span class="sidebar-normal">Location</span>
+                  </a>
+                </li>
+                <li>
+                  <a @click="goTo('/type', 3)">
+                    <span class="sidebar-mini-icon">T</span>
+                    <span class="sidebar-normal">Type</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li v-bind:class="classActive === 4 ? 'actived': ''">
+            <a @click="goTo('/issue', 4)">
+              <i class="nc-icon nc-chart-bar-32"></i>
+              <p>Finding</p>
+            </a>
+          </li>
+          <li v-bind:class="classActive === 5 ? 'actived': ''">
+            <a @click="goTo('/list-form', 5)">
+              <i class="nc-icon nc-calendar-60"></i>
+              <p>Form</p>
+            </a>
+          </li>
+        </ul>
+      <div class="ps__rail-x" style="width: 260px; left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 244px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
+    <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
 </template>
 <script>
   import axios from 'axios'
@@ -99,39 +131,20 @@
       return {
         nama_lengkap: sessionStorage.getItem('fullname'),
         profil: JSON.parse(localStorage.getItem('profile')),
-        menus: [
-          {
-            path: '/lembaga-masyarakat',
-            label: 'Lembaga Masyarakat',
-          },
-          {
-            path: '/forum',
-            label: 'Forum PUSPA'
-          },
-          {
-            path: '/berita',
-            label: 'Berita'
-          }
-        ],
         token: localStorage.getItem('token_ppa'),
         profile: JSON.parse(localStorage.getItem('profile')),
         login: false,
-        LoginShow: false,
-        Username: '',
-        Password: ''
+        classActive: false
       }
     },
     components: {
     },
     methods: {
-      goTo (path) {
+      goTo (path, id) {
         let self = this
-        self.LoginShow = false
         var body = document.body;
-        body.classList.add("sidebar-collapse");
-        var element = document.getElementById("navbarsExample01");
-        element.classList.remove("show");
         self.$router.push(path)
+        self.classActive = id
       },
       logout (e) {
         var self = this

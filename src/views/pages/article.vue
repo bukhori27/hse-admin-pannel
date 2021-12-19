@@ -1,21 +1,24 @@
 <template>
-  <div class="app flex-row">
+  <div class="flex-row">
     <div class="container-fluid">
       <div class="row nmr nml">
-        <div class="col-sm-12 col-xs-12" style="padding:10px 35px;">
-          <div class="row m-t-30 nplr" v-for="(indexs, id) in berita" @click="detailBerita(indexs.id)" style="cursor: pointer;"> 
-            <div class="col-xs-12 row">
-              <div class="text-green-title1 col-12 fs28" style="text-transform: capitalize; margin: auto;"> {{indexs.name}}</div>
-              <b-img :src="urlImage + indexs.image" fluid-grow alt="Responsive image" style="height:250px; border-radius: 8px"/>
+        <div class="col-sm-12 col-xs-12 row">
+          <div class="m-t-30 col-lg-4 col-md-6 col-xs-12" v-for="(indexs, id) in berita" style="cursor: pointer;"> 
+            <div class="col-xs-12" style="border: 1px solid black; padding:10px; border-radius:10px;">
+              <div class="text-green-title1 col-12 fs18" style="text-transform: capitalize; margin: auto;"@click="detailBerita(indexs.id)" > {{indexs.nama}}</div>
+              
+              <div class="col-12">
+                <b-img :src="'/' + indexs.url_images" fluid-grow alt="Responsive image" style="height:200px; border-radius: 8px"/>
+              </div>
               <div class="text-green-title1 col-12 fs12" style="margin: auto; padding:10px 15px;"> {{indexs.author}}, {{indexs.date}}</div>
-              <div class="col-md-12 fs16 m-t-10 m-b-50"> 
-                <span v-html="batasin(indexs.description)"></span>
+              <div class="col-md-12 fs16 m-t-10 m-b-20"> 
+                <span v-html="batasin(indexs.description)"> </span>
                 <p v-if="more" class="m-t-10" @click="detailBerita(indexs.id)" style="color:blue;">More >> </p>
               </div>
             </div>
-            <div class="col-md-12 m-t-30" style="border-top: 1px solid #cecccc;"></div>
+            <div class="col-md-12 m-t-10" style="border-top: 1px solid #cecccc; display:none;"></div>
           </div>
-          <div class="col-md-12 m-t-30 m-b-20 text-green-title1" style="text-align: right; padding:10px;" >
+          <div class="col-md-12 m-t-10 m-b-10 text-green-title1" style="text-align: right; padding:10px;" >
             <span @click="listLM(pages-1)" v-if="pages !== 1"> << previous </span>
             <span @click="listLM(pages+1)" style="padding-left:20px" v-if="pageSize > pages"> more >> </span>
           </div>
@@ -43,11 +46,11 @@
         slide: 0,
         sliding: null,
         berita: [],
-        token: localStorage.getItem('token_ppa'),
+        token: localStorage.getItem('token_hse'),
         urlImage: url.url_image,
         pages: 1,
         pageSize: '',
-        more: false
+        more: false, 
       }
     },
     methods: {

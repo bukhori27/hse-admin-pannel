@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-row">
+  <div class="flex-row card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-header">
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
@@ -9,7 +9,7 @@
           </a>
         </div>
       </b-row>
-      <b-row>
+      <b-row class="card-body">
         <div class="col-12">
           <div class="col-12">
             <img :src="!imageData ? 'static/img/icons/pdf.jpg' : imageData" class="rounded d-block" style="height:140px;" @click="chooseFiles()">
@@ -17,7 +17,7 @@
           <input type="file" class="form-control mb-4" @change="openFile" style="display:none;" id="fileUpload">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name location</label>
-            <input type="text" v-model="nama" class="form-control mb-4 border-radius-8" placeholder="nama lokasi">
+            <input type="text" v-model="nama" class="form-control mb-4 border-radius-8 border-left" placeholder="nama lokasi">
           </b-input-group>
             <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right"  size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
               Simpan

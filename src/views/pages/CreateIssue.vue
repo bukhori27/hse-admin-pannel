@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-row">
+  <div class="flex-row card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-header">
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
@@ -9,7 +9,7 @@
           </a>
         </div>
       </b-row>
-      <b-row>
+      <b-row class="card-body">
         <div class="col-xs-12 col-md-4 d-block d-sm-none">
           <div class="col-12">
             <img :src="!imageData ? 'static/img/icons/defaultImage.jpg' : imageData" class="rounded mx-auto d-block" style="height:140px;" @click="chooseFiles()">
@@ -19,26 +19,26 @@
         <div class="col-xs-12 col-md-8">
           <b-input-group>
             <label style="width: 100%; font-weight:600">Name</label>
-            <input type="text" v-model="nama" class="form-control mb-4 border-radius-8" placeholder="nama">
+            <input type="text" v-model="nama" class="form-control mb-2 border-left" placeholder="nama">
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">description</label>
-            <input type="text" v-model="description" class="form-control mb-4 border-radius-8" placeholder="description">
+            <input type="text" v-model="description" class="form-control mb-2 border-left" placeholder="description">
           </b-input-group>
             <label style="width: 100%; font-weight:600">Location</label>
-              <select v-model="locationId" class="register-custom-select mb-4">
+              <select v-model="locationId" class="register-custom-select mb-2">
                 <option v-for="(cabang, i) in locationList" :value="cabang.id" :key="'cabang' + i">{{ cabang.nama }}</option>
               </select>
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">Category</label>
-            <select v-model="categoryId" class="register-custom-select mb-4">
+            <select v-model="categoryId" class="register-custom-select mb-2">
               <option v-for="(category, i) in categoryList" :value="category.id" :key="'category' + i">{{ category.nama }}</option>
             </select>
           </b-input-group>
           <b-input-group>
             <label style="width: 100%; font-weight:600">type</label>
-            <select v-model="typeId" class="register-custom-select mb-4">
+            <select v-model="typeId" class="register-custom-select mb-2">
               <option v-for="(type, i) in typeList" :value="type.id" :key="'type' + i">{{ type.nama }}</option>
             </select>
           </b-input-group>
@@ -47,9 +47,9 @@
           <div class="col-12">
             <img :src="!imageData ? 'static/img/icons/defaultImage.jpg' : imageData" class="rounded mx-auto d-block" style="height:140px;" @click="chooseFiles()">
           </div>
-          <input type="file" class="form-control mb-4" @change="openFile" style="display:none;" id="fileUpload">
+          <input type="file" class="form-control mb-2" @change="openFile" style="display:none;" id="fileUpload">
         </div>
-        <div class="col-12">
+        <div class="col-12 m-b-10">
           <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
             Simpan
           </b-button>

@@ -2,23 +2,30 @@
   <div class="app flex-row align-items-center">
     <div class="container">
       <b-row class="justify-content-center nmr nml">
-        <div class="col-md-8 col-sm-12 col-lg-6 col-xl-6 col-xs-12" style="padding-right: 0px;">
+        <div class="col-lg-4 col-md-6 ml-auto mr-auto" style="padding-right: 0px;">
           <div id="pt-pgSignin" class="col-md-12 row register-form">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12 tc">
               <!-- <b-img src="static/img/icons/logo.png" alt="Responsive image" style="height:60px; width:70px;"/> -->
               <h1 class="m-b-50">Login</h1> 
             </div>
-            <b-input-group>
-              <input type="text" v-model="Username" class="form-control mb-4" placeholder="username" v-on:keyup.enter="submit">
-            </b-input-group>
-            <b-input-group>
-              <input type="password" v-model="Password" class="form-control mb-4" placeholder="password" v-on:keyup.enter="submit">
-            </b-input-group>
-            <div class="col-md-12 fs12 m-b-20" style="padding:0; display: inline; margin-top:-20px; ">
-              <div class="tar" @click="$router.push('/reset-password')"> Forgot Password ?  </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="nc-icon nc-single-02"></i>
+                </span>
+              </div>
+              <input type="text" v-model="Username" class="form-control" placeholder="username" v-on:keyup.enter="submit">
             </div>
-            <div class="col-md-12 row m-b-10" style="padding:0">
-              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="login" style="background:#f58931; color:white; padding: 20px 0; border-radius:5px; margin-left:15px; margin-right:-15px;">
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="nc-icon nc-key-25"></i>
+                </span>
+              </div>
+              <input type="password" v-model="Password" class="form-control" placeholder="password" v-on:keyup.enter="submit">
+            </div>
+            <div class="col-md-12 row m-b-10 m-t-20" style="padding:0">
+              <b-button button-rounded-border-radius label="Verify" rounded class="col-md-12" size="14" @click="login" style="background:#f58931; color:white; padding: 10px 0; border-radius:5px; margin-left:15px; margin-right:-15px;">
                 Login
               </b-button>
             </div>

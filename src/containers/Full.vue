@@ -1,13 +1,11 @@
 <template>
-  <div class="app layout-fixed"">
+  <div class="wrapper">
     <AppHeader/>
-    <AppMenu/>
-    <div class="content-wrapper">
-      <main>
-        <div class="container-fluid no-padding mt-10" style="position: relative;overflow: hidden;">
-            <router-view></router-view>
-        </div>
-      </main>
+    <div class="main-panel">
+      <AppSidebar/>
+      <div class="container-fluid no-padding m-t-80" style="position: relative;overflow: hidden;">
+        <router-view></router-view>
+      </div>
     </div>
     <AppFooter/>
   </div>
@@ -15,14 +13,14 @@
 
 <script>
 import nav from '../_nav'
-import { Header as AppHeader, Footer as AppFooter, Menu as AppMenu } from '../components/'
+import { Header as AppHeader, Sidebar as AppSidebar, FooterPrivate as AppFooter } from '../components/'
 
 export default {
   name: 'full',
   components: {
     AppHeader,
-    AppMenu,
-    AppFooter
+    AppFooter,
+    AppSidebar
   },
   data () {
     return {

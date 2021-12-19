@@ -1401,22 +1401,22 @@ fieldset[disabled] a.btn {
 
 .btn-primary {
   color: #fff;
-  background-color: #20a8d8;
-  border-color: #20a8d8; }
+  background-color: #f39548;
+  border-color: #f39548; }
   .btn-primary:hover {
     color: #fff;
-    background-color: #1b8eb7;
-    border-color: #1985ac; }
+    background-color: #f39548;
+    border-color: #f39548; }
   .btn-primary:focus, .btn-primary.focus {
     box-shadow: 0 0 0 3px rgba(32, 168, 216, 0.5); }
   .btn-primary.disabled, .btn-primary:disabled {
-    background-color: #20a8d8;
-    border-color: #20a8d8; }
+    background-color: #f39548;
+    border-color: #f39548; }
   .btn-primary:active, .btn-primary.active,
   .show > .btn-primary.dropdown-toggle {
-    background-color: #1b8eb7;
+    background-color: #f39548;
     background-image: none;
-    border-color: #1985ac; }
+    border-color: #f39548; }
 
 .btn-secondary {
   color: #111;

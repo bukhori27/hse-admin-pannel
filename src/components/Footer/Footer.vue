@@ -1,18 +1,23 @@
 <template>
-  	<div class="main-footer">
-      <strong>Copyright © 2020 Platform HSE.</strong>
-      All rights reserved.
-	</div>	
+   <div class="container-fluid2">
+      <div class="row nplr">
+        <div class="credits ml-auto">
+          <span class="copyright">
+            © 2021
+          </span>
+        </div>
+      </div>
+    </div>
 </template>
 <script>
 import axios from 'axios'
 import { url } from '../../url'
 export default {
-  	name: 'Footer',
+  	name: 'Lfooter_',
     axios,
     data ()	{
-      return {
-      }
+        return {
+        }
     },
     methods: {
       goTo (path, id) {
@@ -21,7 +26,7 @@ export default {
         self.$router.push(path)
       },
     },
-    created () {
+    created: function () {
     }
 }
 </script>

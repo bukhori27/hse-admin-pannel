@@ -1,104 +1,26 @@
 <template>
-  <div v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2 || profil.pengguna_level == 4" class="flex-row">
+  <div class="flex-row">
     <div class="container-fluid">
-      <div class="row" style="display:none">
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-info">
-            <div class="inner">
-              <h3>{{reportData}}</h3>
-
-              <p>New Issue</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-bag"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-success">
-            <div class="inner">
-              <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-              <p>Bounce Rate</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-warning">
-            <div class="inner">
-              <h3>44</h3>
-
-              <p>User Registrations</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-person-add"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-        <div class="col-lg-3 col-6">
-          <!-- small box -->
-          <div class="small-box bg-danger">
-            <div class="inner">
-              <h3>65</h3>
-
-              <p>Unique Visitors</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
-            <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-          </div>
-        </div>
-        <!-- ./col -->
-      </div>
       <div class="row">
-
         <div class="col-12">
           <div class="card card-danger">
             <div class="card-header">
-              <h3 class="card-title">Issue Chart</h3>
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
+              <h3 class="card-title">Finding Patrol</h3>
             </div>
             <div class="card-body">
                 <GChart
-                type="LineChart"  
+                type="BarChart"  
                 :data="dateData"
                 :options="CategoryOptions"
               />
             </div>
           </div>
         </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-2"></div>
+        <div class="col-xs-12 col-md-12">
           <div class="card card-info">
             <div class="card-header">
-              <h3 class="card-title">Issue by Prio Chart</h3>
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
+              <h3 class="card-title">Summary Findings</h3>
             </div>
             <div class="card-body">
                 <GChart
@@ -109,18 +31,11 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-2"></div>
+        <!-- <div class="col-xs-12 col-md-6">
           <div class="card card-warning">
             <div class="card-header">
               <h3 class="card-title">Category Chart</h3>
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
             </div>
             <div class="card-body">
                 <GChart
@@ -130,78 +45,8 @@
               />
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
-    </div>
-  </div>
-  <div v-else>
-    <div class="flex-row">
-      <div class="container-fluid">
-      <IssueTempate > </IssueTempate>
-      </div>
-      <!-- ./col -->
-    </div>
-  </div>
-  <div v-else style="display:none">
-    <div class="flex-row">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <p>Create Issue</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a @click="goTo('/issue/create')" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <p>List Issue</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a @click="goTo('/issue/')" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-
-                <p>User</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-
-                <p>Unique</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- ./col -->
     </div>
   </div>
 </template>
@@ -216,6 +61,7 @@
   import sha256 from 'sha256'
   import { GChart } from 'vue-google-charts'
   import IssueTempate from '../../components/Layout/IssueTempate.vue'    
+  import { corechart } from '../../mixins/chart'
 
   export default {
     name: 'Index',
@@ -229,18 +75,11 @@
         token: localStorage.getItem('token_hse'),
         profil: JSON.parse(localStorage.getItem('profile')),
         reportData: '',
+        colorStackbar: [],
         dailyData: [
           ['Type', 'Count']
         ],
-        chartOptions: {
-          chart: {
-            title: 'Issue',
-            subtitle: ''
-          },
-          pieSliceText: 'label',
-          slices: [{color: 'red'}, {color: 'yellow'}, {color: 'blue'}],
-          is3D: true,
-        },
+        chartOptions: {},
         dataCategory: [
           ['Type', 'Count', { role: 'style' }]
         ],
@@ -252,17 +91,10 @@
           bars: 'horizontal',
           legend: { position: "none" }
         },
+        CategoryOptions: { },
         dateData: [
-          ['month', 'issue']
+          ['PIC', 'Close', 'On Progress', 'Open']
         ],
-        CategoryOptions: {
-          chart: {
-            title: 'Issue',
-            subtitle: ''
-          },
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        }
       }
     },
     methods: {
@@ -278,6 +110,8 @@
         let self = this
         var token = self.token
         let data = []
+        let dataColor = []
+        let ab = ''
         var parameter = {
           token: token,
           type: "type"
@@ -291,15 +125,27 @@
           if (response.data.resultCode == 'OK') {
             let report = response.data.report
             for (let i = 0; i < report.length; i++) {
+              ab = self.rndColor()
+              if (ab.length < 6) ab = self.rndColor()
+              dataColor.push(ab) 
               let a =  {
                 type: report[i].nama,
-                count: parseInt(report[i].count)
+                count: parseInt(report[i].count),
               }
               data.push(a)
             }
             for (let i = 0; i < data.length; i++) {
               const propertyValues = Object.values(data[i]);
               self.dailyData.push(propertyValues)
+            }
+            self.chartOptions = {
+              chart: {
+                title: 'Issue',
+                subtitle: ''
+              },
+              pieSliceText: 'label',
+              is3D: true,
+              colors: dataColor
             }
           } else {
             alert('SALAH...!')
@@ -326,7 +172,7 @@
               let a =  {
                 type: report[i].nama,
                 count: parseInt(report[i].count),
-                style: self.rndColor()
+                color: self.rndColor()
               }
               data.push(a)
             }
@@ -339,10 +185,12 @@
           }
         })
       },
+      //stackbar
       reportDateFunct () {
         let self = this
         var token = self.token
         let data = []
+        let ab = ''
         var parameter = {
           token: token,
           type: "date"
@@ -356,12 +204,27 @@
           if (response.data.resultCode == 'OK') {
             let report = response.data.report
             for (let i = 0; i < report.length; i++) {
+              //type: self.changeDate(report[i].date),
               let a =  {
-                type: self.changeDate(report[i].date),
-                count: parseInt(report[i].count)
+                type: report[i].nama,
+                close: parseInt(report[i].close),
+                onProgress: parseInt(report[i].onProgress),
+                open: parseInt(report[i].open)
               }
               data.push(a)
             }
+            
+            for (let i = 0; i < 3; i++) {
+              
+              ab = self.rndColor()
+              if (ab.length < 6) ab = self.rndColor()
+              self.colorStackbar.push(ab)
+            }
+            self.CategoryOptions = {
+              isStacked: true,
+              colors: self.colorStackbar
+            }
+            self.CategoryOptions.color = self.colorStackbar
             for (let i = 0; i < data.length; i++) {
               const propertyValues = Object.values(data[i]);
               self.dateData.push(propertyValues)
@@ -403,11 +266,14 @@
     },
     created: function () {
       let self = this
-      if (self.profil.pengguna_level == 1 || self.profil.pengguna_level == 2 || self.profil.pengguna_level == 4) {
-        self.getData()
-        self.reportTypeFunct()
-        self.reportDateFunct()
-        self.reportCategoryFunct();
+      if (self.token === null) {self.$router.push('')
+      } else {
+        if (self.profil.pengguna_level == 1 || self.profil.pengguna_level == 2 || self.profil.pengguna_level == 4) {
+          self.getData()
+          self.reportTypeFunct()
+          self.reportDateFunct()
+          self.reportCategoryFunct();
+        }
       }
     }
   }

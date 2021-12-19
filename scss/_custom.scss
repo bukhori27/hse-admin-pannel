@@ -7,3 +7,23 @@
         background: linear-gradient(38deg, #f58931 0%, #ededed 150%);
     }
 }
+.main-footer {
+    position: fixed !important;
+    width: 100%;
+    bottom: 0;
+}
+.menu-border {
+    border: 1px solid black;
+}
+.header-bg-hse {
+    // background: #ff8100;
+    background: -webkit-linear-gradient(38deg, #f58931 0%, #ededed 150%);
+    background: -webkit-linear-gradient(52deg, #f58931 0%, #ededed 150%);
+    background: -o-linear-gradient(52deg, #f58931 0%, #ededed 150%);
+    background: linear-gradient(38deg, #f58931 0%, #ededed 150%);
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 20px;
+}
