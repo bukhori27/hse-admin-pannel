@@ -1,13 +1,30 @@
 <template>
-  <div class="flex-row align-items-center">
+  <div class="flex-row align-items-center card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-header">
         <div class="col-sm-6">
           <h1>List Form</h1>
         </div>
       </b-row>
-      <b-row class="justify-content-center">
+      <b-row class="justify-content-center card-body">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
+          <b-row>
+            <div class="col-12">
+              <div class="float-right m-b-10 " >
+                <b-button variant="primary" @click="addForm">Create Form</b-button>
+              </div>
+              <div class="card-tools float-left p-t-3">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" placeholder="Search Form" v-model="searchText">
+                  <div class="input-group-append">
+                    <div class="btn btn-primary">
+                      <i class="fas fa-search" @click="search(searchText)"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </b-row>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
@@ -45,12 +62,11 @@
         currentPage: 1,
         perPage: 10,
         totalRows: 0,
+        searchText: '',
         fields: [
           'no',
           'nama',
-          'description',
-          'staff',
-          'date'
+          'description'
         ],
         sortBy: 'creator',
         sortDesc: false,
@@ -67,6 +83,9 @@
         // this.totalRows = filteredItems.length
         this.currentPage = 1
       },
+      search () {
+        this.listUser(1)
+      },
       listUser (page) {
         var self = this
         let status = []
@@ -74,24 +93,23 @@
         var token = self.token
         var parameter = {
           token: token,
-          "page": page
+          "page": page,
+          search: self.searchText
         }
         var config = { 
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'form_hse_list', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'form_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
-            let dump = response.data.form_hse_list
+            let dump = response.data.form_list
             self.pages = response.data.current_page
             self.pageSize = response.data.page_size
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].name,
+                nama: dump[i].nama,
                 description: dump[i].description,
-                staff: dump[i].author,
-                date: dump[i].date,
                 no: parseInt( (i+1) + (self.pages - 1) * self.perPage), 
                 id: dump[i].id
               }
@@ -132,10 +150,10 @@
           })
         }
       },
-      addCategory () {
+      addForm () {
         let self = this
         self.LoginShow = false
-        self.$router.push('/category/add')
+        self.$router.push('/form/add')
       }
     },
     created: function () {

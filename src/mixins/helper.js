@@ -23,15 +23,20 @@
 // 	    },
 // 	}
 // }
-export function changeStatus (data) {
+export function changeStatus (state) {
+	var data = parseInt(state)
 	if(data === 1) {
 		return 'Admin'
-	}else if(data === 4) {
-		return 'Reporter'
 	}else if(data === 2) {
 		return 'Manager'
 	}else if(data === 3) {
+		return 'Reporter'
+	}else if(data === 4) {
+		return 'Observer'
+	}else if(data === 5) {
 		return 'Executor'
+	}else if(data === 6) {
+		return 'PIC'
 	}
 
 }

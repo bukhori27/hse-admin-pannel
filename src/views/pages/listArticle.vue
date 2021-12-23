@@ -13,6 +13,16 @@
               <div class="float-right m-b-10 " >
                 <b-button variant="primary" @click="addArticle">Create Article</b-button>
               </div>
+              <div class="card-tools float-left p-t-3">
+                <div class="input-group input-group-sm">
+                  <input type="text" class="form-control" placeholder="Search Article" v-model="searchText">
+                  <div class="input-group-append">
+                    <div class="btn btn-primary">
+                      <i class="fas fa-search" @click="search(searchText)"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </b-row>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
@@ -22,7 +32,7 @@
             {{row.item.id}}
             </template>
             <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'list-article/view?id=' + row.item.id"  data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
+              <router-link  v-bind:to="'list-article/view?id=' + row.item.id"  data-original-title="View"><b-button variant="yellow" style="border-radius: 20%"><i class="fa fa-eye"></i></b-button></router-link>
               <router-link  v-bind:to="'list-article/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
              <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
@@ -62,6 +72,7 @@
         currentPage: 1,
         perPage: 10,
         totalRows: 0,
+        searchText: '',
         fields: [
           'no',
           'nama',
@@ -83,6 +94,9 @@
         // this.totalRows = filteredItems.length
         this.currentPage = 1
       },
+      search () {
+        this.listUser(1)
+      },
       listUser (page) {
         var self = this
         let status = []
@@ -90,7 +104,8 @@
         var token = self.token
         var parameter = {
           token: token,
-          "page": page
+          "page": page,
+          search: self.searchText
         }
         var config = { 
           headers: {
@@ -104,7 +119,7 @@
             self.pageSize = response.data.page_size
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: self.batasintitle(dump[i].name),
+                nama: self.batasintitle(dump[i].nama),
                 description: self.batasin(dump[i].description),
                 no: parseInt( (i+1) + (self.pages - 1) * self.perPage), 
                 id: dump[i].id

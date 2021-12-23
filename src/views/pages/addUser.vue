@@ -30,7 +30,7 @@
           <b-input-group>
             <label style="width: 100%; font-weight:600">Role</label>
               <select class="register-custom-select mb-4 " v-model="provinceId">
-                <option v-for="(provinsi, i) in roleList" :value="provinsi.role_id" :key="'d' + i">{{ provinsi.nama }}</option>
+                <option v-for="(role, i) in roleList" :value="role.id_privilege" :key="'d' + i">{{ role.nama }}</option>
               </select>
           </b-input-group>
           <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="registration" style="color:white; padding: 10px 25px; border-radius:5px;">

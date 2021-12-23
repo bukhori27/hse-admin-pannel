@@ -16,6 +16,8 @@ import AddArticle from '@/views/pages/AddArticle'
 import EditArticle from '@/views/pages/EditArticle'
 import ViewArticle from '@/views/pages/ViewArticle'
 import listForm from '@/views/pages/listForm'
+import listActivityForm from '@/views/pages/listActivity'
+import AddForm from '@/views/pages/AddForm'
 import Form from '@/views/pages/Form'
 import detailberita from '@/views/pages/detailberita'
 import Document from '@/views/pages/Document'
@@ -41,6 +43,7 @@ import Type from '@/views/pages/Type'
 import AddType from '@/views/pages/AddType'
 import EditType from '@/views/pages/EditType'
 import Finding from '@/views/pages/Finding'
+import CreateP from '@/views/pages/Finding'
 import Issue from '@/views/pages/Issue'
 import CreateIssue from '@/views/pages/CreateIssue'
 import AssignIssue from '@/views/pages/AssignIssue'
@@ -173,6 +176,23 @@ export default new Router({
       component: Full,
       children: [
         { path: '', name: 'listForm', component: listForm },
+        { path: 'add', name: 'addForm', component: AddForm },
+
+      ]
+    },
+    {
+      path: '/form/',
+      component: Full,
+      children: [
+        { path: 'add', name: 'addForm', component: AddForm },
+
+      ]
+    },
+    {
+      path: '/list-activity-form/',
+      component: Full,
+      children: [
+        { path: '', name: 'listActivityForm', component: listActivityForm },
 
       ]
     },
@@ -219,9 +239,9 @@ export default new Router({
       children: [
         { path: '', name: 'Issue', component: Issue },
         { path: 'create', name: 'CreateIssue', component: CreateIssue },
-        { path: 'assign/:id', name: 'AssignIssue', component: AssignIssue },
-        { path: 'detail/:id', name: 'detailIssue', component: DetailIssue },
-        { path: 'confirmation/:id', name: 'confirmation', component: confirmation },
+        { path: 'assign', name: 'AssignIssue', component: AssignIssue },
+        { path: 'detail', name: 'detailIssue', component: DetailIssue },
+        { path: 'confirmation' , name: 'confirmation', component: confirmation },
       ]
     },
     {

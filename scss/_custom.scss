@@ -27,3 +27,14 @@
     padding-bottom: 30px;
     margin-bottom: 20px;
 }
+.perfect-scrollbar-on .sidebar, .perfect-scrollbar-on .main-panel {
+    height: 100% !important;
+}
+.wrapper {
+    height: 93.5vh !important;
+}
+@media (max-width: 768px) {
+    .wrapper {
+        height: 94.7vh !important;
+    }
+}

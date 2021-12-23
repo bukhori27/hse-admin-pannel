@@ -17,17 +17,61 @@
           </div>
         </div>
         <div class="col-xs-12 col-md-2"></div>
-        <div class="col-xs-12 col-md-12">
-          <div class="card card-info">
-            <div class="card-header">
-              <h3 class="card-title">Summary Findings</h3>
+        <div class="col-xs-12 col-md-12 row">
+          <div class="col-xs-12 col-md-3 col-sm-6">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Summary Findings</h3>
+              </div>
+              <div class="card-body">
+                  <GChart
+                  type="PieChart"
+                  :data="dailyData"
+                  :options="chartOptions" style="height: 340px;"
+                />
+              </div>
             </div>
-            <div class="card-body">
-                <GChart
-                type="PieChart"
-                :data="dailyData"
-                :options="chartOptions" style="height: 340px;"
-              />
+          </div>
+          <div class="col-xs-12 col-md-3 col-sm-6">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Open</h3>
+              </div>
+              <div class="card-body">
+                  <GChart
+                  type="PieChart"
+                  :data="dailyData"
+                  :options="chartOptions" style="height: 340px;"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-3 col-sm-6">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">On Progress</h3>
+              </div>
+              <div class="card-body">
+                  <GChart
+                  type="PieChart"
+                  :data="dailyData"
+                  :options="chartOptions" style="height: 340px;"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-12 col-md-3 col-sm-6">
+            <div class="card card-info">
+              <div class="card-header">
+                <h3 class="card-title">Closed</h3>
+              </div>
+              <div class="card-body">
+                  <GChart
+                  type="PieChart"
+                  :data="dailyData"
+                  :options="chartOptions" style="height: 340px;"
+                />
+              </div>
             </div>
           </div>
         </div>

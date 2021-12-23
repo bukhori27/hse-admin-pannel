@@ -71,6 +71,7 @@
         currentPage: 1,
         perPage: 10,
         totalRows: 0,
+        searchText: '',
         fields: [
           'no',
           'nama',

@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-row">
+  <div class="flex-row card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-header">
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
@@ -9,13 +9,13 @@
           </a>
         </div>
       </b-row>
-      <div class="row">
+      <div class="row card-body">
         <div class="col-md-12 m-b-5 m-t-10">
             <b-input-group  >
-              <input type="text" v-model="nama" class="form-control mb-4"placeholder="username">
+              <input type="text" v-model="nama" class="form-control mb-4 border-left"placeholder="username">
             </b-input-group>
             <b-input-group >
-              <input type="email" v-model="email" class="form-control mb-4" placeholder="email">
+              <input type="email" v-model="email" class="form-control mb-4 border-left" placeholder="email">
             </b-input-group>
         </div>
           <div class="col-md-12">

@@ -1,15 +1,15 @@
 <template>
-  <div class="flex-row">
+  <div class="flex-row card">
     <div class="container-fluid">
-      <b-row>
+      <b-row class="card-head">
         <div class="col-sm-6">
         <a @click="backTo" class="nav-link df nplr">
           <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
           <h1>Detail Issue</h1>
         </a>
         </div>
-      </b-row>
-      <b-row>
+      </b-row >
+      <b-row class="card-body justify-content-center ">
         <div class="col-md-8">
           <div>
             <span> Title </span><br/><b><p> {{detailIssue.title}} </p></b>
@@ -29,38 +29,61 @@
         </div>
         <div class="col-md-4">
           <div class="col-md-12 row nplr" v-if="detailIssue.state == 1 && (profil.pengguna_level == 1 || profil.pengguna_level == 2) ">
-            <div class="col-md-6 smnpl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(detailIssue.id)">Closed</a></div>
-            <div class="col-md-6 smnpr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="assign(detailIssue.id)">Assign</a></div>
+            <div class="col-md-6 smnpl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(id_issue)">Closed</a></div>
+            <div class="col-md-6 smnpr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="assign(id_issue)">Assign</a></div>
             </div>
           <div class="col-md-12 row nplr" v-if="detailIssue.state == 2 || detailIssue.state == 3 || detailIssue.state == 4 || detailIssue.state == 5">
-            <div class="col-md-6 smnpl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(detailIssue.id)" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">Closed</a></div>
-            <div class="col-md-6 smnpr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="confirmation(detailIssue.id)">Confirmation</a></div>
+            <div class="col-md-6 smnpl"><a class="btn btn-danger mb-2 button-issue col-md-12" @click="closed(id_issue)" v-if="profil.pengguna_level == 1 || profil.pengguna_level == 2">Closed</a></div>
+            <div class="col-md-6 smnpr"><a class="btn btn-primary mb-2 button-issue col-md-12" @click="confirmation(id_issue)">Confirmation</a></div>
           </div>
           <div class="col-md-12 row nplr" v-else>
           </div>
         </div>
         <div class="col-md-12" v-if="finding.length > 0">
-          <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">Status</h3>
-            <div class="card-tools">
-            <button type="button" class="btn btn-tool" data-card-widget="collapse">
-              <i class="fas fa-minus"></i>
-            </button>
-            </div>
-          </div>
-          <div class="card-body p-0 mt-10">
-            <div v-for="(indexs, id) in finding" class="row" >
-              <div class="col-md-4 col-xs-12">
-                <p class="xspl-15 xpr-15"><a class="btn btn-secondary btn-block mb-2 button-issue ">{{checkType(indexs.state)}}</a> </p>
-                <p class="tar xpl-15 xpr-15">{{indexs.date}}</p>
-              </div>
-              <div class="col-md-8 col-xs-12">
-                <b><p class="xpl-15">{{indexs.name}}</p></b>
-                <p class="xpl-15 xpr-15">{{indexs.description}}</p>
+          <div class="card card-timeline card-plain pb15">
+            <div class="card-header" @click="toggleAccordion()"
+              :aria-expanded="isOpen"
+              :aria-controls="`collapse${_uid}`">
+              <div class="row">
+                <h3 class="card-title col-md-11">Status</h3>
+                <div class="card-tools col-md-1" style="float:right">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="nc-icon nc-minimal-down"></i>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+             <div class="card-body" v-show="isOpen" :id="`collapse${_uid}`">
+                <ul class="timeline timeline-simple" >
+                  <li class="timeline-inverted" v-for="(indexs, id) in finding" >
+                    <div class="timeline-badge danger" v-if="indexs.status === 'Manager'">
+                      <i class="nc-icon nc-single-copy-04"></i>
+                    </div>
+                    <div class="timeline-badge success" v-if="indexs.status === 'Reporter'">
+                      <i class="nc-icon nc-sun-fog-29"></i>
+                    </div>
+                    <div class="timeline-badge info" v-else>
+                      <i class="nc-icon nc-world-2"></i>
+                    </div>
+                    <!-- <div class="timeline-badge danger" v-else>
+                      <i class="nc-icon nc-single-copy-04"></i>
+                    </div> -->
+                    <div class="timeline-panel">
+                      <div class="timeline-heading">
+                        <span class="badge badge-pill badge-danger">{{indexs.status}}</span>
+                      </div>
+                      <div class="timeline-body">
+                        <p> {{indexs.description}} </p>
+                        <p>{{indexs.name}}</p>
+                      </div>
+                      <h6>
+                        <i class="ti-time"></i>
+                        {{indexs.date}}
+                      </h6>
+                    </div>
+                  </li>
+                </ul>
+              </div>
           <!-- /.card-body -->
           </div>
         </div>
@@ -89,6 +112,8 @@
         description: '',
         finding: [],
         detailIssue: {},
+        id_issue: '',
+        isOpen: false,
         token: localStorage.getItem('token_hse'),
         profil: JSON.parse(localStorage.getItem('profile')),
       }
@@ -97,6 +122,9 @@
       submit () {
 
       },
+      toggleAccordion() {
+        this.isOpen = !this.isOpen;
+      },  
       backTo () {
         let self = this
         window.history.back();
@@ -111,8 +139,10 @@
         }
         return sentence.join(" ");
       },
-      checkStatus (index) {
+      checkStatus (data) {
         let self = this
+        console.log(data)
+        let index = parseInt(data)
         if (index == 1) {
           return 'Open' 
         }
@@ -164,16 +194,17 @@
           if (response.data.resultCode == 'OK') {
             let report = response.data
             let issue_view = report.issue_view
+            console.log( report.progress)
             let dumpdata = {
-              reporter: self.paragrafCase(issue_view.user_name), 
+              reporter: self.paragrafCase(issue_view.id_user), 
               id: issue_view.issue_id, 
-              title: self.paragrafCase(issue_view.issue_name), 
-              description: self.title(issue_view.issue_description), 
+              title: self.paragrafCase(issue_view.title), 
+              description: self.title(issue_view.description), 
               img: url.url_image + issue_view.path,
               executor: issue_view.executor,
               observer: issue_view.assign_to,
               date: issue_view.issue_date,
-              state: issue_view.state,
+              state: issue_view.status,
             }
             self.detailIssue = dumpdata
             let progress = report.progress
@@ -183,8 +214,10 @@
                 name: self.paragrafCase(progress[i].user_name),
                 img: url.url_image + progress[i].path,
                 state: progress[i].state,
+                status: progress[i].privilage_name,
+                
                 description: self.title(progress[i].description),
-                date: progress[i].progress_date
+                date: progress[i].date
               }
               dataProgress.push(dumpdataprogress)
             }
@@ -221,17 +254,18 @@
       },
       confirmation(index) {
         let self = this
-        self.$router.push('/issue/confirmation/' + index)
+        self.$router.push('/issue/confirmation?id=' + index)
       },
       assign (index) {
         let self = this
-        self.$router.push('/issue/assign/' + index)
+        self.$router.push('/issue/assign?id=' + index)
       }
     },
     created: function () {
-      this.user = this.$route.params;
-      console.log(this.user)
-      this.provincesFunc(this.user.id)
+      let self = this
+      this.id_issue = self.$route.query.id
+      console.log(this.id_issue)
+      this.provincesFunc(this.id_issue)
     }
   }
 </script>

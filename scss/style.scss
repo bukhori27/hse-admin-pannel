@@ -118,6 +118,9 @@ h1, .h1 {
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 .container-fluid4 {
+  width: calc(100% - 250px);
+  display: inline-table;
+  float: right;
   padding: 20px 30px !important; 
   background-color: rgba(0, 0, 0, 0.7) !important;}
 .paginate-list {
@@ -1248,6 +1251,9 @@ img-relative {
     width: 200px;
     min-height: 100%;
   }
+  .container-fluid4 {
+    width: 100%;
+  }
 }
 @media only screen and (max-width:767px) {
   .xpl-15{
@@ -1930,6 +1936,10 @@ img-relative {
 .pb8 {
   padding-bottom:8px;
 }
+.pb15 {
+  padding-bottom:15px;
+}
+
 .popup-show {
   display: block;
 }
@@ -2034,6 +2044,11 @@ li.actived>a {
   color: #ffffff;
   background-color: #257a49;
   border-color: #257a49;
+}
+.btn-yellow {
+  color: #ffffff;
+  background-color: #ffc107;
+  border-color: #ffc107;
 }
 .input-group-sm > .form-control, .input-group-sm > .custom-select, .input-group-sm > .input-group-prepend > .input-group-text, .input-group-sm > .input-group-append > .input-group-text, .input-group-sm > .input-group-prepend > .btn, .input-group-sm > .input-group-append > .btn {
   padding: 0.15rem 0.5rem !important;

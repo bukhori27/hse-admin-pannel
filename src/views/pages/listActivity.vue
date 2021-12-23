@@ -3,44 +3,18 @@
     <div class="container-fluid">
       <b-row class="card-header">
         <div class="col-sm-6">
-          <h3 class="card-title">report Type</h3>
+          <h1>List Activity</h1>
         </div>
       </b-row>
       <b-row class="justify-content-center card-body">
-        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-1s">
-          <b-row>
-            <div class="col-12">
-              <div class="float-right m-b-10 " >
-                <b-button variant="primary" @click="addType">Create Type</b-button>
-              </div>
-              <div class="card-tools float-left p-t-3">
-                <div class="input-group input-group-sm">
-                  <input type="text" class="form-control" placeholder="Search Type" v-model="searchText">
-                  <div class="input-group-append">
-                    <div class="btn btn-primary">
-                      <i class="fas fa-search" @click="search(searchText)"></i>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </b-row>
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
-            <template slot="id" slot-scope="row">
-            {{row.item.id}}
-            </template>
-            <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'type/edit?id=' + row.item.id"  data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
-              <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
-            </template>
+            <!-- <template slot="actions" slot-scope="row">
+              <router-link  v-bind:to="'category/edit?id=' + row.item.id" data-toggle="tooltip" data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></i></b-button></router-link>
+            </template> -->
           </b-table>
-
-          <!-- <div class="col-md-12 text-green-title1" style="text-align: right; padding:10px;" >
-            <span @click="listUser(pages-1)" v-if="pages !== 1"> << previous </span>
-            <span @click="listUser(pages+1)" style="padding-left:20px" v-if="pageSize > pages"> more >> </span>
-          </div> -->
           <b-pagination :total-rows="totalRows" :per-page="perPage" v-model="currentPage" class="float-right" />
         </div>
       </b-row>
@@ -59,7 +33,7 @@
   import sha256 from 'sha256'
 
   export default {
-    name: 'Type',
+    name: 'listActivity',
     axios,
     data () {
       return {
@@ -71,12 +45,12 @@
         currentPage: 1,
         perPage: 10,
         totalRows: 0,
-        searchText: '',
         fields: [
           'no',
           'nama',
           'description',
-          {key: 'actions'}
+          'staff',
+          'date'
         ],
         sortBy: 'creator',
         sortDesc: false,
@@ -93,6 +67,9 @@
         // this.totalRows = filteredItems.length
         this.currentPage = 1
       },
+      search () {
+        this.listUser(1)
+      },
       listUser (page) {
         var self = this
         let status = []
@@ -107,15 +84,17 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        axios.post(url.url_app + 'type_list', parameter, config).then(function (response) {
+        axios.post(url.url_app + 'form_hse_list', parameter, config).then(function (response) {
           if (response.data.resultCode == 'OK') {
+            let dump = response.data.form_hse_list
             self.pages = response.data.current_page
             self.pageSize = response.data.page_size
-            let dump = response.data.type_list
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                nama: dump[i].nama,
+                nama: dump[i].name_form,
                 description: dump[i].description,
+                staff: dump[i].staff,
+                date: dump[i].date,
                 no: parseInt( (i+1) + (self.pages - 1) * self.perPage), 
                 id: dump[i].id
               }
@@ -123,12 +102,15 @@
               self.totalRows = response.data.count_data
             }
             self.listing = status 
-            self.pages = response.data.current_page
-            self.pageSize = response.data.page_size
           } else {
             alert('SALAH...!')
           }
         })
+      },
+      
+      edit (data) {
+        let self = this
+        self.$router.push({name: 'EditCategory', params: data})
       },
       deleted(id) {
         var self = this
@@ -142,21 +124,21 @@
             'Content-Type': 'application/x-www-form-urlencoded'
           }
         }
-        var del = confirm('Apakah anda yakin menghapus tipe?')
+        var del = confirm('Apakah anda yakin menghapus category?')
         if (del) {
-          axios.post(url.url_app + 'type_delete', parameter, config).then(function (response) {
+          axios.post(url.url_app + 'category_delete', parameter, config).then(function (response) {
             if (response.data.resultCode == 'OK') {
-              alert ('sukses menghapus tipe');
+              alert ('sukses menghapus category');
               self.listUser(1)
             } else {
             }
           })
         }
       },
-      addType () {
+      addCategory () {
         let self = this
         self.LoginShow = false
-        self.$router.push('/type/add')
+        self.$router.push('/category/add')
       }
     },
     created: function () {

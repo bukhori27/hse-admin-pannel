@@ -23,14 +23,14 @@
             <a data-toggle="collapse" href="#pagesExamples">
               <i class="nc-icon nc-book-bookmark"></i>
               <p>
-                Pages <b class="caret"></b>
+                User <b class="caret"></b>
               </p>
             </a>
             <div class="collapse " id="pagesExamples">
               <ul class="nav">
                 <li>
                   <a @click="goTo('/user/all', 2)">
-                    <span class="sidebar-mini-icon">T</span>
+                    <span class="sidebar-mini-icon">U</span>
                     <span class="sidebar-normal"> All User </span>
                   </a>
                 </li>
@@ -100,6 +100,12 @@
                     <span class="sidebar-normal">Type</span>
                   </a>
                 </li>
+                <li>
+                  <a @click="goTo('/list-form', 3)">
+                    <span class="sidebar-mini-icon">F</span>
+                    <span class="sidebar-normal">Form</span>
+                  </a>
+                </li>
               </ul>
             </div>
           </li>
@@ -110,9 +116,9 @@
             </a>
           </li>
           <li v-bind:class="classActive === 5 ? 'actived': ''">
-            <a @click="goTo('/list-form', 5)">
+            <a @click="goTo('/list-activity-form', 5)">
               <i class="nc-icon nc-calendar-60"></i>
-              <p>Form</p>
+              <p>Activity</p>
             </a>
           </li>
         </ul>

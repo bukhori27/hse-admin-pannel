@@ -32,7 +32,7 @@
             {{row.item.id}}
             </template>
             <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'/issue/assign/id=' + row.item.id"  data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
+              <router-link  v-bind:to="'/issue/detail?id=' + row.item.id"  data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
               <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
             </template>
           </b-table>
