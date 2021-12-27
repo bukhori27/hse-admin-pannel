@@ -40,8 +40,8 @@
               <div class="card-body">
                   <GChart
                   type="PieChart"
-                  :data="dailyData"
-                  :options="chartOptions" style="height: 340px;"
+                  :data="dataOpen"
+                  :options="OptionPie" style="height: 340px;"
                 />
               </div>
             </div>
@@ -54,8 +54,8 @@
               <div class="card-body">
                   <GChart
                   type="PieChart"
-                  :data="dailyData"
-                  :options="chartOptions" style="height: 340px;"
+                  :data="dataOpen"
+                  :options="OptionPie" style="height: 340px;"
                 />
               </div>
             </div>
@@ -68,8 +68,8 @@
               <div class="card-body">
                   <GChart
                   type="PieChart"
-                  :data="dailyData"
-                  :options="chartOptions" style="height: 340px;"
+                  :data="dataOpen"
+                  :options="OptionPie" style="height: 340px;"
                 />
               </div>
             </div>
@@ -139,6 +139,66 @@
         dateData: [
           ['PIC', 'Close', 'On Progress', 'Open']
         ],
+        openData: [['Open']],
+        ClosedData: [['Close']],
+        progressData: [['Progress']],
+        dataOpen: {
+          labels: [1, 2],
+          datasets: [{
+            label: "Emails",
+            pointRadius: 0,
+            pointHoverRadius: 0,
+            backgroundColor: ['#4acccd', '#f4f3ef'],
+            borderWidth: 0,
+            data: [60, 40]
+          }]
+        },
+        OptionPie:{
+          elements: {
+            center: {
+              text: '60%',
+              color: '#66615c', // Default is #000000
+              fontStyle: 'Arial', // Default is Arial
+              sidePadding: 60 // Defualt is 20 (as a percentage)
+            }
+          },
+          cutoutPercentage: 90,
+          legend: {
+
+            display: false
+          },
+
+          tooltips: {
+            enabled: false
+          },
+
+          scales: {
+            yAxes: [{
+
+              ticks: {
+                display: false
+              },
+              gridLines: {
+                drawBorder: false,
+                zeroLineColor: "transparent",
+                color: 'rgba(255,255,255,0.05)'
+              }
+
+            }],
+
+            xAxes: [{
+              barPercentage: 1.6,
+              gridLines: {
+                drawBorder: false,
+                color: 'rgba(255,255,255,0.1)',
+                zeroLineColor: "transparent"
+              },
+              ticks: {
+                display: false,
+              }
+            }]
+          },
+        }
       }
     },
     methods: {
@@ -234,6 +294,10 @@
         let self = this
         var token = self.token
         let data = []
+        let countClosed = 0
+        let countOnProgress = 0
+        let countOpen = 0
+        let count = 0
         let ab = ''
         var parameter = {
           token: token,
@@ -255,9 +319,19 @@
                 onProgress: parseInt(report[i].onProgress),
                 open: parseInt(report[i].open)
               }
+              countClosed +=parseInt(report[i].close)
+              countOnProgress +=parseInt(report[i].onProgress)
+              countOpen +=parseInt(report[i].open)
               data.push(a)
             }
-            
+            count = countClosed + countOnProgress + countOpen
+            self.openData.push(countOpen)
+            self.openData.push(count)
+            self.ClosedData.push(countOpen)
+            self.ClosedData.push(count)
+            self.progressData.push(countOpen)
+            self.progressData.push(count)
+            console.log(self.dailyData)
             for (let i = 0; i < 3; i++) {
               
               ab = self.rndColor()

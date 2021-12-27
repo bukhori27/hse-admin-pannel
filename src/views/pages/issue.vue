@@ -11,7 +11,7 @@
           <b-row>
             <div class="col-12">
               <div class="float-right m-b-10 " >
-                <b-button variant="primary" @click="createissue">Create Finding</b-button>
+                <b-button variant="danger" @click="createissue">Create Finding</b-button>
               </div>
               <div class="card-tools float-left p-t-3">
                 <div class="input-group input-group-sm">
@@ -31,9 +31,8 @@
             <template slot="id" slot-scope="row">
             {{row.item.id}}
             </template>
-            <template slot="actions" slot-scope="row">
-              <router-link  v-bind:to="'/issue/detail?id=' + row.item.id"  data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fas fa-pencil-alt"></i></b-button></router-link>
-              <b-button variant="danger" style="border-radius: 20%" @click="deleted(row.item.id)"><i class="fas fa-trash-alt"></i></b-button>
+            <template slot="detail" slot-scope="row">
+              <router-link  v-bind:to="'/issue/detail?id=' + row.item.id"  data-original-title="View"><b-button variant="warning" style="border-radius: 20%"><i class="fa fa-eye"></i></b-button></router-link>
             </template>
           </b-table>
 
@@ -74,10 +73,13 @@
         totalRows: 0,
         fields: [
           'id',
-          'name',
-          'status',
-          'lokasi',
-          {key: 'actions'}
+          'date', 
+          'section', 
+          'area', 
+          'findings', 
+          'pic', 
+          'status', 
+          {key: 'detail'}
         ],
         sortBy: 'creator',
         sortDesc: false,
@@ -98,14 +100,14 @@
         this.listUser(1)
       },
       changeStatus (data) {
-        if (data === 1) return 'Menunggu proses'
-        else if (data === 2) return 'cek issue'
-        else if (data === 3) return 'Perbaikan'
-        else return 'closed'
+        if (data === 1) return 'Draft'
+        else if (data === 2) return 'Open'
+        else if (data === 3 || data === 4) return 'On Progress'
+        else return 'Closed'
       },
       batasin (index) {
-        if (index.length > 30)
-        return index.substr(0, 30) + ' ... ';
+        if (index.length > 15) return index.substr(0, 15) + ' ... ';
+        return index
       },
       listUser (page) {
         let self = this
@@ -129,22 +131,13 @@
             var dump = response.data.issue_list
             for (let i = 0; i < dump.length; i++) {
               let b = {
-                name: self.batasin(dump[i].title), 
-                category_description: dump[i].category_description, 
-                category_name: dump[i].category_name,  
+                id: dump[i].id, 
                 date: dump[i].date, 
-                image_name: dump[i].image_name, 
-                id_issue: dump[i].id_issue, 
-                issue_description: dump[i].issue_description,
-                location_description: dump[i].location_description, 
-                lokasi: dump[i].id_location, 
-                img: url.url_image + dump[i].path, 
-                type_description: dump[i].type_description, 
-                type: dump[i].id_type, 
-                type_nama: dump[i].type_nama,  
-                status: self.changeStatus(parseInt(dump[i].status)),  
-                user_name: dump[i].user_name, 
-                id: dump[i].id_issue, 
+                section: dump[i].section, 
+                area: self.batasin(dump[i].area), 
+                findings: self.batasin(dump[i].finding),
+                pic: dump[i].pic? dump[i].pic: '-', 
+                status: self.changeStatus(parseInt(dump[i].state)),
               }
               status.push(b)
               self.totalRows = response.data.count_data

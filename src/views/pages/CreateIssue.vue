@@ -5,49 +5,71 @@
         <div class="col-sm-6">
           <a @click="backTo" class="nav-link df nplr">
             <i class="nav-icon fas fa-arrow-left fs20 arrow-left"></i>
-            <h1>Create Issue</h1>
+            <h1>Buat Data Temuan</h1>
           </a>
         </div>
       </b-row>
       <b-row class="card-body">
-        <div class="col-xs-12 col-md-4 d-block d-sm-none">
-          <div class="col-12">
-            <img :src="!imageData ? 'static/img/icons/defaultImage.jpg' : imageData" class="rounded mx-auto d-block" style="height:140px;" @click="chooseFiles()">
+        <div class="col-xs-12 col-md-12">
+          <div class="row col-xs-12 col-md-12 nplr mb-2">
+            <label style="font-weight:600" class="col-md-2 col-form-label">Tanggal</label>
+            <input type="date" v-model="date" class="form-control mb-2 border-left col-md-10 npr" placeholder="date">
           </div>
-          <input type="file" class="form-control mb-4" @change="openFile" style="display:none;" id="fileUpload">
-        </div>
-        <div class="col-xs-12 col-md-8">
-          <b-input-group>
-            <label style="width: 100%; font-weight:600">Name</label>
-            <input type="text" v-model="nama" class="form-control mb-2 border-left" placeholder="nama">
-          </b-input-group>
-          <b-input-group>
-            <label style="width: 100%; font-weight:600">description</label>
-            <input type="text" v-model="description" class="form-control mb-2 border-left" placeholder="description">
-          </b-input-group>
-            <label style="width: 100%; font-weight:600">Location</label>
-              <select v-model="locationId" class="register-custom-select mb-2">
+          <div class="row col-xs-12 col-md-12 nplr mb-2">
+            <label style="font-weight:600" class="col-md-2 col-form-label">Bagian</label>
+              <select v-model="bagianId" class="register-custom-select mb-2 col-md-10 npr">
+                <option v-for="(cabang, i) in bagianList" :value="cabang.id" :key="'cabang' + i">{{ cabang.nama }}</option>
+              </select> 
+          </div>
+          <div class="row col-xs-12 col-md-12 nplr mb-2">
+            <label style="font-weight:600" class="col-md-2 col-form-label">Lokasi</label>
+              <select v-model="locationId" class="register-custom-select mb-2 col-md-10 npr">
                 <option v-for="(cabang, i) in locationList" :value="cabang.id" :key="'cabang' + i">{{ cabang.nama }}</option>
-              </select>
-          </b-input-group>
-          <b-input-group>
-            <label style="width: 100%; font-weight:600">Category</label>
-            <select v-model="categoryId" class="register-custom-select mb-2">
-              <option v-for="(category, i) in categoryList" :value="category.id" :key="'category' + i">{{ category.nama }}</option>
-            </select>
-          </b-input-group>
-          <b-input-group>
-            <label style="width: 100%; font-weight:600">type</label>
-            <select v-model="typeId" class="register-custom-select mb-2">
-              <option v-for="(type, i) in typeList" :value="type.id" :key="'type' + i">{{ type.nama }}</option>
-            </select>
-          </b-input-group>
-        </div>
-        <div class="col-xs-12 col-md-4 d-none d-sm-block">
-          <div class="col-12">
-            <img :src="!imageData ? 'static/img/icons/defaultImage.jpg' : imageData" class="rounded mx-auto d-block" style="height:140px;" @click="chooseFiles()">
+              </select> 
           </div>
-          <input type="file" class="form-control mb-2" @change="openFile" style="display:none;" id="fileUpload">
+          <div class="row col-xs-12 col-md-12 nplr mb-2">
+            <label style="font-weight:600" class="col-md-2 col-form-label">Sumber Bahaya</label>
+            <textarea v-model="sumber_bahaya" class="form-control mb-4 border-radius-8 border-left col-md-10 npr" placeholder="" rows="15"/>
+         
+            <!-- <input type="text" v-model="sumber_bahaya" class="form-control mb-2 border-left col-md-10 npr" placeholder="description"> -->
+          </div>
+          <div class="row col-xs-12 col-md-12 nplr mb-2">
+            <label style="font-weight:600" class="col-md-2 col-form-label">Resiko</label>
+            <input type="text" v-model="resiko" class="form-control mb-2 border-left col-md-10 npr" placeholder="">
+          </div>
+          <div class="row col-xs-12 col-md-12 nplr mb-2">
+            <label style="font-weight:600" class="col-md-2 col-form-label">Rekomendasi</label>
+            <textarea v-model="rekomendasi" class="form-control mb-4 border-radius-8 border-left col-md-10 npr" placeholder="" rows="15"/>
+          </div>
+          <div class="row col-xs-12 col-md-12 nplr mb-2">
+            <label style="font-weight:600" class="col-md-2 col-form-label">SO</label>
+            <input type="text" v-model="so" class="form-control mb-2 border-left col-md-10 npr" placeholder="">
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-12 m-b-10 nplr">
+          <label style="font-weight:600" class="col-md-12 col-form-label">Kondisi Temuan</label>
+           <div class="fileinput fileinput-new col-xs-12 col-md-4 text-center" data-provides="fileinput">
+              <div class="fileinput-new thumbnail">
+                <img :src="!imageData ? 'static/img/icons/defaultImage.jpg' : imageData" alt="...">
+              </div>
+              <div class="fileinput-preview fileinput-exists thumbnail"></div>
+              <div>
+                <span class="btn btn-rose btn-round btn-file btn-primary">
+                  <span class="fileinput-new">Select image</span>
+                  <span class="fileinput-exists">Change</span>
+                  <input type="file" @change="openFile" name="..." />
+                </span>
+                <a href="javascript:;" class="btn btn-danger btn-round fileinput-exists" data-dismiss="fileinput"><i class="fa fa-times"></i> Remove</a>
+              </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-12 nplr" v-if="Image.length >= 0">
+          <div class="col-xs-12 col-md-12 nplr row" >
+            <div class="col-3 mt-10" v-for="(img, i) in Image">
+              <img :src="!img.path ? 'static/img/icons/defaultImage.jpg' : img.path" class="rounded">
+            </div>
+            <input type="file" class="form-control mb-2" style="display:none;" id="fileUploads">
+          </div>
         </div>
         <div class="col-12 m-b-10">
           <b-button button-rounded-border-radius label="Verify" variant="primary" rounded class="float-right" size="14" @click="submit" style="color:white; padding: 10px 25px; border-radius:5px;">
@@ -75,17 +97,24 @@
     axios,
     data () {
       return {
-        nama: '',
+        date: '',
         description: '',
         locationList: [],
         locationId: '1',
+        bagianList: [],
+        bagianId: '',
         categoryList: [],
         categoryId: '1',
         typeList: [],
         typeId: '1',
         fileId: '',
         imageData: '',
+        Image: [],
         imageFile: '',
+        sumber_bahaya: '',
+        resiko: '',
+        rekomendasi: '',
+        so:'',
         token: localStorage.getItem('token_hse')
       }
     },
@@ -161,6 +190,7 @@
         let self = this
         var input = event.target
         self.imageFile = input.files[0];
+        console.log(input)
         self.uploadImage()
       },
       uploadImage () {
@@ -169,6 +199,7 @@
         fd.append('token', self.token)
         fd.append('photo_cover', self.imageFile)
         let urls = url.url_app + 'upload_document'
+        self.Image.push(self.imageFile)
         axios({
           method: 'post',
           url: urls,

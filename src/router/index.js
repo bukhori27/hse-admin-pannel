@@ -43,7 +43,7 @@ import Type from '@/views/pages/Type'
 import AddType from '@/views/pages/AddType'
 import EditType from '@/views/pages/EditType'
 import Finding from '@/views/pages/Finding'
-import CreateP from '@/views/pages/Finding'
+import createRepair from '@/views/pages/createRepair'
 import Issue from '@/views/pages/Issue'
 import CreateIssue from '@/views/pages/CreateIssue'
 import AssignIssue from '@/views/pages/AssignIssue'
@@ -172,15 +172,6 @@ export default new Router({
       ]
     },
     {
-      path: '/list-form/',
-      component: Full,
-      children: [
-        { path: '', name: 'listForm', component: listForm },
-        { path: 'add', name: 'addForm', component: AddForm },
-
-      ]
-    },
-    {
       path: '/form/',
       component: Full,
       children: [
@@ -242,6 +233,8 @@ export default new Router({
         { path: 'assign', name: 'AssignIssue', component: AssignIssue },
         { path: 'detail', name: 'detailIssue', component: DetailIssue },
         { path: 'confirmation' , name: 'confirmation', component: confirmation },
+        { path: 'createRepair' , name: 'createRepair', component: createRepair },
+        
       ]
     },
     {

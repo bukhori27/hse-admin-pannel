@@ -79,6 +79,7 @@
             localStorage.setItem('token_hse', self.listing.token)
             localStorage.setItem('profile', JSON.stringify(self.listing.profile))
             self.$router.push('/dashboard')
+            window.location.reload();
           } else {
             alert('SALAH...!')
           }

@@ -100,12 +100,6 @@
                     <span class="sidebar-normal">Type</span>
                   </a>
                 </li>
-                <li>
-                  <a @click="goTo('/list-form', 3)">
-                    <span class="sidebar-mini-icon">F</span>
-                    <span class="sidebar-normal">Form</span>
-                  </a>
-                </li>
               </ul>
             </div>
           </li>

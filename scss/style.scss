@@ -2032,7 +2032,7 @@ li.actived>a {
 .fw700 {
   font-weight: 700;
 }
-.btn-primary {
+.btn-assign {
   color: #fff;
   background-color: #ff8100;
   border-color: #ff8100;
@@ -2042,14 +2042,14 @@ li.actived>a {
 }
 .btn-warning {
   color: #ffffff;
-  background-color: #257a49;
-  border-color: #257a49;
+//   background-color: #257a49;
+//   border-color: #257a49;
 }
-.btn-yellow {
-  color: #ffffff;
-  background-color: #ffc107;
-  border-color: #ffc107;
-}
+// .btn-yellow {
+//   color: #ffffff;
+//   background-color: #ffc107;
+//   border-color: #ffc107;
+// }
 .input-group-sm > .form-control, .input-group-sm > .custom-select, .input-group-sm > .input-group-prepend > .input-group-text, .input-group-sm > .input-group-append > .input-group-text, .input-group-sm > .input-group-prepend > .btn, .input-group-sm > .input-group-append > .btn {
   padding: 0.15rem 0.5rem !important;
   font-size: 0.76562rem;
@@ -2073,4 +2073,55 @@ li.actived>a {
 }
 .border-left {
   border: 1px solid #e3e8ec !important;
+}
+.jcr {
+  justify-content: flex-end;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mb-30 {
+  margin-bottom: 30px;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+.mb-50 {
+  margin-bottom: 50px;
+}
+.mb-60 {
+  margin-bottom: 60px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mt-30 {
+  margin-top: 30px;
+}
+.mt-40 {
+  margin-top: 40px;
+}
+.mt-50 {
+  margin-top: 50px;
+}
+.mt-60 {
+  margin-top: 60px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
+.mr-20 {
+  margin-right: 20px;
+}
+.mr-30 {
+  margin-right: 30px;
+}
+.mr-40 {
+  margin-right: 40px;
+}
+.mr-50 {
+  margin-right: 50px;
+}
+.mr-60 {
+  margin-right: 60px;
 }

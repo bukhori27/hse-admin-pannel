@@ -8,6 +8,13 @@
       </b-row>
       <b-row class="justify-content-center card-body">
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
+          <b-row>
+            <div class="col-12">
+              <div class="float-right m-b-10 " >
+                <b-button variant="danger" @click="addForm">Create Form</b-button>
+              </div>
+            </div>
+          </b-row>
           <b-table class="t-1" :sort-by.sync="sortBy" :sort-desc.sync="sortDesc"
           responsive="xs" :items="listing" :fields="fields" :current-page="currentPage" :per-page="perPage"
            :filter="filter" @filtered="onFiltered">
@@ -139,6 +146,11 @@
         let self = this
         self.LoginShow = false
         self.$router.push('/category/add')
+      },
+      addForm () {
+        let self = this
+        self.LoginShow = false
+        self.$router.push('/form/add')
       }
     },
     created: function () {

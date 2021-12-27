@@ -10,9 +10,6 @@
         <div class="col-md-12 col-sm-12 col-lg-12 col-xl-12 col-xs-12">
           <b-row>
             <div class="col-12">
-              <div class="float-right m-b-10 " >
-                <b-button variant="primary" @click="addForm">Create Form</b-button>
-              </div>
               <div class="card-tools float-left p-t-3">
                 <div class="input-group input-group-sm">
                   <input type="text" class="form-control" placeholder="Search Form" v-model="searchText">
@@ -150,11 +147,6 @@
           })
         }
       },
-      addForm () {
-        let self = this
-        self.LoginShow = false
-        self.$router.push('/form/add')
-      }
     },
     created: function () {
       this.listUser(1)
